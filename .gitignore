@@ -1,0 +1,5 @@
+#ignore all brModelo autosave and config files
+*.chc
+
+#ignore brModelo
+brModelo.jar
