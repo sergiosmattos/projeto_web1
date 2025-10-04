@@ -9,7 +9,7 @@ class UsuarioRepositorio
         $this->pdo = $pdo;
     }
 
-    // Corrigido: nomes dos campos conforme o banco
+    
     private function formarObjeto(array $d): Usuario
     {
         return new Usuario(
@@ -90,7 +90,7 @@ class UsuarioRepositorio
 
     public function deletarUsuario(int $id): bool
     {
-        $st = $this->pdo->prepare("DELETE FROM tbUsuario WHERE id=?");
+        $st = $this->pdo->prepare("DELETE FROM tbUsuario WHERE id_usuario=?");
         return $st->execute([$id]);
     }
 }

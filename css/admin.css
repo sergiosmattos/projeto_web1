@@ -5,13 +5,20 @@ body {
     padding: 0;
 }
 
+
 .topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    gap: 80%;
+    justify-content: space-between;
+    align-items: center;
     background-color: #252525;
     color: white;
-    align-items: center;
-    padding: 2px;
+    padding: 10px 20px;
+    z-index: 1000;
+    height: 100px;
 }
 
 .iconUser {
@@ -20,25 +27,22 @@ body {
 }
 
 .iconLogo {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
 }
 
 .logo {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 15px;
     font-weight: bold;
 }
-
-
 
 .sidebar {
     width: 220px;
     background-color: #252525;
     position: fixed;
-    top: 118px;
+    top: 100px; 
     left: 0;
     bottom: 0;
     padding: 20px;
@@ -52,17 +56,111 @@ body {
     color: #ddd;
     text-decoration: none;
     font-weight: bold;
-    padding: 10px;
+    padding: 12px;
     border-radius: 10px;
     transition: background 0.3s;
 }
 
 .sidebar a:hover {
-    background-color: #272727;
+    background-color: #333;
 }
 
 main {
-    margin-top: 100px;
-    margin-left: 240px;
-    padding: 20px;
+    margin-top: 140px;
+    margin-left: 260px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    min-height: calc(100vh - 140px);
+    width: calc(100% - 280px);
+    box-sizing: border-box;
+    margin-right: 40px;
+}
+
+main h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+
+.acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+
+.btn-add {
+    background-color: #6a5acd;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: #7b68ee;
+}
+
+.busca input {
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    outline: none;
+    width: 300px;
+}
+
+.tabela {
+    background-color: #d9d9d9;
+    color: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.btn-editar {
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-editar:hover {
+    background-color: #7b68ee;
+}
+
+.btn-excluir {
+    background-color: #d62828;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-excluir:hover {
+    background-color: #f44336;
 }
