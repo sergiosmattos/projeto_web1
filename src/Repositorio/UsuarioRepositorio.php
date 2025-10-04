@@ -9,31 +9,30 @@ class UsuarioRepositorio
         $this->pdo = $pdo;
     }
 
-
-    private function formarObjeto(): Usuario
+    private function formarObjeto(array $params): Usuario
     {
         return new Usuario(
-            isset($d['id']) ? (int)$d['id'] : null,
-            $d['tipo'] ?? 'User',
-            $d['nome'] ?? '',
-            new DateTime($d['data_nascimento'] ?? '1900-01-01'),
-            $d['email'] ?? '',
-            $d['senha'] ?? ''
+            isset($params['id']) ? (int)$params['id'] : null,
+            $params['tipo'] ?? 'User',
+            $params['nome'] ?? '',
+            new DateTime($params['data_nascimento'] ?? '1900-01-01'),
+            $params['email'] ?? '',
+            $params['senha'] ?? ''
         );
     }
 
     public function listarUsuario(): array
     {
-        $sql = "SELECT id,tipoUsuario,nomeUsuario,dataNascimentoUsuario,emailUsuario,senhaUsuario FROM tbUsuario ORDER BY emailUsuario";
+        $sql = "SELECT id, tipoUsuario, nomeUsuario, dataNascimentoUsuario, emailUsuario, senhaUsuario FROM tbUsuario ORDER BY emailUsuario";
         $rs = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return array_map(fn($r) => $this->formarObjeto($r), $rs);
     }
 
-    public function findybyId(int $id): ?Usuario
+    public function findById(int $id): ?Usuario
     {
         $sql = "SELECT id,tipoUsuario,nomeUsuario,dataNascimentoUsuario,emailUsuario,senhaUsuario FROM tbUsuario WHERE id = :id";
-        $st->execute([$id]);
-        $d = $st->fetch(PDO::FETCH_ASSOC);
+        $stm->execute([$id]);
+        $d = $stm->fetch(PDO::FETCH_ASSOC);
         return $d ? $this->formarObjeto($d) : null;
     }
 
@@ -72,16 +71,19 @@ class UsuarioRepositorio
             $senha = password_hash($senha, PASSWORD_DEFAULT);
         }
 
-        $sql = "UPDATE tbUsuario SET nomeUsuario = ?, tipoUsuario = ?, emailUsuario = ?, senhaUsuario = ?, dataNascimentoUsuario = ? WHERE id = ?";
+        $sql = "UPDATE tbUsuario SET email_usuario = ?, senha_usuario = ?, nome_usuario = ?, tipo_usuario = ?, data_nascimento_usuario = ? WHERE id = ?";
         $st = $this->pdo->prepare($sql);
-        $st->execute([
-            $usuario->getNome(),
-            $usuario->getTipo(),
-            $usuario->getEmail(),
-            $senha,
-            $usuario->getDataNascimento()->format('Y-m-d'),
-            $usuario->getId()
-        ]);
+        $st->execute
+        (   
+            [
+                $usuario->getEmail(),
+                $senha,
+                $usuario->getNome(),
+                $usuario->getTipo(),
+                $usuario->getDataNascimento()->format('Y-m-d'),
+                $usuario->getId()
+            ]
+        );
     }
 
     public function deletarUsuario(int $id): bool

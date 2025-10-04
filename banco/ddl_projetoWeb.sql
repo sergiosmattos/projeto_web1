@@ -1,3 +1,5 @@
+-- drop database dbProjetoWeb1;
+
 CREATE DATABASE dbProjetoWeb1;
 use dbProjetoWeb1;
 
@@ -59,11 +61,10 @@ create table tbObraCategoria (
 create table tbLeilao (
 
 	id_leilao int auto_increment,
-    data_inicio_leilao date not null default current_timestamp,
+    data_inicio_leilao date not null,
     id_produto int not null,
     
     constraint pk_tbLeilao primary key (id_leilao),
     constraint fk_tbLelao_tbProduto foreign key (id_produto) references tbProduto (id_produto)
 
 );
-
