@@ -33,11 +33,12 @@ $erro = $_GET['erro'] ?? '';
                     </form>
                 </div>
             </section>
+            
         <?php else: ?>
 
             <section class="login-section">
-                <h1>Login</h1>
 
+                <h1>Login</h1>
 
                 <?php if ($erro === 'credenciais'): ?>
                     <p class="mensagem-erro">Usuário ou senha incorretos.</p>
@@ -45,13 +46,16 @@ $erro = $_GET['erro'] ?? '';
                     <p class="mensagem-erro">Preencha todos os campos.</p>
                 <?php endif; ?>
 
-                <form action="autentificar.php" method="post">
-                    <input type="email" id="email" name="email" placeholder="Email" required>
-                    <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                <form action="autenticar.php" method="post">
+
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="senha" placeholder="Senha" required>
 
                     <a href="#">Esqueci minha senha</a>
                     <button type="submit">Entrar</button>
+
                 </form>
+
             </section>
 
             <section class="cadastro-section">

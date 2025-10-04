@@ -29,7 +29,7 @@ class UsuarioRepositorio
         return array_map(fn($r) => $this->formarObjeto($r), $rs);
     }
 
-    public function findybyId(int $id): ?Usuario
+    public function findById(int $id): ?Usuario
     {
         $sql = "SELECT id_usuario,tipo_usuario,nome_usuario,dataNascimento_usuario,email_usuario,senha_usuario FROM tbUsuario WHERE id_usuario = :id";
         $st = $this->pdo->prepare($sql);
@@ -73,16 +73,19 @@ class UsuarioRepositorio
             $senha = password_hash($senha, PASSWORD_DEFAULT);
         }
 
-        $sql = "UPDATE tbUsuario SET nomeUsuario = ?, tipoUsuario = ?, emailUsuario = ?, senhaUsuario = ?, dataNascimentoUsuario = ? WHERE id = ?";
+        $sql = "UPDATE tbUsuario SET email_usuario = ?, senha_usuario = ?, nome_usuario = ?, tipo_usuario = ?, data_nascimento_usuario = ? WHERE id = ?";
         $st = $this->pdo->prepare($sql);
-        $st->execute([
-            $usuario->getNome(),
-            $usuario->getTipo(),
-            $usuario->getEmail(),
-            $senha,
-            $usuario->getDataNascimento()->format('Y-m-d'),
-            $usuario->getId()
-        ]);
+        $st->execute
+        (   
+            [
+                $usuario->getEmail(),
+                $senha,
+                $usuario->getNome(),
+                $usuario->getTipo(),
+                $usuario->getDataNascimento()->format('Y-m-d'),
+                $usuario->getId()
+            ]
+        );
     }
 
     public function deletarUsuario(int $id): bool
