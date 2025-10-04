@@ -24,14 +24,14 @@ class UsuarioRepositorio
 
     public function listarUsuario(): array
     {
-        $sql = "SELECT id,tipoUsuario,nomeUsuario,dataNascimentoUsuario,emailUsuario,senhaUsuario FROM tbUsuario ORDER BY emailUsuario";
+        $sql = "SELECT id_usuario,tipo_usuario,nome_usuario,dataNascimento_usuario,email_usuario,senha_usuario FROM tbUsuario ORDER BY email_usuario";
         $rs = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return array_map(fn($r) => $this->formarObjeto($r), $rs);
     }
 
     public function findybyId(int $id): ?Usuario
     {
-        $sql = "SELECT id,tipoUsuario,nomeUsuario,dataNascimentoUsuario,emailUsuario,senhaUsuario FROM tbUsuario WHERE id = :id";
+        $sql = "SELECT id_usuario,tipo_usuario,nome_usuario,dataNascimento_usuario,email_usuario,senha_usuario FROM tbUsuario WHERE id_usuario = :id";
         $st = $this->pdo->prepare($sql);
         $st->execute(['id' => $id]);
         $d = $st->fetch(PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@ class UsuarioRepositorio
 
     public function buscarPorEmailUsuario(string $email): ?Usuario
     {
-        $st = $this->pdo->prepare("SELECT id,nomeUsuario,tipoUsuario,emailUsuario,senhaUsuario,dataNascimentoUsuario FROM tbUsuario WHERE emailUsuario=? LIMIT 1");
+        $st = $this->pdo->prepare("SELECT id_usuario,nome_usuario,tipo_usuario,email_usuario,senha_usuario,data_nascimento_usuario FROM tbUsuario WHERE email_usuario=? LIMIT 1");
         $st->bindValue(1, $email);
         $st->execute();
         $d = $st->fetch(PDO::FETCH_ASSOC);
@@ -49,7 +49,7 @@ class UsuarioRepositorio
 
     public function salvarUsuario(Usuario $usuario)
     {
-        $sql = "INSERT INTO tbUsuario (nomeUsuario, tipoUsuario, emailUsuario, senhaUsuario, dataNascimentoUsuario) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tbUsuario (nome_usuario, tipo_usuario, email_usuario, senha_usuario, dataNascimento_usuario) VALUES (?, ?, ?, ?, ?)";
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(1, $usuario->getNome());
         $statement->bindValue(2, $usuario->getTipo());
