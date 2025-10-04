@@ -1,126 +1,168 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #1a1a1a;
+  height: 100vh;
+  width: 100vw;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #1a1a1a;
-      height: 100vh;
-      width: 100vw;
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #1a1a1a;
+}
+
+
+
+.login-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #1a1a1a;
+  color: white;
     }
 
-    main {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: #1a1a1a;
-    }
+.login-section h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.login-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 70%;
+  max-width: 350px;
+}
+
+.login-section input {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #ddd;
+}
+
+.login-section a {
+  font-size: 12px;
+  color: #ccc;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.login-section button {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #7b42f6;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-section button:hover {
+  background: #652ed6;
+}
 
 
-    /* Seção de login (esquerda) */
-    .login-section {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 60%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: #1a1a1a;
-      color: white;
-    }
+.cadastro-section {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(135deg, #7b42f6, #4c3df7);
+  border-radius: 200px 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 30px;
+  font-weight: bold;
+}
 
-    .login-section h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      font-weight: bold;
-      text-decoration: underline;
-    }
+.cadastro-section h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
 
-    .login-section form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      width: 70%;
-      max-width: 350px;
-    }
+.cadastro-section p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
 
-    .login-section input {
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      background: #ddd;
-    }
+.cadastro-section a {
+  padding: 12px 24px;
+  border: 1px solid #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    .login-section a {
-      font-size: 12px;
-      color: #ccc;
-      text-align: center;
-      text-decoration: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 4px;
-    }
+.cadastro-section a:hover {
+  background: #fff;
+  color: #4c3df7;
+}
 
-    .login-section button {
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      background: #7b42f6;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.login-section button:hover {
+    pointer-events: painted;
+}
 
-    .login-section button:hover {
-      background: #652ed6;
-    }
+.logado-section {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
 
-    /* Seção cadastro (direita) */
-    .cadastro-section {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 40%;
-      height: 100%;
-      background: linear-gradient(135deg, #7b42f6, #4c3df7);
-      border-radius: 200px 0 0 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      padding: 30px;
-      font-weight: bold;
-    }
+.pergunta {
+  background-color: #4c3df7;
+  padding: 36px;
+  border-radius: 8px;
+  font-size: 25px;
+}
 
-    .cadastro-section h2 {
-      font-size: 26px;
-      margin-bottom: 10px;
-    }
+.pergunta a {
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  padding-top: 8px;
+}
 
-    .cadastro-section p {
-      margin-bottom: 20px;
-      font-size: 16px;
-    }
+.botoes {
+  display: flex;
+  padding-top: 15px;
+  gap: 20px;
+  border-radius: 5px; 
+}
 
-    .cadastro-section a {
-      padding: 12px 24px;
-      border: 1px solid #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+.botaoSair {
+  background-color: brown;
+  
+  padding: 5px;
+}
 
-    .cadastro-section a:hover {
-      background: #fff;
-      color: #4c3df7;
-    }
+.paginaInicial {
+  text-decoration: none;
+  background-color: green;
+  padding: 5px;
 
-    .login-section button:hover {
-        pointer-events: painted;
-    }
+}

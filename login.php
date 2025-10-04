@@ -20,12 +20,18 @@ $erro = $_GET['erro'] ?? '';
         <?php if ($usuarioLogado): ?>
 
             <section class="logado-section">
-                <h1>Bem-vindo, <?php echo htmlspecialchars($usuarioLogado); ?>!</h1>
-                <a href="dashboard.php">Ir para o painel</a>
+                <div class="pergunta">
+                    <h1>Você já esta logado, <?php echo htmlspecialchars($usuarioLogado); ?>!</h1>
+                </div>
 
-                <form action="dashboard.php" method="post">
-                    <button type="submit">Sair</button>
-                </form>
+                <div class="botoes">
+
+                    <a href="dashboard.php" class="paginaInicial">Pagina Inicial</a>
+                
+                    <form action="logout.php" method="post">
+                        <button type="submit" class="botaoSair">Sair</button>
+                    </form>
+                </div>
             </section>
             
         <?php else: ?>
