@@ -56,9 +56,9 @@ main {
   color: #ccc;
   text-align: center;
   text-decoration: none;
-border: 1px solid #ccc;
-border-radius: 4px;
-padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
 }
 
 .login-section button {
