@@ -25,9 +25,10 @@ $erro = $_GET['erro'] ?? '';
                 </div>
 
                 <div class="botoes">
+
                     <a href="dashboard.php" class="paginaInicial">Pagina Inicial</a>
                 
-                    <form action="dashboard.php" method="post">
+                    <form action="logout.php" method="post">
                         <button type="submit" class="botaoSair">Sair</button>
                     </form>
                 </div>
@@ -44,9 +45,9 @@ $erro = $_GET['erro'] ?? '';
                     <p class="mensagem-erro">Preencha todos os campos.</p>
                 <?php endif; ?>
 
-                <form action="autenticar.php" method="post">
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="senha" placeholder="Senha" required>
+                <form action="autentificar.php" method="post">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="password" id="senha" name="senha" placeholder="Senha" required>
 
                     <a href="#">Esqueci minha senha</a>
                     <button type="submit">Entrar</button>

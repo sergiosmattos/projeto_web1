@@ -151,14 +151,18 @@ padding: 4px;
   display: flex;
   padding-top: 15px;
   gap: 20px;
+  border-radius: 5px; 
 }
 
 .botaoSair {
   background-color: brown;
-  border-radius: 5px;
+  
+  padding: 5px;
 }
 
 .paginaInicial {
   text-decoration: none;
-  
+  background-color: green;
+  padding: 5px;
+
 }

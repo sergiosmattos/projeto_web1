@@ -9,16 +9,16 @@ class UsuarioRepositorio
         $this->pdo = $pdo;
     }
 
-
-    private function formarObjeto(): Usuario
+    // Corrigido: nomes dos campos conforme o banco
+    private function formarObjeto(array $d): Usuario
     {
         return new Usuario(
             isset($d['id']) ? (int)$d['id'] : null,
-            $d['tipo'] ?? 'User',
-            $d['nome'] ?? '',
-            new DateTime($d['data_nascimento'] ?? '1900-01-01'),
-            $d['email'] ?? '',
-            $d['senha'] ?? ''
+            $d['tipoUsuario'] ?? 'User',
+            $d['nomeUsuario'] ?? '',
+            new DateTime($d['dataNascimentoUsuario'] ?? '1900-01-01'),
+            $d['emailUsuario'] ?? '',
+            $d['senhaUsuario'] ?? ''
         );
     }
 
@@ -32,7 +32,8 @@ class UsuarioRepositorio
     public function findybyId(int $id): ?Usuario
     {
         $sql = "SELECT id,tipoUsuario,nomeUsuario,dataNascimentoUsuario,emailUsuario,senhaUsuario FROM tbUsuario WHERE id = :id";
-        $st->execute([$id]);
+        $st = $this->pdo->prepare($sql);
+        $st->execute(['id' => $id]);
         $d = $st->fetch(PDO::FETCH_ASSOC);
         return $d ? $this->formarObjeto($d) : null;
     }
@@ -41,7 +42,7 @@ class UsuarioRepositorio
     {
         $st = $this->pdo->prepare("SELECT id,nomeUsuario,tipoUsuario,emailUsuario,senhaUsuario,dataNascimentoUsuario FROM tbUsuario WHERE emailUsuario=? LIMIT 1");
         $st->bindValue(1, $email);
-        $st->execute([$email]);
+        $st->execute();
         $d = $st->fetch(PDO::FETCH_ASSOC);
         return $d ? $this->formarObjeto($d) : null;
     }
@@ -86,7 +87,7 @@ class UsuarioRepositorio
 
     public function deletarUsuario(int $id): bool
     {
-        $st = $this->pdo->prepare("DELETE FROM usuarios WHERE id=?");
+        $st = $this->pdo->prepare("DELETE FROM tbUsuario WHERE id=?");
         return $st->execute([$id]);
     }
 }

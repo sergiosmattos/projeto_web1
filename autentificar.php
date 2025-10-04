@@ -2,12 +2,20 @@
 
 session_start();
 
-require_once _DIR_ . '/src/conexaoBD.php';
-require_once _DIR_ . '/src/Repositorio/UsuarioRepositorio.php';
-require_once _DIR_ . '/src/Modelo/Usuario.php';
+require_once __DIR__ . '/src/conexaoBD.php';
+require_once __DIR__ . '/src/Repositorio/UsuarioRepositorio.php';
+require_once __DIR__ . '/src/Modelo/Usuario.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: login.php');
+    exit;
+}
+
+$email = $_POST['email'] ?? '';
+$senha = $_POST['senha'] ?? '';
+
+if ($email === '' || $senha === '') {
+    header('Location: login.php?erro=campos');
     exit;
 }
 
@@ -19,6 +27,15 @@ if ($repo->autenticar($email, $senha)) {
     $tipo = $usuario->getTipo();
     $_SESSION['usuario'] = $email;
     $_SESSION['permissoes'] = $tipo === 'Admin' ? ['usuarios.listar',  'produtos.listar'] : ['produtos.listar'];
-    header('Location: dashboard.php'); // alterado de admin.php
+    
+    if ($tipo === 'Admin') {
+        header('Location: dashboardAdmin.php');
+    } elseif ($tipo === 'User') {
+        header('Location: dashboardUser.php');
+    }
+
     exit;
 }
+
+header('Location: login.php?erro=credenciais');
+exit;
