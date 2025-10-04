@@ -2,9 +2,10 @@
 
 class Obra
 {
-    private ?int $id;
+    private $int $id;
     private string $nome;
     private string $descricao;
+    
 
     public function __construct(?int $id, string $nome, string $descricao)
     {

@@ -9,29 +9,28 @@ class UsuarioRepositorio
         $this->pdo = $pdo;
     }
 
-    
     private function formarObjeto(array $d): Usuario
     {
         return new Usuario(
-            isset($d['id']) ? (int)$d['id'] : null,
-            $d['tipoUsuario'] ?? 'User',
-            $d['nomeUsuario'] ?? '',
-            new DateTime($d['dataNascimentoUsuario'] ?? '1900-01-01'),
-            $d['emailUsuario'] ?? '',
-            $d['senhaUsuario'] ?? ''
+            isset($d['id_usuario']) ? (int)$d['id_usuario'] : null,
+            $d['tipo_usuario'] ?? 'User',
+            $d['nome_usuario'] ?? '',
+            new DateTime($d['data_nascimento_usuario'] ?? '1900-01-01'),
+            $d['email_usuario'] ?? '',
+            $d['senha_usuario'] ?? ''
         );
     }
 
     public function listarUsuario(): array
     {
-        $sql = "SELECT id_usuario,tipo_usuario,nome_usuario,dataNascimento_usuario,email_usuario,senha_usuario FROM tbUsuario ORDER BY email_usuario";
+        $sql = "SELECT id_usuario, tipo_usuario, nome_usuario, data_nascimento_usuario, email_usuario, senha_usuario FROM tbUsuario ORDER BY email_usuario";
         $rs = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return array_map(fn($r) => $this->formarObjeto($r), $rs);
     }
 
     public function findById(int $id): ?Usuario
     {
-        $sql = "SELECT id_usuario,tipo_usuario,nome_usuario,dataNascimento_usuario,email_usuario,senha_usuario FROM tbUsuario WHERE id_usuario = :id";
+        $sql = "SELECT id_usuario, tipo_usuario, nome_usuario, data_nascimento_usuario, email_usuario, senha_usuario FROM tbUsuario WHERE id_usuario = :id";
         $st = $this->pdo->prepare($sql);
         $st->execute(['id' => $id]);
         $d = $st->fetch(PDO::FETCH_ASSOC);
@@ -40,7 +39,7 @@ class UsuarioRepositorio
 
     public function buscarPorEmailUsuario(string $email): ?Usuario
     {
-        $st = $this->pdo->prepare("SELECT id_usuario,nome_usuario,tipo_usuario,email_usuario,senha_usuario,data_nascimento_usuario FROM tbUsuario WHERE email_usuario=? LIMIT 1");
+        $st = $this->pdo->prepare("SELECT id_usuario, nome_usuario, tipo_usuario, email_usuario, senha_usuario, data_nascimento_usuario FROM tbUsuario WHERE email_usuario=? LIMIT 1");
         $st->bindValue(1, $email);
         $st->execute();
         $d = $st->fetch(PDO::FETCH_ASSOC);
@@ -49,7 +48,7 @@ class UsuarioRepositorio
 
     public function salvarUsuario(Usuario $usuario)
     {
-        $sql = "INSERT INTO tbUsuario (nome_usuario, tipo_usuario, email_usuario, senha_usuario, dataNascimento_usuario) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tbUsuario (nome_usuario, tipo_usuario, email_usuario, senha_usuario, data_nascimento_usuario) VALUES (?, ?, ?, ?, ?)";
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(1, $usuario->getNome());
         $statement->bindValue(2, $usuario->getTipo());
@@ -73,19 +72,16 @@ class UsuarioRepositorio
             $senha = password_hash($senha, PASSWORD_DEFAULT);
         }
 
-        $sql = "UPDATE tbUsuario SET email_usuario = ?, senha_usuario = ?, nome_usuario = ?, tipo_usuario = ?, data_nascimento_usuario = ? WHERE id = ?";
+        $sql = "UPDATE tbUsuario SET email_usuario = ?, senha_usuario = ?, nome_usuario = ?, tipo_usuario = ?, data_nascimento_usuario = ? WHERE id_usuario = ?";
         $st = $this->pdo->prepare($sql);
-        $st->execute
-        (   
-            [
-                $usuario->getEmail(),
-                $senha,
-                $usuario->getNome(),
-                $usuario->getTipo(),
-                $usuario->getDataNascimento()->format('Y-m-d'),
-                $usuario->getId()
-            ]
-        );
+        $st->execute([
+            $usuario->getEmail(),
+            $senha,
+            $usuario->getNome(),
+            $usuario->getTipo(),
+            $usuario->getDataNascimento()->format('Y-m-d'),
+            $usuario->getId()
+        ]);
     }
 
     public function deletarUsuario(int $id): bool

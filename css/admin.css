@@ -21,9 +21,15 @@ body {
     height: 100px;
 }
 
+.topo a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
 .iconUser {
     width: auto;
-    height: 50px;
+    height: 35px;
 }
 
 .iconLogo {
@@ -112,7 +118,8 @@ main h1 {
     border-radius: 5px;
     padding: 8px 12px;
     outline: none;
-    width: 300px;
+    width: 250px;
+    margin-right: 100px;
 }
 
 .tabela {

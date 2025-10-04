@@ -10,7 +10,7 @@ class ObraRepositorio
     }
 
     
-    private function formarObjeto(array $d): Usuario
+    private function formarObjeto(array $d): Obra
     {
         return new Usuario(
             isset($d['id']) ? (int)$d['id'] : null,
@@ -49,7 +49,7 @@ class ObraRepositorio
 
     public function salvarObra(Obra $obra)
     {
-        $sql = "INSERT INTO tbUsuario (nome_obra, descricao_obra) VALUES (?, ?)";
+        $sql = "INSERT INTO tbObra (nome_obra, descricao_obra) VALUES (?, ?)";
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(1, $obra->getNome());
         $statement->bindValue(2, $obra->getDescricao());
