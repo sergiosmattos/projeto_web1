@@ -46,7 +46,7 @@ $erro = $_GET['erro'] ?? '';
                     <p class="mensagem-erro">Preencha todos os campos.</p>
                 <?php endif; ?>
 
-                <form action="autenticar.php" method="post">
+                <form action="autentificar.php" method="post">
 
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="senha" placeholder="Senha" required>
