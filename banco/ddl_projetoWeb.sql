@@ -61,7 +61,9 @@ create table tbObraCategoria (
 create table tbLeilao (
 
 	id_leilao int auto_increment,
-    data_inicio_leilao date not null,
+    data_horario_inicio_leilao date not null,
+    lance_inicial_leilao float not null,
+    lance_atual_leilao float not null,
     id_produto int not null,
     
     constraint pk_tbLeilao primary key (id_leilao),
