@@ -3,6 +3,7 @@ body {
     background-color: #1f1f1f;
     margin: 0;
     padding: 0;
+    color: white;
 }
 
 
@@ -58,7 +59,9 @@ body {
     gap: 15px;
 }
 
-.sidebar a {
+
+
+.sidebar a{
     color: #ddd;
     text-decoration: none;
     font-weight: bold;
@@ -72,15 +75,21 @@ body {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
     margin-top: 140px;
     margin-left: 260px;
     padding: 40px;
-    background-color: #fff;
     border-radius: 10px;
     min-height: calc(100vh - 140px);
     width: calc(100% - 280px);
-    box-sizing: border-box;
     margin-right: 40px;
+    align-items: center;
+}
+
+main img {
+    width: 150px;
+    height: auto;
 }
 
 main h1 {
@@ -89,85 +98,39 @@ main h1 {
     margin-bottom: 25px;
 }
 
-
-.acoes {
+.deshboard {
     display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 20px;
+    width: 500px;
+    font-size: 20px;
+}
+
+.deshboard a {
+    text-decoration: none;
+    color: white;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 25px;
-}
-
-
-.btn-add {
-    background-color: #6a5acd;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 14px;
-    cursor: pointer;
-}
-
-.btn-add:hover {
-    background-color: #7b68ee;
-}
-
-.busca input {
-    background-color: #e0e0e0;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    outline: none;
-    width: 250px;
-    margin-right: 100px;
-}
-
-.tabela {
-    background-color: #d9d9d9;
-    color: #000;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 100%;
-    max-width: 800px;
     padding: 10px;
+    border-radius: 4px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.deshboard a:hover {
+    opacity: 0.9;
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
+.deshboard-produto, .deshboard-usuario, .deshboard-leilao {
+    text-align: center;
 }
 
-th {
-    border-bottom: 1px solid #bdbdbd;
+.deshboard-produto {
+    background-color: #7b42f6;
 }
 
-.btn-editar {
-    background-color: #6a5acd;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+.deshboard-usuario {
+    background-color: #9567f8;
 }
 
-.btn-editar:hover {
-    background-color: #7b68ee;
-}
-
-.btn-excluir {
-    background-color: #d62828;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-excluir:hover {
-    background-color: #f44336;
+.deshboard-leilao {
+    background-color: #7b42f6;
 }
