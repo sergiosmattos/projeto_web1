@@ -24,19 +24,9 @@ class Usuario
         return $this->id;
     }
 
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
-
     public function getNome(): string
     {
         return $this->nome;
-    }
-
-    public function setNome(string $nome): void
-    {
-        $this->nome = $nome;
     }
 
     public function getTipo(): string
@@ -44,19 +34,9 @@ class Usuario
         return $this->tipo;
     }
 
-    public function setModo(string $tipo): void
-    {
-        $this->tipo = $tipo;
-    }
-
     public function getEmail(): string
     {
         return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
     }
 
     public function getSenha(): string
@@ -64,18 +44,9 @@ class Usuario
         return $this->senha;
     }
 
-    public function setSenha(string $senha): void
-    {
-        $this->senha = $senha;
-    }
-
     public function getDataNascimento(): DateTime
     {
         return $this->dataNascimento;
     }
-
-    public function setDataNascimento(DateTime $dataNascimento): void
-    {
-        $this->dataNascimento = $dataNascimento;
-    }
+    
 }
