@@ -1,0 +1,100 @@
+.listar {
+    margin-top: 140px;
+    margin-left: 260px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    min-height: calc(100vh - 140px);
+    width: calc(100% - 280px);
+    box-sizing: border-box;
+    margin-right: 40px;
+}
+
+.listar h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+
+.acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+
+.btn-add {
+    background-color: #6a5acd;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: #7b68ee;
+}
+
+.busca input {
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    outline: none;
+    width: 250px;
+    margin-right: 100px;
+}
+
+.tabela {
+    background-color: #d9d9d9;
+    color: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.btn-editar {
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-editar:hover {
+    background-color: #7b68ee;
+}
+
+.btn-excluir {
+    background-color: #d62828;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-excluir:hover {
+    background-color: #f44336;
+}
