@@ -1,3 +1,59 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
+require __DIR__ . "/src/Repositorio/conexaoBD.php";
+require __DIR__ . "/src/Repositorio/UsuarioRepositorio.php";
+require __DIR__ . "/src/Repositorio/CategoriaRepositorio.php";
+require __DIR__ . "/src/Repositorio/LeilaoRepositorio.php";
+require __DIR__ . "/src/Repositorio/ObraRepositorio.php";
+require __DIR__ . "/src/Repositorio/ProdutoRepositorio.php";
+require __DIR__ . "/src/Modelo/Categoria.php";
+require __DIR__ . "/src/Modelo/Leilao.php";
+require __DIR__ . "/src/Modelo/Obra.php";
+require __DIR__ . "/src/Modelo/Produto.php";
+require __DIR__ . "/src/Modelo/Usuario.php";
+
+if (!$usuarioLogado) {
+    header('Location: login.php');
+    exit;
+}
+
+$tipo = $_GET['tipo'] ?? 'usuario';
+$titulo = '';
+$itens = [];
+
+if ($tipo === 'usuario') {
+    $repo = new UsuarioRepositorio($pdo);
+    $itens = $repo->listar();
+    $titulo = 'Lista de Usuários';
+} elseif ($tipo === 'obra') {
+    $repo = new ObraRepositorio($pdo);
+    $itens = $repo->listar();
+    $titulo = 'Lista de Obras';
+} elseif ($tipo === 'produto') {
+    $repo = new ProdutoRepositorio($pdo);
+    $itens = $repo->listar();
+    $titulo = 'Lista de Produtos';
+} else if ($tipo === 'categoria') {
+    $repo = new CategoriaRepositorio($pdo);
+    $itens = $repo->listar();
+    $titulo = 'Lista de Categorias';
+} else if ($tipo === 'leilao') {
+    $repo = new LeilaoRepositorio($pdo);
+    $itens = $repo->listar();
+    $titulo = 'Lista de Leilões';
+} else {
+    $titulo = 'Tipo inválido';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,6 +64,7 @@
     <link rel="stylesheet" href="../css/admin.css">
     <title>Admin - Usuario</title>
 </head>
+
 <body>
     <section class="topo">
         <div class="logo">

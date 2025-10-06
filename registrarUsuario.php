@@ -18,7 +18,7 @@ if ($nome === '' || dataNascimento === '' || $email === '' || $senha === '') {
 }
 
 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-$stmt = $pdo->prepare('INSERT INTO usuarios (nome, perfil, email, senha) VALUES (?, ?, ?, ?)');
+$stmt = $pdo->prepare('INSERT INTO tbUsuarios (nome, tipo, email, senha) VALUES (?, ?, ?, ?)');
 $stmt->execute([$nome, $perfil, $email, password_hash($senha, PASSWORD_DEFAULT)]);
 
 header("Location: login.php?novo=1");

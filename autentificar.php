@@ -29,7 +29,7 @@ if ($repo->autenticar($email, $senha)) {
     $_SESSION['permissoes'] = $tipo === 'Admin' ? ['usuarios.listar',  'produtos.listar'] : ['produtos.listar'];
     
     if ($tipo === 'Admin') {
-        header('Location: dashboardAdmin.php');
+        header('Location: dashboardAdmin.html');
     } elseif ($tipo === 'User') {
         header('Location: dashboardUser.php');
     }
