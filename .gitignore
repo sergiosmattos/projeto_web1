@@ -3,3 +3,7 @@
 
 #ignore brModelo
 brModelo.jar
+
+#ignore testFiles
+
+testF*.*

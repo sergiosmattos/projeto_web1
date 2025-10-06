@@ -32,7 +32,7 @@ class LeilaoRepositorio {
 
     public function findById(int $id): ?Leilao {
 
-        $sql = 'select tbLeilao.* from tbLeilao where id = ?';
+        $sql = 'select tbLeilao.* from tbLeilao where id = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
@@ -84,7 +84,7 @@ class LeilaoRepositorio {
 
     public function listar() : array {
         
-        $sql = 'select tbLeilao.* tbLeilao limit 1';
+        $sql = 'select tbLeilao.* from tbLeilao';
 
         $query = $this->pdo->query(PDO::FETCH_ASSOC);
         $resultadoConsulta = $query->fetchAll();

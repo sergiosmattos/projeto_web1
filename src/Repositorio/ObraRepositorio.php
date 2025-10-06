@@ -29,7 +29,7 @@ class ObraRepositorio {
 
     public function findById(int $id): ?Obra {
 
-        $sql = 'select tbObra.* from tbObra where id = ?';
+        $sql = 'select tbObra.* from tbObra where id = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
@@ -75,7 +75,7 @@ class ObraRepositorio {
 
     public function listar() : array {
         
-        $sql = 'select tbObra.* tbObra limit 1';
+        $sql = 'select tbObra.* from tbObra';
 
         $query = $this->pdo->query(PDO::FETCH_ASSOC);
         $resultadoConsulta = $query->fetchAll();

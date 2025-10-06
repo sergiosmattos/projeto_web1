@@ -1,10 +1,10 @@
 <?php
 session_start();
+
 $usuarioLogado = $_SESSION['usuario'] ?? null;
 $erro = $_GET['erro'] ?? '';
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -61,9 +61,29 @@ $erro = $_GET['erro'] ?? '';
             <section class="cadastro-section">
                 <h2>Bem-vindo</h2>
                 <p>Registre-se para obter uma melhor experiência.</p>
-                <a href="cadastro.html">Cadastre-se</a>
+                <a href="cadastro.php">Cadastrar</a>
             </section>
+
         <?php endif; ?>
     </main>
+
+    <script>
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            
+            const mensagens = document.querySelectorAll('.mensagem-erro, .mensagem-ok');
+
+            mensagens.forEach(msg => {
+                
+                setTimeout(() => {
+                    msg.classList.add('oculto');
+                }, 5000);
+
+                msg.addEventListener('transitionend', () => msg.remove());
+            });
+        });
+        
+    </script>
+
 </body>
 </html>

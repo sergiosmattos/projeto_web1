@@ -28,7 +28,7 @@ class CategoriaRepositorio {
 
     public function findById(int $id): ?Categoria {
 
-        $sql = 'select tbCategoria.* from tbCategoria where id = ?';
+        $sql = 'select tbCategoria.* from tbCategoria where id = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
@@ -66,7 +66,7 @@ class CategoriaRepositorio {
 
     public function listar() : array {
         
-        $sql = 'select tbCategoria.* tbCategoria limit 1';
+        $sql = 'select tbCategoria.* from tbCategoria';
 
         $query = $this->pdo->query(PDO::FETCH_ASSOC);
         $resultadoConsulta = $query->fetchAll();

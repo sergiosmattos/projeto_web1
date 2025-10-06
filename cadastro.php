@@ -12,7 +12,8 @@
         <section class="login-section">
             <h1>Cadastre-se</h1>
 
-            <form action="#">
+            <form action="cadastroUsuario.php" method="post">
+                
                 <input type="text" placeholder="Nome" required>
 
                 <input type="date" placeholder="data da Nascimento. Ex: YYYY-mm-DD" required>

@@ -16,13 +16,11 @@ class ProdutoRepositorio {
 
         $id = $atributos['id'];
         
-        $produto = new Produto(
-
-            isset($id) ? (int) $id : null,
+        $produto = new Produto(isset($id) ? (int) $id : null,
             $atributos['nome'],
             $atributos['descricao'],
             $atributos['preco'],
-            $atributos['produto$produto']
+            $atributos['obra']
 
         );
 
@@ -32,7 +30,7 @@ class ProdutoRepositorio {
 
     public function findById(int $id): ?Produto {
 
-        $sql = 'select tbProduto.* from tbProduto where id = ?';
+        $sql = 'select tbProduto.* from tbProduto where id = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
@@ -84,7 +82,7 @@ class ProdutoRepositorio {
 
     public function listar() : array {
         
-        $sql = 'select tbProduto.* tbProduto limit 1';
+        $sql = 'select tbProduto.* from tbProduto';
 
         $query = $this->pdo->query(PDO::FETCH_ASSOC);
         $resultadoConsulta = $query->fetchAll();

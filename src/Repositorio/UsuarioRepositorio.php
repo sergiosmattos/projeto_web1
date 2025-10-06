@@ -101,7 +101,7 @@ class UsuarioRepositorio {
 
     public function listar() : array {
         
-        $sql = 'select tbUsuario.* tbUsuario limit 1';
+        $sql = 'select tbUsuario.* from tbUsuario';
 
         $query = $this->pdo->query(PDO::FETCH_ASSOC);
         $resultadoConsulta = $query->fetchAll();
