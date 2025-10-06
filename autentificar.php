@@ -20,16 +20,16 @@ if ($email === '' || $senha === '') {
 }
 
 $repo = new UsuarioRepositorio($pdo);
-$usuario = $repo->buscarPorEmailUsuario($email);
+$usuario = $repo->findByEmail($email);
 
-if ($repo->autenticar($email, $senha)) {
+if ($repo->autenticarByEmailSenha($email, $senha)) {
     session_regenerate_id(true);
     $tipo = $usuario->getTipo();
     $_SESSION['usuario'] = $email;
     $_SESSION['permissoes'] = $tipo === 'Admin' ? ['usuarios.listar',  'produtos.listar'] : ['produtos.listar'];
     
     if ($tipo === 'Admin') {
-        header('Location: dashboardAdmin.html');
+        header('Location: dashboardAdmin.php');
     } elseif ($tipo === 'User') {
         header('Location: dashboardUser.php');
     }
