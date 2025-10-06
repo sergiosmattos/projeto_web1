@@ -48,8 +48,8 @@ $erro = $_GET['erro'] ?? '';
 
                 <form action="autentificar.php" method="post">
 
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="senha" placeholder="Senha" required>
+                    <input type="email" name="email" placeholder="Email">
+                    <input type="password" name="senha" placeholder="Senha">
 
                     <a href="#">Esqueci minha senha</a>
                     <button type="submit">Entrar</button>

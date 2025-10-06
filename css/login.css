@@ -166,3 +166,21 @@ main {
   padding: 5px;
 
 }
+
+.mensagem-erro {
+  color: #c0392b;
+  background: #fff0f0;
+  border: 1px solid #c0392b;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.mensagem-erro.oculto {
+
+  opacity: 0;
+  /* transform: translateY(-10); */
+
+}

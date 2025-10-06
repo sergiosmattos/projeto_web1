@@ -9,10 +9,10 @@ class Usuario
     private string $email;
     private string $senha;
 
-    public function __construct( ?int $id, string $tipo, string $nome, DateTime $dataNascimento, string $email, string $senha) {
+    public function __construct( ?int $id, ?string $tipo, string $nome, DateTime $dataNascimento, string $email, string $senha) {
 
         $this->id = $id;
-        $this->tipo = $tipo;
+        $this->tipo = $tipo ?? 'User';
         $this->nome = $nome;
         $this->dataNascimento = $dataNascimento;
         $this->email = $email;
@@ -26,14 +26,14 @@ class Usuario
         return $this->id;
     }
 
+    public function getTipo(): ?string
+    {
+        return $this->tipo;
+    }
+
     public function getNome(): string
     {
         return $this->nome;
-    }
-
-    public function getTipo(): string
-    {
-        return $this->tipo;
     }
 
     public function getEmail(): string

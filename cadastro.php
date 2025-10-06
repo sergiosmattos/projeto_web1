@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+$erro = $_GET['erro'] ?? '';
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,14 +21,18 @@
             <h1>Cadastre-se</h1>
 
             <form action="cadastroUsuario.php" method="post">
-                
-                <input type="text" placeholder="Nome" required>
 
-                <input type="date" placeholder="data da Nascimento. Ex: YYYY-mm-DD" required>
+                <?php if($erro === 'campos'): ?>
+                    <p class="mensagem-erro">Preencha todos os campos.</p>
+                <?php endif ?>
 
-                <input type="email" placeholder="Email" required>
+                <input name="nome" type="text" placeholder="Nome">
 
-                <input type="password" placeholder="Senha" required>
+                <input name="dataNascimento" type="date" placeholder="data da Nascimento. Ex: YYYY-mm-DD">
+
+                <input name="email" type="email" placeholder="Email">
+
+                <input name="senha" type="password" placeholder="Senha">
                 
                 <a href="#">Esqueci minha senha</a>
 
@@ -29,11 +41,33 @@
         </section>
 
         <section class="cadastro-section">
+            
             <h2>Bem-vindo</h2>
             <p>Caso já tenha um cadastro aperte em login</p>
             <a href="login.php">Login</a>
 
         </section>
+        
     </main>
+
+    <script>
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            
+            const mensagens = document.querySelectorAll('.mensagem-erro');
+
+            mensagens.forEach(msg => {
+                
+                setTimeout(() => {
+                    msg.classList.add('oculto');
+                }, 1000);
+
+                msg.remove();
+                
+            });
+        });
+        
+    </script>
+
 </body>
 </html>

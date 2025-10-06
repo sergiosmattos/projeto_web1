@@ -12,7 +12,8 @@ CREATE TABLE tbUsuario (
     senha_usuario VARCHAR(100) NOT NULL,
     tipo_usuario VARCHAR(15) NOT NULL DEFAULT 'User',
     
-    CONSTRAINT pk_tbUsuario PRIMARY KEY (id_usuario)
+    CONSTRAINT pk_tbUsuario PRIMARY KEY (id_usuario),
+    constraint ch_TipoUsuariotbUsuario check (tipo_usuario in ('User'))
 );
 
 create table tbObra (

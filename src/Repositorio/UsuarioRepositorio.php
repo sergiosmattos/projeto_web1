@@ -17,7 +17,7 @@ class UsuarioRepositorio {
         $usuario = new Usuario(
 
             isset($id) ? (int) $id : null,
-            $atributos['tipo'],
+            $atributos['tipo'] ?? 'User',
             $atributos['nome'],
             $atributos['dataNascimento'],
             $atributos['email'],
@@ -65,12 +65,8 @@ class UsuarioRepositorio {
         'values (?, ?, ?, ?, ?)';
 
         $stmt = $this->pdo->prepare($sql);
+        $this->setStmtValues($stmt, $usuario);
 
-        $stmt->bindValue(1, $usuario->getTipo());
-        $stmt->bindValue(2, $usuario->getNome());
-        $stmt->bindValue(3, $usuario->getEmail());
-        $stmt->bindValue(4, $usuario->getSenha());
-        $stmt->bindValue(5, $usuario->getDataNascimento());
 
         $stmt->execute();
 
@@ -88,12 +84,8 @@ class UsuarioRepositorio {
 
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->bindValue(1, $usuario->getTipo());
-        $stmt->bindValue(2, $usuario->getNome());
-        $stmt->bindValue(3, $usuario->getEmail());
-        $stmt->bindValue(4, $usuario->getSenha());
-        $stmt->bindValue(5, $usuario->getDataNascimento());
         $stmt->bindValue(6, $usuario->getId());
+        $this->setStmtValues($stmt, $usuario);
 
         $stmt->execute();
 
@@ -117,6 +109,16 @@ class UsuarioRepositorio {
         
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute();
+
+    }
+
+    private function setStmtValues(PDOStatement $stmt, Usuario $usuario) {
+
+        $stmt->bindValue(1, $usuario->getTipo());
+        $stmt->bindValue(2, $usuario->getNome());
+        $stmt->bindValue(3, $usuario->getEmail());
+        $stmt->bindValue(4, $usuario->getSenha());
+        $stmt->bindValue(5, $usuario->getDataNascimento()->format('Y-m-d'));
 
     }
 
