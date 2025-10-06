@@ -4,6 +4,7 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit;
 }
+
 require __DIR__ . "/../src/conexaoBD.php";
 require __DIR__ . "/../src/Modelo/Usuario.php";
 require __DIR__ . "/../src/Repositorio/UsuarioRepositorio.php";
@@ -16,12 +17,7 @@ if (!$usuarioLogado) {
 
 $usuarioRepositorio = new UsuarioRepositorio($pdo);
 $usuarios = $usuarioRepositorio->listar();
-
-
 ?>
-<!doctype html>
-<html lang="pt-br">
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -31,7 +27,7 @@ $usuarios = $usuarioRepositorio->listar();
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/listarUsuario.css">
     <link rel="stylesheet" href="../css/admin.css">
-    <title>Admin - Usuario</title>
+    <title>Admin - Usuário</title>
 </head>
 
 <body>
@@ -41,8 +37,8 @@ $usuarios = $usuarioRepositorio->listar();
             <h1>Geek Artefacts</h1>
         </div>
 
-        <a href="#">Adminstração</a>
-        <a href="#">Leilao</a>
+        <a href="#">Administração</a>
+        <a href="#">Leilão</a>
         <a href="#">Compra</a>
 
         <img src="../img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
@@ -50,19 +46,18 @@ $usuarios = $usuarioRepositorio->listar();
 
     <aside class="sidebar">
         <a href="../dashboardAdmin.html">Painel de controle</a>
-        <a href="#">Obra</a>
+        <a href="../Obra/listar.php">Obra</a>
         <a href="#">Usuários</a>
         <a href="#">Leilões</a>
         <a href="#">Categorias</a>
         <a href="#">Produtos</a>
     </aside>
 
-
     <div class="listar">
-        <h1>Gerenciar Usuario</h1>
+        <h1>Gerenciar Usuário</h1>
 
         <div class="acoes">
-            <button class="btn-add">adicionar Usuario</button>
+            <button class="btn-add">Adicionar Usuário</button>
             <div class="busca">
                 <input type="text" placeholder="Buscar">
             </div>
@@ -72,20 +67,30 @@ $usuarios = $usuarioRepositorio->listar();
             <table>
                 <thead>
                     <tr>
-                        <th>Título</th>
-                        <th>Lance Atual</th>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Nome</th>
+                        <th>Data de Nascimento</th>
+                        <th>Email</th>
+                        <th>Senha</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Vaso</td>
-                        <td>R$ 5.000</td>
-                        <td>
-                            <button class="btn-editar">alterar</button>
-                            <button class="btn-excluir">excluir</button>
-                        </td>
-                    </tr>
+                    <?php foreach ($usuarios as $usuario): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($usuario->getId()) ?></td>
+                            <td><?= htmlspecialchars($usuario->getTipo()) ?></td>
+                            <td><?= htmlspecialchars($usuario->getNome()) ?></td>
+                            <td><?= $usuario->getDataNascimento()->format('d/m/Y') ?></td>
+                            <td><?= htmlspecialchars($usuario->getEmail()) ?></td>
+                            <td><?= htmlspecialchars($usuario->getSenha()) ?></td>
+                            <td>
+                                <button class="btn-editar">Alterar</button>
+                                <button class="btn-excluir">Excluir</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </section>
