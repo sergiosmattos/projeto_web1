@@ -2,6 +2,10 @@
 session_start();
 
 $email = $_SESSION['usuario'] ?? null;
+
+$_SESSION['usuario'] = 'admin@gmail.com';
+$_SESSION['tipo'] = 'Admin';
+
 $erro = $_GET['erro'] ?? '';
 
 ?>

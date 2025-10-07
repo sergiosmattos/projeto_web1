@@ -15,8 +15,6 @@ $obraRepositorio = new ObraRepositorio($pdo);
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-var_dump($id);
-
 $modoEdicao = false;
 $obra = null;
 
@@ -25,6 +23,8 @@ if ($id) {
     if (method_exists($obraRepositorio, 'findById')) {
         
         $obra = $obraRepositorio->findById($id);
+        var_dump($obra);
+
     }
 
     if ($obra) {
@@ -39,9 +39,8 @@ if ($id) {
     }
 }
 
-// Valores para o form
-$valorNome       = $modoEdicao ? $obra->getNome() : '';
-$valorDescricao     = $modoEdicao ? $obra->getDescricao() : '';
+$valorNome = $modoEdicao ? $obra->getNome() : '';
+$valorDescricao = $modoEdicao ? $obra->getDescricao() : '';
 
 
 $tituloPagina = $modoEdicao ? 'Editar Obra' : 'Cadastrar Obra';
@@ -55,9 +54,9 @@ $actionForm   = $modoEdicao ? 'salvar.php' : 'salvar.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/logo_geek.png">
-    <!-- <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/admin.css">
-    <link rel="stylesheet" href="../../css/form.css"> -->
+    <link rel="stylesheet" href="../../css/form.css">
     <title>Gerenciar Obras</title>
 </head>
 
@@ -90,8 +89,8 @@ $actionForm   = $modoEdicao ? 'salvar.php' : 'salvar.php';
         <div class="form-wrapper">
             <form action="salvar.php" method="POST" class="form-cadastro">
                 
-                <input id="nome" name="nome" type="text" placeholder="Nome" required>
-                <input id="descricao" name="descricao" type="text" placeholder="Descrição" required>
+                <input id="nome" name="nome" type="text" placeholder="Nome" value=<?=$valorNome ?> required>
+                <input id="descricao" name="descricao" type="text" placeholder="Descrição" value=<?= $valorDescricao ?> required>
 
                 
                 <div class="grupo-botoes">

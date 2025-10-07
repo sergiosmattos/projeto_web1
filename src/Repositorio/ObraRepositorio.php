@@ -33,6 +33,7 @@ class ObraRepositorio {
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
+        $stmt->execute();
 
         $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
         $obra = $atributos ? $this->makeObject($atributos) : null;
@@ -76,7 +77,6 @@ class ObraRepositorio {
     public function listar() : array {
         
         $sql = 'select tbObra.* from tbObra';
-
         
         $query = $this->pdo->query($sql);
 

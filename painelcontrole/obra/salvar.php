@@ -1,6 +1,5 @@
 <!-- <?php
-        require __DIR__ . "/../../src/conexaoBD.php";
-        require __DIR__ . "/../../src/Modelo/Obra.php";
+
         require __DIR__ . "/../../src/Repositorio/ObraRepositorio.php";
 
         var_dump($_SERVER["REQUEST_METHOD"]);
@@ -12,7 +11,6 @@
         
         $obraRepositorio = new obraRepositorio($pdo);
 
-
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $obra = new Obra(
@@ -21,7 +19,6 @@
                 $_POST['nome'],
                 $_POST['descricao'],
             );
-            var_dump($obra);
         }
 
 
@@ -55,14 +52,14 @@
                 exit;
             }
 
-
-
             $obra = new Obra($id, $nome, $descricao);
             $obraRepositorio->atualizar($obra);
             header('Location: listar.php?ok=1');
             exit;
-        } else {
-            // Novo Obra
+
+        } 
+        else {
+
             $obra = new Obra(null, $nome, $descricao);
             $obraRepositorio->cadastrar($obra);
             header('Location: listar.php?novo=1');
