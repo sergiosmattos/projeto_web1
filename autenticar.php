@@ -4,12 +4,13 @@ session_start();
 
 require __DIR__.'/src/repositorio/UsuarioRepositorio.php';
 
-// if ( $_SERVER['REQUEST_METHOD' !== "POST"] ) {
-//     header('Location: login.php');
-//     exit;
-// }
+if ( $_SERVER['REQUEST_METHOD' !== "POST"] ) {
+    header('Location: login.php');
+    exit;
+}
 
-var_dump($_POST);
+// print('var dump do post: ');
+// var_dump($_POST);
 
 $email = trim($_POST['email']) ?? '';
 $senha = trim($_POST['senha']) ?? '';

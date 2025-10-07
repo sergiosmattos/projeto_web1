@@ -13,12 +13,12 @@ class CategoriaRepositorio {
 
     public function makeObject(array $atributos) : Categoria {
 
-        $id = $atributos['id'];
+        $id = $atributos['id_categoria'];
         
         $categoria = new Categoria(
 
             isset($id) ? (int) $id : null,
-            $atributos['nome']
+            $atributos['nome_categoria']
 
         );
 

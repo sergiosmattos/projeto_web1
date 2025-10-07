@@ -12,16 +12,19 @@ class UsuarioRepositorio {
 
     public function makeObject(array $atributos) : Usuario {
 
-        $id = $atributos['id'] ?? null;
+        $id = $atributos['id_usuario'] ?? null;
+
+        $dataNascimento = $atributos['data_nascimento_usuario'] ?? null;
+        $timezone = new DateTimeZone('UTC');
         
         $usuario = new Usuario(
 
             isset($id) ? (int) $id : null,
-            $atributos['tipo'] ?? 'User',
-            $atributos['nome'] ?? '',
-            $atributos['dataNascimento'] ?? new DateTime('0000-01-01'),
-            $atributos['email'] ?? '',
-            $atributos['senha'] ?? ''
+            $atributos['tipo_usuario'] ?? 'User',
+            $atributos['nome_usuario'] ?? '',
+            isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : new DateTime('0000-00-00', $timezone),
+            $atributos['email_usuario'] ?? '',
+            $atributos['senha_usuario'] ?? ''
 
         );
 
@@ -53,9 +56,8 @@ class UsuarioRepositorio {
         $stmt->execute();
 
         $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
-        
         $usuario = $atributos ? $this->makeObject($atributos) : null;
-        
+
         return $usuario;
 
     }
@@ -128,7 +130,12 @@ class UsuarioRepositorio {
         $usuarioEncontrado = $this->findByEmail($email);
         $senhaUsuario = $usuarioEncontrado->getSenha();
 
-        return password_verify($senha, $senhaUsuario);
+        // $isPasswordOk = password_verify($senha, $senhaUsuario);
+        $isPasswordOk = $senha === $senhaUsuario;
+
+        var_dump($isPasswordOk);
+
+        return $isPasswordOk;
 
     }
 

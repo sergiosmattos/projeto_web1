@@ -13,13 +13,13 @@ class ObraRepositorio {
 
     public function makeObject(array $atributos) : Obra {
 
-        $id = $atributos['id'];
+        $id = $atributos['id_obra'];
         
         $obra = new Obra(
 
             isset($id) ? (int) $id : null,
-            $atributos['nome'],
-            $atributos['descricao']
+            $atributos['nome_obra'],
+            $atributos['descricao_obra']
 
         );
 
