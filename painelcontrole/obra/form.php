@@ -1,6 +1,51 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: ../login.php');
+    exit;
+}
+
+$usuarioLogado = $_SESSION['usuario'] ?? null;
+if (!$usuarioLogado) {
+    header('Location: login.php');
+    exit;
+}
+
+require_once __DIR__ . '/../../src/conexaoBD.php';
+require_once __DIR__ . '/../../src/Modelo/Obra.php';
+require_once __DIR__ . '/../../src/Repositorio/ObraRepositorio.php';
+
+$repo = new ObraRepositorio($pdo);
+
+// Detecta se é edição
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$modoEdicao = false;
+$obra = null;
+
+if ($id) {
+    // Ajuste o nome do método conforme o que existe no seu repositório (ex: buscarPorId / encontrar / buscar)
+    if (method_exists($repo, 'buscar')) {
+        $obra = $repo->findById($id);
+    }
+
+    if ($obra) {
+        $modoEdicao = true;
+    } else {
+        // id inválido -> voltar para lista
+        header('Location: listar.php');
+        exit;
+    }
+}
+
+// Valores para o form
+$valorNome       = $modoEdicao ? $obra->getNome() : '';
+$valorDescricao     = $modoEdicao ? $obra->getDescricao() : '';
 
 
-
+$tituloPagina = $modoEdicao ? 'Editar Obra' : 'Cadastrar Obra';
+$textoBotao   = $modoEdicao ? 'Salvar Alterações' : 'Cadastrar Obra';
+$actionForm   = $modoEdicao ? 'salvar.php' : 'salvar.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -40,7 +85,7 @@
         <h2>Cadastrar Obra</h2>
 
         <div class="form-wrapper">
-            <form action="" method="post" class="form-cadastro">
+            <form action="salvar.php" method="POST" class="form-cadastro">
                 
                 <input id="nome" name="nome" type="text" placeholder="Nome" required>
                 <input id="descricao" name="descricao" type="text" placeholder="Descrição" required>
