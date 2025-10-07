@@ -29,7 +29,7 @@ class ObraRepositorio {
 
     public function findById(int $id): ?Obra {
 
-        $sql = 'select tbObra.* from tbObra where id = ? limit 1';
+        $sql = 'select tbObra.* from tbObra where id_obra = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);

@@ -55,7 +55,9 @@
         <h1>Gerenciar Obras</h1>
 
         <div class="acoes">
+
             <a href="form.php"><button class="btn-add">Adicionar Obra</button></a>
+            
             <div class="busca">
                 <input type="text" placeholder="Buscar Obra">
             </div>
@@ -78,8 +80,12 @@
                             <td><?= htmlspecialchars($obra->getNome()) ?></td>
                             <td><?= htmlspecialchars($obra->getDescricao()) ?></td>
                             <td>
-                                <a href="form.php?id="><button class="btn-editar">Alterar</button></a>
-                                <button class="btn-excluir">Excluir</button>
+                                <a href="form.php?id=<?= $obra->getId()?>"><button class="btn-editar">Alterar</button></a>
+
+                                <form action="excluir.php" method="post">
+                                    <input type="hidden" name="id" value="<?= $usuario->getId() ?>">
+                                    <input type="submit" class="btn-excluir" value="Excluir">
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

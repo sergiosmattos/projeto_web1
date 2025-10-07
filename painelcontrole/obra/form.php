@@ -1,12 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('Location: ../login.php');
-    exit;
-}
 
-$usuarioLogado = $_SESSION['usuario'] ?? null;
-if (!$usuarioLogado) {
+session_start();
+
+$emailUsuario = $_SESSION['usuario'] ?? null;
+
+if (!isset($emailUsuario)) {
     header('Location: login.php');
     exit;
 }
@@ -16,21 +14,28 @@ require_once __DIR__ . '/../../src/Repositorio/ObraRepositorio.php';
 $obraRepositorio = new ObraRepositorio($pdo);
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+var_dump($id);
+
 $modoEdicao = false;
 $obra = null;
 
 if ($id) {
 
     if (method_exists($obraRepositorio, 'findById')) {
+        
         $obra = $obraRepositorio->findById($id);
     }
 
     if ($obra) {
+
         $modoEdicao = true;
-    } else {
-        // id inválido -> voltar para lista
+    } 
+    else {
+
         header('Location: listar.php');
         exit;
+
     }
 }
 
@@ -50,9 +55,9 @@ $actionForm   = $modoEdicao ? 'salvar.php' : 'salvar.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/logo_geek.png">
-    <link rel="stylesheet" href="../../css/reset.css">
+    <!-- <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/admin.css">
-    <link rel="stylesheet" href="../../css/form.css">
+    <link rel="stylesheet" href="../../css/form.css"> -->
     <title>Gerenciar Obras</title>
 </head>
 

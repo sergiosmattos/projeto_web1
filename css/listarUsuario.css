@@ -87,12 +87,14 @@ th {
 }
 
 .btn-excluir {
+
     background-color: #d62828;
     color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    
 }
 
 .btn-excluir:hover {
