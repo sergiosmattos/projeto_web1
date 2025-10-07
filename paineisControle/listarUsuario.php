@@ -7,17 +7,11 @@ if(!isset($_SESSION['usuario'])) {
     exit;
 }
 
-require __DIR__ . "/src/Repositorio/conexaoBD.php";
 require __DIR__ . "/src/Repositorio/UsuarioRepositorio.php";
 require __DIR__ . "/src/Repositorio/CategoriaRepositorio.php";
 require __DIR__ . "/src/Repositorio/LeilaoRepositorio.php";
 require __DIR__ . "/src/Repositorio/ObraRepositorio.php";
 require __DIR__ . "/src/Repositorio/ProdutoRepositorio.php";
-require __DIR__ . "/src/Modelo/Categoria.php";
-require __DIR__ . "/src/Modelo/Leilao.php";
-require __DIR__ . "/src/Modelo/Obra.php";
-require __DIR__ . "/src/Modelo/Produto.php";
-require __DIR__ . "/src/Modelo/Usuario.php";
 
 if (!$usuarioLogado) {
     header('Location: login.php');

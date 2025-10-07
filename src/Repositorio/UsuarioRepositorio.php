@@ -12,16 +12,16 @@ class UsuarioRepositorio {
 
     public function makeObject(array $atributos) : Usuario {
 
-        $id = $atributos['id'];
+        $id = $atributos['id'] ?? null;
         
         $usuario = new Usuario(
 
             isset($id) ? (int) $id : null,
             $atributos['tipo'] ?? 'User',
-            $atributos['nome'],
-            $atributos['dataNascimento'],
-            $atributos['email'],
-            $atributos['senha']
+            $atributos['nome'] ?? '',
+            $atributos['dataNascimento'] ?? new DateTime('0000-01-01'),
+            $atributos['email'] ?? '',
+            $atributos['senha'] ?? ''
 
         );
 
@@ -48,12 +48,12 @@ class UsuarioRepositorio {
         
         $sql = 'SELECT * FROM tbUsuario WHERE email_usuario = ? LIMIT 1';
 
-
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $email);
         $stmt->execute();
 
         $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
+        
         $usuario = $atributos ? $this->makeObject($atributos) : null;
         
         return $usuario;

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$usuarioLogado = $_SESSION['usuario'] ?? null;
+$usuarioEmail = $_SESSION['usuario'] ?? null;
 $erro = $_GET['erro'] ?? '';
 
 ?>
@@ -21,7 +21,7 @@ $erro = $_GET['erro'] ?? '';
 
             <section class="logado-section">
                 <div class="pergunta">
-                    <h1>Você já esta logado, <?php echo htmlspecialchars($usuarioLogado); ?>!</h1>
+                    <h1>Você já esta logado, <?php echo htmlspecialchars($usuarioEmail); ?>!</h1>
                 </div>
 
                 <div class="botoes">
@@ -46,10 +46,10 @@ $erro = $_GET['erro'] ?? '';
                     <p class="mensagem-erro">Preencha todos os campos.</p>
                 <?php endif; ?>
 
-                <form action="autentificar.php" method="post">
+                <form action="autenticar.php" method="post">
 
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="password" name="senha" placeholder="Senha">
+                    <input name="email" type="email" placeholder="Email">
+                    <input name="senha" type="password" placeholder="Senha">
 
                     <a href="#">Esqueci minha senha</a>
                     <button type="submit">Entrar</button>
@@ -71,15 +71,17 @@ $erro = $_GET['erro'] ?? '';
         
         window.addEventListener('DOMContentLoaded', () => {
             
-            const mensagens = document.querySelectorAll('.mensagem-erro, .mensagem-ok');
+            const mensagens = document.querySelectorAll('.mensagem-erro');
 
             mensagens.forEach(msg => {
                 
                 setTimeout(() => {
-                    msg.classList.add('oculto');
-                }, 5000);
+                
+                msg.classList.add('oculto');
+                msg.remove();
 
-                msg.addEventListener('transitionend', () => msg.remove());
+                }, 2500)
+
             });
         });
         
