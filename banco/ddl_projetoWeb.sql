@@ -14,7 +14,7 @@ CREATE TABLE tbUsuario (
     
     CONSTRAINT pk_tbUsuario PRIMARY KEY (id_usuario),
     constraint un_EmailUsuariotbUsuario unique (email_usuario),
-    constraint ch_TipoUsuariotbUsuario check (tipo_usuario in ('User'))
+    constraint ch_TipoUsuariotbUsuario check (tipo_usuario in ('User', 'Admin'))
 );
 
 create table tbObra (
