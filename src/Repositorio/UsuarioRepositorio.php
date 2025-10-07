@@ -20,11 +20,19 @@ class UsuarioRepositorio {
         $usuario = new Usuario(
 
             isset($id) ? (int) $id : null,
+<<<<<<< HEAD
             $atributos['tipo_usuario'] ?? 'User',
             $atributos['nome_usuario'] ?? '',
             isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : new DateTime('0000-00-00', $timezone),
             $atributos['email_usuario'] ?? '',
             $atributos['senha_usuario'] ?? ''
+=======
+            $atributos['tipo'] ?? 'User',
+            $atributos['nome'],
+            $atributos['dataNascimento'] ,
+            $atributos['email'],
+            $atributos['senha']
+>>>>>>> ba71c52a69cd8c99c3182cae63dad75203d14a8a
 
         );
 

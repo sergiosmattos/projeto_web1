@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,6 +26,15 @@
 
         <img src="../../img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
     </section>
+
+    <aside class="sidebar">
+        <a href="../dashboardAdmin.html">Painel de controle</a>
+        <a href="../Obra/listar.php">Obra</a>
+        <a href="#">Usuários</a>
+        <a href="#">Leilões</a>
+        <a href="#">Categorias</a>
+        <a href="#">Produtos</a>
+    </aside>
 
     <section class="all-form">
         <h2>Cadastrar Obra</h2>
