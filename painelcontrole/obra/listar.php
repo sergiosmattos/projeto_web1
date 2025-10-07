@@ -1,22 +1,24 @@
 <?php
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: ../login.php");
-    exit;
-}
+    
+    session_start();
 
-require __DIR__ . "/../src/conexaoBD.php";
-require __DIR__ . "/../src/Modelo/Obra.php";
-require __DIR__ . "/../src/Repositorio/ObraRepositorio.php";
+    $emailUsuario = $_SESSION['usuario'] ?? null;
 
-$usuarioLogado = $_SESSION['usuario'] ?? null;
-if (!$usuarioLogado) {
-    header('Location: ../login.php');
-    exit;
-}
+    if (!isset($email)) {
+        header('Location: login.php');
+        exit;
+    }
 
-$obraRepositorio = new ObraRepositorio($pdo);
-$obras = $obraRepositorio->listar();
+    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
+
+    if( $tipoUsuario !== 'Admin' ) {
+        header('Location: dashboardUsuario.php');
+        exit;
+    }
+
+    $obraRepositorio = new ObraRepositorio($pdo);
+    $obras = $obraRepositorio->listar();
+
 ?>
 
 <!DOCTYPE html>

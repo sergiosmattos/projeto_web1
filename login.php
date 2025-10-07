@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$usuarioEmail = $_SESSION['usuario'] ?? null;
+$email = $_SESSION['usuario'] ?? null;
 $erro = $_GET['erro'] ?? '';
 
 ?>
@@ -13,24 +13,25 @@ $erro = $_GET['erro'] ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/login.css">
-    <title>Login</title>
+    <title>Geek Artifacts - Login</title>
 </head>
 <body>
     <main>
-        <?php if ($usuarioLogado): ?>
+        <?php if ($email): ?>
 
             <section class="logado-section">
                 <div class="pergunta">
-                    <h1>Você já esta logado, <?php echo htmlspecialchars($usuarioEmail); ?>!</h1>
+                    <h1>Você já esta logado, <?php echo htmlspecialchars($email); ?>!</h1>
                 </div>
 
                 <div class="botoes">
 
-                    <a href="dashboard.php" class="paginaInicial">Pagina Inicial</a>
+                    <a href="dashboardAdmin.php" class="paginaInicial">Pagina Inicial</a>
                 
                     <form action="logout.php" method="post">
                         <button type="submit" class="botaoSair">Sair</button>
                     </form>
+                    
                 </div>
             </section>
             

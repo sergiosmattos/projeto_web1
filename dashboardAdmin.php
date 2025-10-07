@@ -1,3 +1,24 @@
+<?php
+
+    session_start();
+
+    $emailUsuario = $_SESSION['usuario'] ?? null;
+
+    if (!isset($emailUsuario)) {
+        header('Location: login.php');
+        exit;
+    }
+
+    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
+
+    if( $tipoUsuario !== 'Admin' ) {
+        header('Location: dashboardUsuario.php');
+        exit;
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

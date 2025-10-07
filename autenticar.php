@@ -23,9 +23,13 @@ if( $email === '' || $senha === '' ){
 $usuarioRepositorio = new UsuarioRepositorio($pdo);
 
 if( $usuarioRepositorio->autenticarByEmailSenha($email, $senha)){
+    
+    $usuario = $usuarioRepositorio->findByEmail($email);
+    $tipo = $usuario->getTipo();
 
     session_regenerate_id(true);
     $_SESSION['usuario'] = $email;
+    $_SESSION['tipo'] = $tipo;
 
     header('Location: dashboardAdmin.php');
     exit;
