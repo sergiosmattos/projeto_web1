@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/Categoria.php';
+
 class Obra
 {
     private ?int $id;

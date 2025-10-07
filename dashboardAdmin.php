@@ -55,7 +55,7 @@
 
     <aside class="sidebar">
         <a href="#">Painel de controle</a>
-        <a href="#">Obras</a>
+        <a href="painelcontrole/obra/listar.php">Obras</a>
         <a href="#">Usuários</a>
         <a href="#">Leilões</a>
         <a href="#">Categorias</a>
@@ -85,6 +85,11 @@
                 <p>Gerenciar Leilões</p>
             </a>
             
+            <a href="#" class="deshboard-cetegoria">
+                <h2>Categorias</h2>
+                <p>Gerenciar Categorias</p>
+            </a>
+
             <a href="#" class="deshboard-cetegoria">
                 <h2>Categorias</h2>
                 <p>Gerenciar Categorias</p>
