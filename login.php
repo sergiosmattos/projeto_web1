@@ -13,7 +13,8 @@ $erro = $_GET['erro'] ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/login.css">
-    <title>Geek Artifacts - Login</title>
+    <link rel="icon" href="img/logo_geek.png">
+    <title>Login</title>
 </head>
 <body>
     <main>
@@ -31,7 +32,7 @@ $erro = $_GET['erro'] ?? '';
                     <form action="logout.php" method="post">
                         <button type="submit" class="botaoSair">Sair</button>
                     </form>
-                    
+
                 </div>
             </section>
             
