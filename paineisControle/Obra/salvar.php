@@ -1,7 +1,7 @@
 <!-- <?php
-        require __DIR__ . "/../src/conexaoBD.php";
-        require __DIR__ . "/../src/Modelo/Usuario.php";
-        require __DIR__ . "/../src/Repositorio/UsuarioRepositorio.php";
+        require __DIR__ . "/../../src/conexaoBD.php";
+        require __DIR__ . "/../../src/Modelo/Obra.php";
+        require __DIR__ . "/../../src/Repositorio/ObraRepositorio.php";
 
         $usuarioRepositorio = new UsuarioRepositorio($pdo);
 
@@ -9,11 +9,8 @@
 
             $usuario = new Usuario(
                 $_POST['id'] ?: null,
-                $_POST['tipo'],
                 $_POST['nome'],
-                $_POST['dataNascimento'],
-                $_POST['email'],
-                $_POST['senha'],
+                $_POST['descricao'],
             );
         }
 
