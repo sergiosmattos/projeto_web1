@@ -4,17 +4,15 @@
 
     $emailUsuario = $_SESSION['usuario'] ?? null;
 
-    if (!isset($email)) {
-        header('Location: login.php');
+    if (!isset($emailUsuario)) {
+        header('Location: ../login.php');
         exit;
     }
+    
+    require __DIR__ . "/../../src/conexaoBD.php";
+    require __DIR__ . "/../../src/Modelo/Obra.php";
+    require __DIR__ . "/../../src/Repositorio/ObraRepositorio.php";
 
-    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
-
-    if( $tipoUsuario !== 'Admin' ) {
-        header('Location: dashboardUsuario.php');
-        exit;
-    }
 
     $obraRepositorio = new ObraRepositorio($pdo);
     $obras = $obraRepositorio->listar();
