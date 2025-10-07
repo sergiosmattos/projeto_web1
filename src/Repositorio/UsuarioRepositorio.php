@@ -19,7 +19,7 @@ class UsuarioRepositorio {
             isset($id) ? (int) $id : null,
             $atributos['tipo'] ?? 'User',
             $atributos['nome'],
-            $atributos['dataNascimento'],
+            $atributos['dataNascimento'] ,
             $atributos['email'],
             $atributos['senha']
 
