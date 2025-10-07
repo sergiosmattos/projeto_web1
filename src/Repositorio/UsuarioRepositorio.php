@@ -46,7 +46,8 @@ class UsuarioRepositorio {
 
     public function findByEmail(string $email) : ?Usuario {
         
-        $sql = 'select tbUsuario.* from tbUsuairo where email_usuario = ? limit 1';
+        $sql = 'SELECT * FROM tbUsuario WHERE email_usuario = ? LIMIT 1';
+
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $email);

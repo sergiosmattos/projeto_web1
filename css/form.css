@@ -1,0 +1,59 @@
+.all-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20%;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    
+}
+
+.all-form h2 {
+    font-weight: bold;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-cadastro input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.grupo-botoes {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.botao-cadastrar,
+.botao-voltar {
+    padding: 15px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.botao-cadastrar {
+    background-color: #7b42f6;
+    color: white;
+}
+
+.botao-voltar {
+    background-color: #444;
+    color: white;
+}
