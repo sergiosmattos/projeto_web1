@@ -8,9 +8,7 @@
         header('Location: ../login.php');
         exit;
     }
-    
     require __DIR__ . "/../../src/Repositorio/ObraRepositorio.php";
-
 
     $obraRepositorio = new ObraRepositorio($pdo);
     $obras = $obraRepositorio->listar();
@@ -23,16 +21,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/logo_geek.png">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/listarUsuario.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/listarUsuario.css">
+    <link rel="stylesheet" href="../../css/admin.css">
     <title>Gerenciar - Obras</title>
 </head>
 
 <body>
     <section class="topo">
         <div class="logo">
-            <img src="../img/logo_geek.png" class="iconLogo" alt="logo geek artefacts">
+            <img src="../../img/logo_geek.png" class="iconLogo" alt="logo geek artefacts">
             <h1>Geek Artefacts</h1>
         </div>
 
@@ -40,7 +39,7 @@
         <a href="#">Leilão</a>
         <a href="#">Compra</a>
 
-        <img src="../img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
+        <img src="../../img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
     </section>
 
     <aside class="sidebar">
@@ -56,7 +55,7 @@
         <h1>Gerenciar Obras</h1>
 
         <div class="acoes">
-            <button class="btn-add">Adicionar Obra</button>
+            <a href="form.php"><button class="btn-add">Adicionar Obra</button></a>
             <div class="busca">
                 <input type="text" placeholder="Buscar Obra">
             </div>
@@ -79,7 +78,7 @@
                             <td><?= htmlspecialchars($obra->getNome()) ?></td>
                             <td><?= htmlspecialchars($obra->getDescricao()) ?></td>
                             <td>
-                                <button class="btn-editar">Alterar</button>
+                                <a href="form.php?id="><button class="btn-editar">Alterar</button></a>
                                 <button class="btn-excluir">Excluir</button>
                             </td>
                         </tr>

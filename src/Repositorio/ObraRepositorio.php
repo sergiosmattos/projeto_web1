@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__.'/../conexaoBD.php';
-require __DIR__.'/../modelo/Obra.php';
+require __DIR__.'/../Modelo/Obra.php';
 
 class ObraRepositorio {
 
@@ -77,8 +77,11 @@ class ObraRepositorio {
         
         $sql = 'select tbObra.* from tbObra';
 
-        $query = $this->pdo->query(PDO::FETCH_ASSOC);
-        $resultadoConsulta = $query->fetchAll();
+        
+        $query = $this->pdo->query($sql);
+
+        $resultadoConsulta = $query->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($resultadoConsulta);
         $arrayObras = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
 
         return $arrayObras;

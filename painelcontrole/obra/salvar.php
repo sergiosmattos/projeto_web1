@@ -3,82 +3,68 @@
         require __DIR__ . "/../../src/Modelo/Obra.php";
         require __DIR__ . "/../../src/Repositorio/ObraRepositorio.php";
 
-        $usuarioRepositorio = new UsuarioRepositorio($pdo);
-
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-            $usuario = new Usuario(
-                $_POST['id'] ?: null,
-                $_POST['nome'],
-                $_POST['descricao'],
-            );
-        }
-
-
-        if ($usuario->getId()) {
-            $usuarioRepositorio->atualizar($usuario);
-        } else {
-            $usuarioRepositorio->cadastrar($usuario);
-        }
-
-        header("Location: listar.php");
-        exit();
-
-
-        require __DIR__ . "/../src/conexaoBD.php";
-        require __DIR__ . "/../src/Modelo/Usuario.php";
-        require __DIR__ . "/../src/Repositorio/UsuarioRepositorio.php";
-
-        $repo = new UsuarioRepositorio($pdo);
-
+        var_dump($_SERVER["REQUEST_METHOD"]);
+        
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: listar.php');
             exit;
         }
+        
+        $obraRepositorio = new obraRepositorio($pdo);
+
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $obra = new Obra(
+                
+                $_POST['id'] ?: null,
+                $_POST['nome'],
+                $_POST['descricao'],
+            );
+            var_dump($obra);
+        }
+
+
+        if ($obra->getId()) {
+            $obraRepositorio->atualizar($obra);
+        } else {
+            $obraRepositorio->cadastrar($obra);
+        }
+
+
+        $repo = new obraRepositorio($pdo);
+
 
         $id     = isset($_POST['id']) && $_POST['id'] !== '' ? (int)$_POST['id'] : null;
         $nome   = trim($_POST['nome']   ?? '');
-        $tipo = trim($_POST['tipo'] ?? 'User');
-        $dataNascimento = trim($_POST['dataNascimento'] ?? '');
-        $email  = trim($_POST['email']  ?? '');
-        $senha  = $_POST['senha'] ?? '';
+        $descricao = trim($_POST['descricao'] ?? '');
+
 
 
         // validadecao
-        if ($nome === '' || $email === '' || $dataNascimentoStr === '' || (!$id && $senha === '')) {
+        if ($nome === '' || $descricao === '') {
             header('Location: form.php' . ($id ? '?id=' . $id . '&erro=campos' : '?erro=campos'));
             exit;
         }
 
-        if (!in_array($tipo, ['User', 'Admin'], true)) {
-            $tipo = 'User';
-        }
-
         if ($id) {
 
-            $existente = $repo->findById($id);
+            $existente = $obraRepositorio->findById($id);
             if (!$existente) {
                 header('Location: listar.php?erro=inexistente');
                 exit;
             }
 
 
-            if ($senha === '') {
-                $senhaParaObjeto = $existente->getSenha(); // já é hash
-            } else {
-                $senhaParaObjeto = $senha; // plain; será hash no repositório (com proteção contra re-hash)
-            }
 
-
-
-            $usuario = new Usuario($id, $tipo, $nome, $dataNascimento, $email, $senhaParaObjeto);
-            $repo->atualizar($usuario);
+            $obra = new Obra($id, $nome, $descricao);
+            $obraRepositorio->atualizar($obra);
             header('Location: listar.php?ok=1');
             exit;
         } else {
-            // Novo usuário
-            $usuario = new Usuario(null, $tipo, $nome, $dataNascimento, $email, $senha);
-            $repo->cadastrar($usuario);
+            // Novo Obra
+            $obra = new Obra(null, $nome, $descricao);
+            $obraRepositorio->cadastrar($obra);
             header('Location: listar.php?novo=1');
             exit;
         }
