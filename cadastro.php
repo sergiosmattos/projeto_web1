@@ -54,16 +54,18 @@ $erro = $_GET['erro'] ?? '';
         
         window.addEventListener('DOMContentLoaded', () => {
             
-            const mensagens = document.querySelectorAll('.mensagem-erro');
+            const mensagens = document.querySelectorAll('.mensagem-erro, .mensagem-ok');
 
             mensagens.forEach(msg => {
                 
                 setTimeout(() => {
-                    msg.classList.add('oculto');
-                }, 1000);
 
-                msg.remove();
-                
+                    msg.classList.add('oculto');
+
+                    msg.remove();
+
+                }, 2500);
+
             });
         });
         
