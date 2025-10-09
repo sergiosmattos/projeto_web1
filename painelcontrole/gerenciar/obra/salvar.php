@@ -1,6 +1,6 @@
 <!-- <?php
 
-        require __DIR__ . "/../../src/Repositorio/ObraRepositorio.php";
+        require __DIR__ . "/../../../src/repositorio/ObraRepositorio.php";
 
         var_dump($_SERVER["REQUEST_METHOD"]);
         

@@ -9,7 +9,7 @@ if (!isset($emailUsuario)) {
     exit;
 }
 
-require_once __DIR__ . '/../../src/Repositorio/ObraRepositorio.php';
+require_once __DIR__ . '/../../../src/Repositorio/ObraRepositorio.php';
 
 $obraRepositorio = new ObraRepositorio($pdo);
 

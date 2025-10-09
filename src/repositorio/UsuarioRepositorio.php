@@ -127,13 +127,21 @@ class UsuarioRepositorio {
 
     public function autenticarByEmailSenha(string $email, string $senha) : bool {
         
+        // $usuarioEncontrado = $this->findByEmail($email);
+        // $isPasswordOk = $usuarioEncontrado ? $usuarioEncontrado->getSenha() === $senha : false ;
+        // //$isPasswordOk = $usuarioEncontrado ? password_verify($usuarioEncontrado->getSenha, $senhaUsuario) === $senha : false ;
+        // return $isPasswordOk;
+
         $usuarioEncontrado = $this->findByEmail($email);
+        
+        if (!$usuarioEncontrado) {
+            return false;
+        }
+
         $senhaUsuario = $usuarioEncontrado->getSenha();
 
-        // $isPasswordOk = password_verify($senha, $senhaUsuario);
-        $isPasswordOk = $senha === $senhaUsuario;
-
-        var_dump($isPasswordOk);
+        //$isPasswordOk = password_verify($senha, $senhaUsuario);
+        $isPasswordOk = $senhaUsuario === $senha;
 
         return $isPasswordOk;
 

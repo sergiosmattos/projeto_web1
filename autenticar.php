@@ -4,7 +4,9 @@ session_start();
 
 require __DIR__.'/src/repositorio/UsuarioRepositorio.php';
 
-if ( $_SERVER['REQUEST_METHOD' !== "POST"] ) {
+$requestMethod = $_SERVER['REQUEST_METHOD'] ?? '';
+
+if ( $requestMethod !== "POST" ) {
     header('Location: login.php');
     exit;
 }
