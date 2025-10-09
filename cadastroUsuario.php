@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/src/repositorio1/UsuarioRepositorio.php';
+require __DIR__.'/src/repositorio/UsuarioRepositorio.php';
 
 //Verificação
 
