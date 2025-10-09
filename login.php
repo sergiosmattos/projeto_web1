@@ -77,7 +77,7 @@ $novousuario = $_GET['novousuario'] ?? '';
         
         window.addEventListener('DOMContentLoaded', () => {
             
-            const mensagens = document.querySelectorAll('.mensagem-erro');
+            const mensagens = document.querySelectorAll('.mensagem-erro, .mensagem-ok');
 
             mensagens.forEach(msg => {
                 
