@@ -18,7 +18,6 @@
         <a href="#">Compra</a>
 
     </div>
-    
 
     <img src="img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
         

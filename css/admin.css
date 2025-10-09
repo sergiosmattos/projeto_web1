@@ -8,19 +8,19 @@ body {
 
 
 .topo {
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #252525;
     color: white;
+    position: fixed;
     padding: 5px 20px;
     z-index: 1000;
     height: 100px;
+    top: 0;
+    left: 0;
+    right: 0;
     
 }
 
@@ -29,14 +29,15 @@ body {
     text-decoration: none;
     color: white;
     font-weight: bold;
+
 }
 
 .topo .container-navegacao {
 
     display: flex;
-    justify-content: space-between;
     padding: 10px 20px;
     margin: 20px;
+    gap: 100px;
 
 }
 
@@ -74,12 +75,14 @@ body {
 
 
 .sidebar a{
+
     color: #ddd;
     text-decoration: none;
     font-weight: bold;
     padding: 12px;
     border-radius: 10px;
     transition: background 0.3s;
+
 }
 
 .sidebar a:hover {

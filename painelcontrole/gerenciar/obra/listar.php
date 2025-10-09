@@ -5,9 +5,11 @@
     $emailUsuario = $_SESSION['usuario'] ?? null;
 
     if (!isset($emailUsuario)) {
-        header('Location: ../login.php');
+        header('Location: login.php');
         exit;
     }
+
+    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
     require __DIR__ . "/../../../src/repositorio/ObraRepositorio.php";
 
@@ -31,19 +33,7 @@
 
 <body>
     
-    <section class="topo">
-
-        <div class="logo">
-            <img src="../../../img/logo_geek.png" class="iconLogo" alt="logo geek artefacts">
-            <h1>Geek Artefacts</h1>
-        </div>
-
-        <a href="#">Administração</a>
-        <a href="#">Leilão</a>
-        <a href="#">Compra</a>
-
-        <img src="../../../img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
-    </section>
+    <?php include_once '../../../header.php' ?>
 
     <aside class="sidebar">
         <a href="../dashboardAdmin.php">Painel de controle</a>

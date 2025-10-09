@@ -1,53 +1,56 @@
 <?php
 
-session_start();
+    session_start();
 
-$emailUsuario = $_SESSION['usuario'] ?? null;
+    $emailUsuario = $_SESSION['usuario'] ?? null;
 
-if (!isset($emailUsuario)) {
-    header('Location: login.php');
-    exit;
-}
-
-require_once __DIR__ . '/../../../src/Repositorio/ObraRepositorio.php';
-
-$obraRepositorio = new ObraRepositorio($pdo);
-
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
-$modoEdicao = false;
-$obra = null;
-
-if ($id) {
-
-    if (method_exists($obraRepositorio, 'findById')) {
-        
-        $obra = $obraRepositorio->findById($id);
-        var_dump($obra);
-
-    }
-
-    if ($obra) {
-
-        $modoEdicao = true;
-    } 
-    else {
-
-        header('Location: listar.php');
+    if (!isset($emailUsuario)) {
+        header('Location: login.php');
         exit;
-
     }
-}
 
-$valorNome = $modoEdicao ? $obra->getNome() : '';
-$valorDescricao = $modoEdicao ? $obra->getDescricao() : '';
+    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
+
+    require_once __DIR__ . '/../../../src/Repositorio/ObraRepositorio.php';
+
+    $obraRepositorio = new ObraRepositorio($pdo);
+
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+    $modoEdicao = false;
+    $obra = null;
+
+    if ($id) {
+
+        if (method_exists($obraRepositorio, 'findById')) {
+            
+            $obra = $obraRepositorio->findById($id);
+            var_dump($obra);
+
+        }
+
+        if ($obra) {
+
+            $modoEdicao = true;
+        } 
+        else {
+
+            header('Location: listar.php');
+            exit;
+
+        }
+    }
+
+    $valorNome = $modoEdicao ? $obra->getNome() : '';
+    $valorDescricao = $modoEdicao ? $obra->getDescricao() : '';
 
 
-$tituloPagina = $modoEdicao ? 'Editar Obra' : 'Cadastrar Obra';
-$textoBotao   = $modoEdicao ? 'Salvar Alterações' : 'Cadastrar Obra';
-$actionForm   = $modoEdicao ? 'salvar.php' : 'salvar.php';
+    $tituloPagina = $modoEdicao ? 'Editar Obra' : 'Cadastrar Obra';
+    $textoBotao   = $modoEdicao ? 'Salvar Alterações' : 'Cadastrar Obra';
+    $actionForm   = $modoEdicao ? 'salvar.php' : 'salvar.php';
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -61,18 +64,8 @@ $actionForm   = $modoEdicao ? 'salvar.php' : 'salvar.php';
 </head>
 
 <body>
-    <section class="topo">
-        <div class="logo">
-            <img src="../../img/logo_geek.png" class="iconLogo" alt="logo geek artefacts">
-            <h1>Geek Artifacts</h1>
-        </div>
-
-        <a href="#">Administração</a>
-        <a href="#">Leilão</a>
-        <a href="#">Compra</a>
-
-        <img src="../../img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
-    </section>
+    
+    <?php include_once '../../../header.php' ?>
 
     <aside class="sidebar">
         <a href="../dashboardAdmin.html">Painel de controle</a>
