@@ -1,12 +1,10 @@
 <?php
+
 session_start();
 
 $email = $_SESSION['usuario'] ?? null;
-
-$_SESSION['usuario'] = 'admin@gmail.com';
-$_SESSION['tipo'] = 'Admin';
-
 $erro = $_GET['erro'] ?? '';
+$novousuario = $_GET['novousuario'] ?? '';
 
 ?>
 
@@ -24,27 +22,29 @@ $erro = $_GET['erro'] ?? '';
     <main>
         <?php if ($email): ?>
 
-            <section class="logado-section">
+            <section class="section-logado">
+
                 <div class="pergunta">
-                    <h1>Você já esta logado, <?php echo htmlspecialchars($email); ?>!</h1>
+                    <h1>Você já esta logado como <?php echo htmlspecialchars($email); ?>!</h1>
                 </div>
 
                 <div class="botoes">
 
-                    <a href="dashboardAdmin.php" class="paginaInicial">Pagina Inicial</a>
-                
-                    <form action="logout.php" method="post">
-                        <button type="submit" class="botaoSair">Sair</button>
-                    </form>
+                    <a href="dashboardAdmin.php" class="botao-dashboard">Pagina Inicial</a>
+                    <a href="logout.php" class="botao-sair">Encerrar Sessão</a>
 
                 </div>
             </section>
             
         <?php else: ?>
 
-            <section class="login-section">
+            <section class="section-login">
 
                 <h1>Login</h1>
+                
+                <?php if ($novousuario === 'true'): ?>
+                    <p class="mensagem-ok">Usuário cadastrado!</p>
+                <?php endif; ?>
 
                 <?php if ($erro === 'credenciais'): ?>
                     <p class="mensagem-erro">Usuário ou senha incorretos.</p>
@@ -64,7 +64,7 @@ $erro = $_GET['erro'] ?? '';
 
             </section>
 
-            <section class="cadastro-section">
+            <section class="section-cadastro">
                 <h2>Bem-vindo</h2>
                 <p>Registre-se para obter uma melhor experiência.</p>
                 <a href="cadastro.php">Cadastrar</a>

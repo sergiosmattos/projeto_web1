@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/src/repositorio/UsuarioRepositorio.php';
+require __DIR__.'/src/repositorio1/UsuarioRepositorio.php';
 
 //Verificação
 
@@ -19,6 +19,8 @@ $senha = trim($_POST['senha']) ?? '';
 $dataNascimento = $_POST['dataNascimento'] ?? '';
 
 $dataNascimento = isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : '';
+
+// $senha = password_hash($senha, PASSWORD_DEFAULT);
 
 // Verificação
 

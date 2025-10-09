@@ -18,7 +18,7 @@ $erro = $_GET['erro'] ?? '';
 </head>
 <body>
     <main>
-        <section class="login-section">
+        <section class="section-login">
             <h1>Cadastre-se</h1>
 
             <form action="cadastroUsuario.php" method="post">
@@ -41,7 +41,7 @@ $erro = $_GET['erro'] ?? '';
             </form>
         </section>
 
-        <section class="cadastro-section">
+        <section class="section-cadastro">
             
             <h2>Bem-vindo</h2>
             <p>Caso já tenha um cadastro aperte em login</p>

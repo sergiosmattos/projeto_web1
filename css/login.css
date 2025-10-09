@@ -13,9 +13,7 @@ main {
   background: #1a1a1a;
 }
 
-
-
-.login-section {
+.section-login {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,14 +27,14 @@ main {
   color: white;
     }
 
-.login-section h1 {
+.section-login h1 {
   font-size: 32px;
   margin-bottom: 20px;
   font-weight: bold;
   text-decoration: underline;
 }
 
-.login-section form {
+.section-login form {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -44,14 +42,14 @@ main {
   max-width: 350px;
 }
 
-.login-section input {
+.section-login input {
   padding: 12px;
   border: none;
   border-radius: 6px;
   background: #ddd;
 }
 
-.login-section a {
+.section-login a {
   font-size: 12px;
   color: #ccc;
   text-align: center;
@@ -61,7 +59,7 @@ main {
   padding: 4px;
 }
 
-.login-section button {
+.section-login button {
   padding: 12px;
   border: none;
   border-radius: 6px;
@@ -72,12 +70,12 @@ main {
   transition: 0.3s;
 }
 
-.login-section button:hover {
+.section-login button:hover {
   background: #652ed6;
 }
 
 
-.cadastro-section {
+.section-cadastro {
   position: absolute;
   top: 0;
   right: 0;
@@ -95,17 +93,17 @@ main {
   font-weight: bold;
 }
 
-.cadastro-section h2 {
+.section-cadastro h2 {
   font-size: 26px;
   margin-bottom: 10px;
 }
 
-.cadastro-section p {
+.section-cadastro p {
   margin-bottom: 20px;
   font-size: 16px;
 }
 
-.cadastro-section a {
+.section-cadastro a {
   padding: 12px 24px;
   border: 1px solid #fff;
   border-radius: 6px;
@@ -115,16 +113,16 @@ main {
   transition: 0.3s;
 }
 
-.cadastro-section a:hover {
+.section-cadastro a:hover {
   background: #fff;
   color: #4c3df7;
 }
 
-.login-section button:hover {
+.section-login button:hover {
     pointer-events: painted;
 }
 
-.logado-section {
+.section-logado {
   color: white;
   display: flex;
   justify-content: center;
@@ -147,24 +145,24 @@ main {
   padding-top: 8px;
 }
 
-.botoes {
+.section-logado .botoes {
   display: flex;
   padding-top: 15px;
   gap: 20px;
   border-radius: 5px; 
 }
 
-.botaoSair {
-  background-color: brown;
+.botoes .botao-sair, .botoes .botao-dashboard {
+    
+  width: 150px;
+  text-align: center;
   
-  padding: 5px;
-}
-
-.paginaInicial {
   text-decoration: none;
-  background-color: green;
-  padding: 5px;
-
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #7b42f6;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .mensagem-erro {
@@ -178,9 +176,9 @@ main {
   font-weight: 500;
 }
 
-.mensagem-erro.oculto {
+.mensagem-erro .oculto {
 
   opacity: 0;
-  /* transform: translateY(-10); */
+  transform: translateY(-10);
 
 }
