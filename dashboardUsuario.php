@@ -14,7 +14,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 
     <meta charset="UTF-8">
@@ -22,15 +22,16 @@
     <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
     <link rel="stylesheet" href="/projeto_web1/css/admin.css">
-    <title>Dashboard</title>
+    <title>Geek Artifacts</title>
     
 </head>
 <body>
-    <section class="topo">
+
+    <?php include_once 'header.php' ?>
+    
+    <main>
         
-        <?php include_once 'header.php' ?>
-        
-        <img src="img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
-    </section>
+    </main>
+
 </body>
 </html>

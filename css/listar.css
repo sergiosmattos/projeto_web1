@@ -25,7 +25,7 @@
 }
 
 
-.btn-add {
+.botao-adicionar {
     background-color: #6a5acd;
     color: white;
     font-weight: bold;
@@ -35,11 +35,11 @@
     cursor: pointer;
 }
 
-.btn-add:hover {
+.botao-adicionar:hover {
     background-color: #7b68ee;
 }
 
-.busca input {
+.barra-pesquisar input {
     background-color: #e0e0e0;
     border: none;
     border-radius: 5px;
@@ -73,7 +73,7 @@ th {
     border-bottom: 1px solid #bdbdbd;
 }
 
-.btn-editar {
+.botao-editar {
     background-color: #6a5acd;
     color: white;
     border: none;
@@ -82,11 +82,11 @@ th {
     cursor: pointer;
 }
 
-.btn-editar:hover {
+.botao-editar:hover {
     background-color: #7b68ee;
 }
 
-.btn-excluir {
+.botao-excluir {
 
     background-color: #d62828;
     color: white;
@@ -97,6 +97,6 @@ th {
     
 }
 
-.btn-excluir:hover {
+.botao-excluir:hover {
     background-color: #f44336;
 }
