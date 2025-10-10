@@ -24,7 +24,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo_geek.png">
+    <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/admin.css">
     <title>Administração</title>
@@ -35,7 +35,7 @@
 
     <aside class="sidebar">
         <a href="#">Painel de controle</a>
-        <a href="painelcontrole/gerenciar/obra/listar.php">Obras</a>
+        <a href="/projeto_web1/gerenciar/obra/listar.php">Obras</a>
         <a href="#">Usuários</a>
         <a href="#">Leilões</a>
         <a href="#">Categorias</a>

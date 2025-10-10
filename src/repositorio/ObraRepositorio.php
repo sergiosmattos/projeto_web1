@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__.'/../conexaoBD.php';
-require __DIR__.'/../Modelo/Obra.php';
+require __DIR__.'/../modelo/Obra.php';
 
 class ObraRepositorio {
 
