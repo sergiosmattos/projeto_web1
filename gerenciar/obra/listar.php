@@ -71,15 +71,17 @@
                             <td><?= htmlspecialchars($obra->getId()) ?></td>
                             <td><?= htmlspecialchars($obra->getNome()) ?></td>
                             <td><?= htmlspecialchars($obra->getDescricao()) ?></td>
-                            <td class="acoes">
-                                <form action="excluir.php" method="post">
-                                    <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId()) ?>">
-                                    <input type="submit" class="botao-excluir" value="Excluir">
-                                </form>
-                                <form action="form.php" method="post">
-                                    <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId()) ?>">
-                                    <input type="submit" class="botao-editar" value="Editar">
-                                </form>
+                            <td>
+                                <div class="acoes">
+                                    <form action="excluir.php" method="post">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId()) ?>">
+                                        <input type="submit" class="botao-excluir" value="Excluir">
+                                    </form>
+                                    <form action="form.php" method="post">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId()) ?>">
+                                        <input type="submit" class="botao-editar" value="Editar">
+                                    </form>
+                                </div>
                             </td>
                             
                         </tr>

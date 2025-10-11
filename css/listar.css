@@ -70,25 +70,46 @@
     
 }
 
+thead tr {
+    
+    border-bottom: 3px groove #272727;
 
-th {
-    border-bottom: 1px solid #272727;
+}
+
+thead th {
+    text-align: center;
+}
+
+tbody td  {
+    
+    border: 1px groove #272727;
+    background-color: #d3d2d2;
+
 }
 
 th, td{
 
     padding: 12px;
-    text-align: left;
+    text-align: center;
     
+}
+
+.td-valor {
+
+    justify-self: left;
+    padding: 1px;
+    border-bottom: 1px solid #000;
+
 }
 
 .acoes {
     display: flex;
     flex-direction: row;
-    gap: 25%;
+    gap: 10%;
     margin: 10px;
     border-radius: 10px;
-    background-color: rgb(167, 167, 167);
+    padding: 10px;
+    background-color: #b1b0b0;
     justify-content: center;
 }
 
