@@ -1,4 +1,5 @@
 <?php
+
     require __DIR__ . '/src/repositorio/ObraRepositorio.php';
 
     session_start();
@@ -21,16 +22,20 @@
 
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
         $id = isset($_POST['id']) && $_POST['id'] !== '' ? (int)$_POST['id'] : null;
         $nome = trim($_POST['nome'] ?? '');
         $descricao = trim($_POST['descricao'] ?? '');
 
         if ($nome === '' || $descricao === '') {
+
             header('Location: form.php' . ($id ? '?id=' . $id . '&erro=campos' : '?erro=campos'));
             exit;
+            
         }
 
         if ($id) {
+
             $existenteObra = $obraRepositorio->findById($id);
 
             if (!$existenteObra) {

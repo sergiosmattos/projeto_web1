@@ -13,8 +13,8 @@ CREATE TABLE tbUsuario (
     tipo_usuario VARCHAR(15) NOT NULL DEFAULT 'User',
     
     CONSTRAINT pk_tbUsuario PRIMARY KEY (id_usuario),
-    constraint un_EmailUsuariotbUsuario unique (email_usuario),
-    constraint ch_TipoUsuariotbUsuario check (tipo_usuario in ('User', 'Admin'))
+    constraint un_EmailUsuario_tbUsuario unique (email_usuario),
+    constraint ch_TipoUsuario_tbUsuario check (tipo_usuario in ('User', 'Admin'))
 );
 
 create table tbObra (
@@ -23,7 +23,8 @@ create table tbObra (
     nome_obra varchar(80),
     descricao_obra varchar(255),
     
-    constraint pk_tbObra primary key (id_obra)
+    constraint pk_tbObra primary key (id_obra),
+    constraint un_NomeObra_tbUsuario unique (nome_obra)
 
 );
 

@@ -45,23 +45,23 @@
         <section class="dashboard">
 
             <a href="#" class="dashboard-option-even">
-                <h2>Produtos</h2>
-                <p>Gerencia produtos</p>
-            </a>
-    
-            <a href="Usuario/listarUsuario.html" class="dashboard-option-odd">
                 <h2>Usuários</h2>
                 <p>Gerenciar Usuarios</p>
             </a>
     
-            <a href="" class="dashboard-option-even">
+            <a href="#" class="dashboard-option-odd">
+                <h2>Produtos</h2>
+                <p>Gerenciar Produtos</p>
+            </a>
+    
+            <a href="#" class="dashboard-option-even">
                 <h2>Leilões</h2>
                 <p>Gerenciar Leilões</p>
             </a>
             
             <a href="#" class="dashboard-option-odd">
-                <h2>Categorias</h2>
-                <p>Gerenciar Categorias</p>
+                <h2>Obras</h2>
+                <p>Gerenciar Obras</p>
             </a>
 
             <a href="#" class="dashboard-option-even">

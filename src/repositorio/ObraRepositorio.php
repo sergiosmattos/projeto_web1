@@ -81,7 +81,6 @@ class ObraRepositorio {
         $query = $this->pdo->query($sql);
 
         $resultadoConsulta = $query->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($resultadoConsulta);
         $arrayObras = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
 
         return $arrayObras;
@@ -91,8 +90,10 @@ class ObraRepositorio {
     public function remover(int $id) : bool {
         
         $sql = 'delete from tbObra where id_obra = ?';
-        
+
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $id);
+        
         return $stmt->execute();
 
     }

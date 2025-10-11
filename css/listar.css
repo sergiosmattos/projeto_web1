@@ -1,31 +1,46 @@
-.listar {
+.container-listar {
+
+    background-color: #fff;
+    box-sizing: border-box;
     margin-top: 140px;
     margin-left: 260px;
-    padding: 40px;
-    background-color: #fff;
+    margin-right: 40px;
     border-radius: 10px;
+    padding: 40px;
+
     min-height: calc(100vh - 140px);
     width: calc(100% - 280px);
-    box-sizing: border-box;
-    margin-right: 40px;
 }
 
-.listar h1 {
+.container-listar h1 {
+
+    color: #000;
     font-size: 26px;
     font-weight: bold;
     margin-bottom: 25px;
+    text-decoration: underline;
 }
 
+.topo-listar{
 
-.acoes {
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 25px;
+    width: 100%;
+    margin: 25px 0;
 }
 
+.barra-pesquisar input {
+    background-color: #e0e0e0;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    width: 500px;
+}
 
 .botao-adicionar {
+
     background-color: #6a5acd;
     color: white;
     font-weight: bold;
@@ -39,39 +54,44 @@
     background-color: #7b68ee;
 }
 
-.barra-pesquisar input {
-    background-color: #e0e0e0;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    outline: none;
-    width: 250px;
-    margin-right: 100px;
-}
-
-.tabela {
-    background-color: #8f8f8f;
-    color: #000;
+.container-tabela {
+    
+    background-color: #cacaca;
     border-radius: 10px;
+    color: #000;
     overflow: hidden;
-    width: 100%;
-    max-width: 800px;
-    padding: 10px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.container-tabela table {
+    
+    width: 90%;
+    margin: 5% 0;
+    justify-self: center;
+    
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-}
 
 th {
-    border-bottom: 1px solid #bdbdbd;
+    border-bottom: 1px solid #272727;
 }
+
+th, td{
+
+    padding: 12px;
+    text-align: left;
+    
+}
+
+.acoes {
+    display: flex;
+    flex-direction: row;
+    gap: 25%;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(167, 167, 167);
+    justify-content: center;
+}
+
 
 .botao-editar {
     background-color: #6a5acd;

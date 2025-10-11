@@ -2,7 +2,7 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
-
+    
     session_start();
 
     $emailUsuario = $_SESSION['usuario'] ?? null;
@@ -14,13 +14,10 @@
 
     $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
-    if( $tipoUsuario !== 'Admin' ) {
-        header('Location: dashboardUsuario.php');
-        exit;
-    }
+    $obraRepositorio = new ObraRepositorio($pdo);
+    $obras = $obraRepositorio->listar();
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -29,21 +26,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
-    <link rel="stylesheet" href="/projeto_web1/css/admin.css">
     <link rel="stylesheet" href="/projeto_web1/css/listar.css">
-    <title>Geek Artifacts</title>
+    <link rel="stylesheet" href="/projeto_web1/css/admin.css">
+    <title>Gerenciar - Obras</title>
 </head>
-<body>
 
+<body>
+    
     <?php include_once DIR_PROJETOWEB . 'header.php' ?>
 
-    <main>
-        
-        <?php include_once DIR_PROJETOWEB . 'menu-gerenciar.php' ?>
+    <?php include DIR_PROJETOWEB . 'menu-gerenciar.php'?>
 
-        
+    <div class="container-listar">
 
-    </main>
+        <h1>Gerenciar Obras</h1>
 
+        <div class="topo-listar">
+
+            <a href="form.php"><button class="botao-adicionar">Adicionar Obra</button></a>
+            
+            <div class="barra-pesquisar">
+                <input type="text" placeholder="Pesquisar obra...">
+            </div>
+
+        </div>
+
+        <section class="container-tabela">
+
+            <table>
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    <?php foreach ($obras as $obra): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($obra->getId()) ?></td>
+                            <td><?= htmlspecialchars($obra->getNome()) ?></td>
+                            <td><?= htmlspecialchars($obra->getDescricao()) ?></td>
+                            <td class="acoes">
+                                <form action="excluir.php" method="post">
+                                    <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId()) ?>">
+                                    <input type="submit" class="botao-excluir" value="Excluir">
+                                </form>
+                                <form action="form.php" method="post">
+                                    <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId()) ?>">
+                                    <input type="submit" class="botao-editar" value="Editar">
+                                </form>
+                            </td>
+                            
+                        </tr>
+                    <?php endforeach; ?>
+
+                </tbody>
+            </table>
+
+        </section>
+    
+    </div>
 </body>
 </html>
