@@ -21,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
-    <link rel="stylesheet" href="/projeto_web1/css/admin.css">
+    <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
     <title>Geek Artifacts</title>
     
 </head>

@@ -15,7 +15,7 @@
     $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
     $obraRepositorio = new ObraRepositorio($pdo);
-    $obras = $obraRepositorio->listar();
+    
 
 ?>
 
@@ -37,20 +37,18 @@
 
     <?php include DIR_PROJETOWEB . 'menu-gerenciar.php'?>
 
-    <div class="all-form">
+    <section class="section-form">
 
-        <h1>Cadastrar Obras</h1>
+        <div class="container-form">
 
-        <div class="topo-listar">
-
-            <a href="form.php"><button class="botao-adicionar">Adicionar Obra</button></a>
-            
-            <div class="barra-pesquisar">
-                <input type="text" placeholder="Pesquisar obra...">
-            </div>
+            <form action="salvar.php" method="post">
+                <input name="id" type="hidden">
+                <input name="nome" type="text">
+                <input name="descricao" type="text">
+            </form>
 
         </div>
-    
-    </div>
+
+    </section>
 </body>
 </html>

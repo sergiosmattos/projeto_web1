@@ -26,8 +26,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
+    <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
     <link rel="stylesheet" href="/projeto_web1/css/listar.css">
-    <link rel="stylesheet" href="/projeto_web1/css/admin.css">
     <title>Gerenciar - Obras</title>
 </head>
 
@@ -41,7 +41,7 @@
 
         <h1>Gerenciar Obras</h1>
 
-        <div class="topo-listar">
+        <div class="container-topo">
 
             <a href="form.php"><button class="botao-adicionar">Adicionar Obra</button></a>
             
@@ -72,7 +72,7 @@
                             <td><?= htmlspecialchars($obra->getNome()) ?></td>
                             <td><?= htmlspecialchars($obra->getDescricao()) ?></td>
                             <td>
-                                <div class="acoes">
+                                <div class="td-acoes">
                                     <form action="excluir.php" method="post">
                                         <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId()) ?>">
                                         <input type="submit" class="botao-excluir" value="Excluir">

@@ -1,7 +1,7 @@
 
 <header>
 
-    <section class="topo">
+    <section class="container-header">
 
         <div class="logo">
             <a href="/projeto_web1/dashboardUsuario.php">
@@ -21,7 +21,9 @@
 
         </div>
 
-        <img src="/projeto_web1/img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
+        <a href="/projeto_web1/logout.php">
+            <img src="/projeto_web1/img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
+        </a>
         
     </section>
 

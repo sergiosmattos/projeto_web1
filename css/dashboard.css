@@ -9,7 +9,7 @@ body {
 }
 
 
-.topo {
+.container-header {
     
     display: flex;
     justify-content: space-between;
@@ -26,7 +26,7 @@ body {
     
 }
 
-.topo a{
+.container-header a{
 
     text-decoration: none;
     color: white;
@@ -34,7 +34,7 @@ body {
 
 }
 
-.topo .container-navegacao {
+.container-header .container-navegacao {
 
     display: flex;
     padding: 10px 20px;
