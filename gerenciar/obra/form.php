@@ -27,7 +27,8 @@
     <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
     <link rel="stylesheet" href="/projeto_web1/css/listar.css">
-    <link rel="stylesheet" href="/projeto_web1/css/admin.css">
+    <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
+    <link rel="stylesheet" href="/projeto_web1/css/form.css">
     <title>Gerenciar - Obras</title>
 </head>
 
@@ -37,18 +38,26 @@
 
     <?php include DIR_PROJETOWEB . 'menu-gerenciar.php'?>
 
-    <section class="section-form">
+    <main>
 
-        <div class="container-form">
+        <section class="section-form">
 
-            <form action="salvar.php" method="post">
-                <input name="id" type="hidden">
-                <input name="nome" type="text">
-                <input name="descricao" type="text">
-            </form>
+            <div class="container-form">
 
-        </div>
+                <form action="salvar.php" method="post">
+                    <input name="id" type="hidden">
 
-    </section>
+                    <label>Nome: </label>
+                    <input name="nome" type="text" placeholder="Nome">
+
+                    <label>Descrição: </label>
+                    <input name="descricao" type="text" placeholder="Descricao">
+                </form>
+
+            </div>
+
+        </section>
+    </main>
+
 </body>
 </html>

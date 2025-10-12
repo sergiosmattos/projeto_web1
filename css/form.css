@@ -1,4 +1,43 @@
+
+.section-form {
+
+    width: 50%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
 .container-form {
+
+    width: 100%;
+    justify-items: center;
+    padding: 10px;
+
+}
+
+.container-form form {
+    
+    display: flex;
+    flex-direction: column;
+
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .container-form {
     display: flex;
     flex-direction: column;
     gap: 15px; 
@@ -39,4 +78,4 @@
 .botao-voltar {
     background-color: #444;
     color: white;
-}
+} */
