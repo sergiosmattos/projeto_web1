@@ -17,10 +17,11 @@
         exit;
     }
 
-    $obraRepositorio = new ObraRepositorio();
+    $obraRepositorio = new ObraRepositorio($pdo);
 
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
         $id = isset($_POST['id']) && $_POST['id'] !== '' ? (int)$_POST['id'] : null;
         $nome = trim($_POST['nome'] ?? '');
         $descricao = trim($_POST['descricao'] ?? '');
@@ -44,5 +45,14 @@
             exit;
 
         }
+         else {
+            $obra = new Obra(null, $nome, $descricao);
+            $obraRepositorio->cadastrar($obra);
+            header('Location: listar.php?novo=1');
+            exit;
+        }
+    } else {
+        header('Location: listar.php');
+        exit;
     }
 ?>
