@@ -37,37 +37,41 @@
         
         <?php include_once 'menu-gerenciar.php' ?>
 
-        <img src="img/logo_geek.png" alt="Logo_Geek_Artifacts">
-        <h2>Bem-vindo, Admin!</h2>
-        <p>Use o menu ao lado para navegar pelas opções de administração.</p>
-        <p>ou logo abaixo</p>
+        <section class="container-dashboard">
+        
+            <img src="img/logo_geek.png" alt="Logo_Geek_Artifacts">
+            <h2>Bem-vindo, Admin!</h2>
+            <p>Use o menu ao lado para navegar pelas opções de administração.</p>
+            <p>ou logo abaixo</p>
 
-        <section class="dashboard">
+            <div class="dashboard-opcoes">
 
-            <a href="#" class="dashboard-option-even">
-                <h2>Usuários</h2>
-                <p>Gerenciar Usuarios</p>
-            </a>
-    
-            <a href="#" class="dashboard-option-odd">
-                <h2>Produtos</h2>
-                <p>Gerenciar Produtos</p>
-            </a>
-    
-            <a href="#" class="dashboard-option-even">
-                <h2>Leilões</h2>
-                <p>Gerenciar Leilões</p>
-            </a>
-            
-            <a href="#" class="dashboard-option-odd">
-                <h2>Obras</h2>
-                <p>Gerenciar Obras</p>
-            </a>
+                <a href="#" class="dashboard-option-even">
+                    <h2>Usuários</h2>
+                    <p>Gerenciar Usuarios</p>
+                </a>
+        
+                <a href="#" class="dashboard-option-odd">
+                    <h2>Produtos</h2>
+                    <p>Gerenciar Produtos</p>
+                </a>
+        
+                <a href="#" class="dashboard-option-even">
+                    <h2>Leilões</h2>
+                    <p>Gerenciar Leilões</p>
+                </a>
+                
+                <a href="#" class="dashboard-option-odd">
+                    <h2>Obras</h2>
+                    <p>Gerenciar Obras</p>
+                </a>
 
-            <a href="#" class="dashboard-option-even">
-                <h2>Categorias</h2>
-                <p>Gerenciar Categorias</p>
-            </a>
+                <a href="#" class="dashboard-option-even">
+                    <h2>Categorias</h2>
+                    <p>Gerenciar Categorias</p>
+                </a>
+
+            </div>
 
         </section>
 

@@ -17,7 +17,7 @@
     $obraRepositorio = new ObraRepositorio($pdo);
 
     $erro = $_GET['erro'] ?? '';
-    $id = $_POST['id'];
+    $id = $_POST['id'] ?? null;
 
     $modoEdicao = $id ? true : false;
 
@@ -46,9 +46,9 @@
 
 <body>
     
-    <?php include_once DIR_PROJETOWEB . '/header.php' ?>
+    <?php include_once DIR_PROJETOWEB . 'header.php' ?>
 
-    <?php include_once DIR_PROJETOWEB . '/menu-gerenciar.php' ?>
+    <?php include_once DIR_PROJETOWEB . 'menu-gerenciar.php' ?>
 
     <section class="all-form">
 
@@ -64,14 +64,18 @@
 
                 <input name="id" type="hidden" value=<?= $id ?>>
 
-                <div>
-                    <label>Nome: </label>
-                    <input name="nome" type="text" value="<?= $valorNome?>">
-                </div>
+                <div class="grupo-input">
 
-                <div>
-                    <label>Descrição: </label>
-                    <input name="descricao" type="text" value="<?= $valorNome?>">
+                    <div>
+                        <label>Nome </label>
+                        <input name="nome" type="text" value="<?= $valorNome?>">
+                    </div>
+
+                    <div>
+                        <label>Descrição </label>
+                        <input name="descricao" type="text" value="<?= $valorDescricao?>">
+                    </div>
+
                 </div>
                 
                 <div class="grupo-botoes">
