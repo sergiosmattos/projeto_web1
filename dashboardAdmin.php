@@ -37,7 +37,7 @@
         
         <?php include_once 'menu-gerenciar.php' ?>
 
-        <img src="img/logo_geek.png" alt="">
+        <img src="img/logo_geek.png" alt="Logo_Geek_Artifacts">
         <h2>Bem-vindo, Admin!</h2>
         <p>Use o menu ao lado para navegar pelas opções de administração.</p>
         <p>ou logo abaixo</p>

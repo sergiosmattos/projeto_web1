@@ -38,6 +38,6 @@ $usuario = new Usuario(null, null, $nome, $dataNascimento, $email, $senha);
 
 $usuarioRepositorio->cadastrar($usuario);
 
-header('Location: login.php?novousuario=true');
+header('Location: login.php?novoregistro=true');
 
 ?>

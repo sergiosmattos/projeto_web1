@@ -12,9 +12,9 @@
         exit;
     }
 
-    $id = $_POST['id'];
+    $id = $_POST['id'] ?? '';
 
-    $id = isset($id) && $id !== '' ? (int) $id : null;
+    $id = $id !== '' ? (int) $id : null;
     $nome = trim($_POST['nome'] ?? '');
     $descricao = trim($_POST['descricao'] ?? '');
 
@@ -38,14 +38,14 @@
         }
         
         $obraRepositorio->atualizar($obra);
-        header('Location: listar.php?ok=1');
+        header('Location: listar.php?editadoregistro=true');
         exit;
 
     }
     else {
             
         $obraRepositorio->cadastrar($obra);
-        header('Location: listar.php?novo=1');
+        header('Location: listar.php?novoregistro=true');
         exit;
 
     }

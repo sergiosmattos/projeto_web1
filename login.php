@@ -4,7 +4,7 @@ session_start();
 
 $email = $_SESSION['usuario'] ?? null;
 $erro = $_GET['erro'] ?? '';
-$novousuario = $_GET['novousuario'] ?? '';
+$novoregistro = $_GET['novoregistro'] ?? '';
 
 ?>
 
@@ -42,14 +42,14 @@ $novousuario = $_GET['novousuario'] ?? '';
 
                 <h1>Login</h1>
                 
-                <?php if ($novousuario === 'true'): ?>
+                <?php if ($novoregistro === 'true'): ?>
                     <p class="mensagem-ok">Usuário cadastrado!</p>
                 <?php endif; ?>
 
-                <?php if ($erro === 'credenciais'): ?>
-                    <p class="mensagem-erro">Usuário ou senha incorretos.</p>
-                <?php elseif ($erro === 'campos'): ?>
+                <?php if ($erro === 'campos'): ?>
                     <p class="mensagem-erro">Preencha todos os campos.</p>
+                <?php elseif ($erro === 'credenciais'): ?>
+                    <p class="mensagem-erro">Usuário ou senha incorretos.</p>
                 <?php endif; ?>
 
                 <form action="autenticar.php" method="post">
@@ -73,25 +73,7 @@ $novousuario = $_GET['novousuario'] ?? '';
         <?php endif; ?>
     </main>
 
-    <script>
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            
-            const mensagens = document.querySelectorAll('.mensagem-erro, .mensagem-ok');
-
-            mensagens.forEach(msg => {
-                
-                setTimeout(() => {
-                
-                msg.classList.add('oculto');
-                msg.remove();
-
-                }, 2500)
-
-            });
-        });
-        
-    </script>
+    <script src="js/form.js"></script>
 
 </body>
 </html>

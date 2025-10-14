@@ -22,7 +22,7 @@
     margin: 0 auto;
 }
 
-.form-cadastro input {
+.form-cadastro input, .form-cadastro label {
     padding: 10px;
     border-radius: 5px;
     border: none;
@@ -36,7 +36,7 @@
     margin-top: 20px;
 }
 
-.botao-cadastrar, .botao-voltar {
+.botao-executar, .botao-voltar {
     padding: 15px 20px;
     font-size: 16px;
     border: none;
@@ -47,7 +47,7 @@
     font-weight: bold;
 }
 
-.botao-cadastrar {
+.botao-executar {
     background-color: #7b42f6;
     color: white;
 }
@@ -55,4 +55,8 @@
 .botao-voltar {
     background-color: #444;
     color: white;
+}
+
+.form-cadastro label {
+    font-weight: bold;
 }

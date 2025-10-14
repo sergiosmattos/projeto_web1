@@ -16,25 +16,12 @@
 
     $obraRepositorio = new ObraRepositorio($pdo);
 
+    $erro = $_GET['erro'] ?? '';
     $id = $_POST['id'];
-    $modoEdicao = false;
-    $obra = null;
 
-    if ($id) {
+    $modoEdicao = $id ? true : false;
 
-        $obra = $obraRepositorio->findById($id);
-
-        if ($obra) {
-
-            $modoEdicao = true;
-        } 
-        else {
-
-            header('Location: listar.php');
-            exit;
-
-        }
-    }
+    $obra = $modoEdicao ? $obraRepositorio->findById($id) : null;
 
     $valorNome = $modoEdicao ? $obra->getNome() : '';
     $valorDescricao = $modoEdicao ? $obra->getDescricao() : '';
@@ -51,6 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
+    <link rel="stylesheet" href="/projeto_web1/css/login.css">
     <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
     <link rel="stylesheet" href="/projeto_web1/css/form.css">
     <title>Gerenciar Obras</title>
@@ -69,13 +57,25 @@
         <div class="form-wrapper">
 
             <form action="salvar.php" method="POST" class="form-cadastro">
-                
+
+                <?php if ($erro === 'campos'): ?>
+                    <p class="mensagem-erro">Preencha todos os campos!</p>
+                <?php endif; ?>
+
                 <input name="id" type="hidden" value=<?= $id ?>>
-                <input id="nome" name="nome" type="text" placeholder="Nome" value=<?= $valorNome ?>>
-                <input id="descricao" name="descricao" type="text" placeholder="Descrição" value=<?= $valorDescricao?>>
+
+                <div>
+                    <label>Nome: </label>
+                    <input name="nome" type="text" value="<?= $valorNome?>">
+                </div>
+
+                <div>
+                    <label>Descrição: </label>
+                    <input name="descricao" type="text" value="<?= $valorNome?>">
+                </div>
                 
                 <div class="grupo-botoes">
-                    <button type="submit" class="botao-cadastrar"><?= $textoBotao ?></button>
+                    <button type="submit" class="botao-executar"><?= $textoBotao ?></button>
                     <a href="listar.php" class="botao-voltar">Voltar</a>
                 </div>
 
@@ -83,6 +83,8 @@
         </div>
 
     </section>
+
+    <script src="js/form.js"></script>
 
 
 </body>

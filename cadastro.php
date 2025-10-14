@@ -28,11 +28,8 @@ $erro = $_GET['erro'] ?? '';
                 <?php endif ?>
 
                 <input name="nome" type="text" placeholder="Nome">
-
-                <input name="dataNascimento" type="date" placeholder="data da Nascimento. Ex: YYYY-mm-DD">
-
+                <input name="dataNascimento" type="date">
                 <input name="email" type="email" placeholder="Email">
-
                 <input name="senha" type="password" placeholder="Senha">
                 
                 <a href="#">Esqueci minha senha</a>
@@ -51,26 +48,7 @@ $erro = $_GET['erro'] ?? '';
         
     </main>
 
-    <script>
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            
-            const mensagens = document.querySelectorAll('.mensagem-erro, .mensagem-ok');
-
-            mensagens.forEach(msg => {
-                
-                setTimeout(() => {
-
-                    msg.classList.add('oculto');
-
-                    msg.remove();
-
-                }, 2500);
-
-            });
-        });
-        
-    </script>
+    <script src="js/form.js"></script>
 
 </body>
 </html>
