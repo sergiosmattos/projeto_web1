@@ -1,43 +1,20 @@
-
-.section-form {
-
-    width: 50%;
-    background-color: white;
-    border-radius: 10px;
-    padding: 10px;
-
-}
-
-.container-form {
-
-    width: 100%;
-    justify-items: center;
-    padding: 10px;
-
-}
-
-.container-form form {
-    
+.all-form {
     display: flex;
     flex-direction: column;
-
+    margin-top: 20%;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    margin-left: 20%;
 }
- 
 
+.all-form h2 {
+    font-weight: bold;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-/* .container-form {
+.form-cadastro {
     display: flex;
     flex-direction: column;
     gap: 15px; 
@@ -45,7 +22,7 @@
     margin: 0 auto;
 }
 
-.container-form input {
+.form-cadastro input {
     padding: 10px;
     border-radius: 5px;
     border: none;
@@ -78,4 +55,4 @@
 .botao-voltar {
     background-color: #444;
     color: white;
-} */
+}

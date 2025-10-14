@@ -59,8 +59,8 @@ class ObraRepositorio {
     public function atualizar(Obra $obra) : void {
         
         $sql = 'update tbObra
-        set nome_obra = ?,
-        set descricao_obra = ?
+        set nome_obra = ?, 
+        descricao_obra = ?
         where id_obra = ?';
 
         $stmt = $this->pdo->prepare($sql);
