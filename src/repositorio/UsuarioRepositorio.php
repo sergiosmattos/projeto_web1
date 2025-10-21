@@ -77,13 +77,13 @@ class UsuarioRepositorio {
 
     public function atualizar(Usuario $usuario) : void {
         
-        $sql = 'update tbUsuario '.
-        'set tipo_usuario = ?, '.
-        'set nome_usuario = ?, '.
-        'set email_usuario = ?, '.
-        'set senha_usuario = ?, '.
-        'set data_nascimento_usuario = ?) '.
-        'where id_usuario = ?';
+        $sql = 'update tbUsuario set 
+        tipo_usuario = ?, 
+        nome_usuario = ?,
+        email_usuario = ?,
+        senha_usuario = ?,
+        data_nascimento_usuario = ?
+        where id_usuario = ?';
 
         $stmt = $this->pdo->prepare($sql);
 

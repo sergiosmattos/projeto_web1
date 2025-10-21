@@ -62,11 +62,11 @@ class LeilaoRepositorio {
 
     public function atualizar(Leilao $leilao) : void {
         
-        $sql = 'update tbLeilao 
-        set data_horario_inicio_leilao = ?, 
-        set lance_inicial_leilao = ?, 
-        set lance_atual_leilao = ?, 
-        set id_produto = ?
+        $sql = 'update tbLeilao set
+        data_horario_inicio_leilao = ?, 
+        lance_inicial_leilao = ?, 
+        lance_atual_leilao = ?, 
+        id_produto = ?
         where id_leilao = ?';
 
         $stmt = $this->pdo->prepare($sql);

@@ -54,7 +54,9 @@ class CategoriaRepositorio {
 
     public function atualizar(Categoria $categoria) : void {
         
-        $sql = 'update tbCategoria where id_categoria = ?';
+        $sql = 'update tbCategoria set
+        nome_categoria = ?
+        where id_categoria = ?';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $categoria->getId());

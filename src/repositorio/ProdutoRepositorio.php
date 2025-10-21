@@ -60,12 +60,12 @@ class ProdutoRepositorio {
 
     public function atualizar(Produto $produto) : void {
         
-        $sql = 'update tbProduto '.
-        'set nome_produto = ?, '.
-        'set descricao_produto = ? '.
-        'set preco_produto, '.
-        'set = id_obra = ? '.
-        'where id_produto = ?';
+        $sql = 'update tbProduto set
+        nome_produto = ?,
+        descricao_produto = ?
+        preco_produto = ?,
+        id_obra = ?
+        where id_produto = ?';
 
         $stmt = $this->pdo->prepare($sql);
 

@@ -58,8 +58,8 @@ class ObraRepositorio {
 
     public function atualizar(Obra $obra) : void {
         
-        $sql = 'update tbObra
-        set nome_obra = ?, 
+        $sql = 'update tbObra set
+        nome_obra = ?, 
         descricao_obra = ?
         where id_obra = ?';
 
