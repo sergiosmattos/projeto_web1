@@ -21,7 +21,7 @@ $erro = $_GET['erro'] ?? '';
         <section class="section-login">
             <h1>Cadastre-se</h1>
 
-            <form action="cadastroUsuario.php" method="post">
+            <form action="cadastroUsuario.php" method="post" autocomplete="off">
 
                 <?php if($erro === 'campos'): ?>
                     <p class="mensagem-erro">Preencha todos os campos.</p>

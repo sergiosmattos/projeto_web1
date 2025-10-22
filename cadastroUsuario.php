@@ -4,10 +4,10 @@ require __DIR__.'/src/repositorio/UsuarioRepositorio.php';
 
 //Verificação
 
-if( $_SERVER["REQUEST_METHOD"] !== "POST" ){
-    header('Location: cadastro.php');
-    exit();
-}
+// if( $_SERVER["REQUEST_METHOD"] !== "POST" ){
+//     header('Location: cadastro.php');
+//     exit();
+// }
 
 //>>
 

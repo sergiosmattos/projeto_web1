@@ -18,10 +18,9 @@ main {
     padding: 0 40px 40px;
     gap: 10px;
 
-    min-height: calc(100vh - 140px);
-
     /* 
-    width: calc(100% - 280px); 
+    width: calc(100% - 280px);
+    min-height: calc(100vh - 140px); 
     */
     
 }

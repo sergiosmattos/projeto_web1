@@ -86,8 +86,8 @@ class LeilaoRepositorio {
         
         $sql = 'select tbLeilao.* from tbLeilao';
 
-        $query = $this->pdo->query(PDO::FETCH_ASSOC);
-        $resultadoConsulta = $query->fetchAll();
+        $query = $this->pdo->query($sql);
+        $resultadoConsulta = $query->fetchAll(PDO::FETCH_ASSOC);
         $arrayProdutos = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
 
         return $arrayProdutos;

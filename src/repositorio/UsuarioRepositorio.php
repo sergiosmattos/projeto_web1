@@ -15,6 +15,7 @@ class UsuarioRepositorio {
         $id = $atributos['id_usuario'] ?? null;
 
         $dataNascimento = $atributos['data_nascimento_usuario'] ?? null;
+
         $timezone = new DateTimeZone('UTC');
         
         $usuario = new Usuario(
@@ -70,7 +71,6 @@ class UsuarioRepositorio {
         $stmt = $this->pdo->prepare($sql);
         $this->setStmtValues($stmt, $usuario);
 
-
         $stmt->execute();
 
     }
@@ -98,8 +98,9 @@ class UsuarioRepositorio {
         
         $sql = 'select tbUsuario.* from tbUsuario';
 
-        $query = $this->pdo->query(PDO::FETCH_ASSOC);
-        $resultadoConsulta = $query->fetchAll();
+        $query = $this->pdo->query($sql);
+
+        $resultadoConsulta = $query->fetchAll(PDO::FETCH_ASSOC);
         $arrayUsuarios = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
 
         return $arrayUsuarios;

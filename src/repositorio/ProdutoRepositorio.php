@@ -48,11 +48,7 @@ class ProdutoRepositorio {
         'values (?, ?, ?, ?)';
 
         $stmt = $this->pdo->prepare($sql);
-
-        $stmt->bindValue(1, $produto->getNome());
-        $stmt->bindValue(2, $produto->getDescricao());
-        $stmt->bindValue(3, $produto->getPreco());
-        $stmt->bindValue(4, $produto->getObra()->getId());
+        $this->setStmValues($stmt, $produto);
 
         $stmt->execute();
 
@@ -69,11 +65,8 @@ class ProdutoRepositorio {
 
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->bindValue(1, $produto->getNome());
-        $stmt->bindValue(2, $produto->getDescricao());
-        $stmt->bindValue(3, $produto->getPreco());
-        $stmt->bindValue(4, $produto->getObra()->getId());
         $stmt->bindValue(5, $produto->getId());
+        $this->setStmValues($stmt, $produto);
 
         $stmt->execute();
 
@@ -84,8 +77,8 @@ class ProdutoRepositorio {
         
         $sql = 'select tbProduto.* from tbProduto';
 
-        $query = $this->pdo->query(PDO::FETCH_ASSOC);
-        $resultadoConsulta = $query->fetchAll();
+        $query = $this->pdo->query($sql);
+        $resultadoConsulta = $query->fetchAll(PDO::FETCH_ASSOC);
         $arrayProdutos = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
 
         return $arrayProdutos;
@@ -98,6 +91,15 @@ class ProdutoRepositorio {
         
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute();
+
+    }
+
+    private function setStmValues(PDOStatement $stmt, Produto $produto): void {
+
+        $stmt->bindValue(1, $produto->getNome());
+        $stmt->bindValue(2, $produto->getDescricao());
+        $stmt->bindValue(3, $produto->getPreco());
+        $stmt->bindValue(4, $produto->getObra()->getId());
 
     }
 

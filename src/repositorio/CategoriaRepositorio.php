@@ -59,7 +59,8 @@ class CategoriaRepositorio {
         where id_categoria = ?';
 
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $categoria->getId());
+        $stmt->bindValue(1, $categoria->getNome());
+        $stmt->bindValue(2, $categoria->getId());
 
         $stmt->execute();
 
@@ -70,8 +71,8 @@ class CategoriaRepositorio {
         
         $sql = 'select tbCategoria.* from tbCategoria';
 
-        $query = $this->pdo->query(PDO::FETCH_ASSOC);
-        $resultadoConsulta = $query->fetchAll();
+        $query = $this->pdo->query($sql);
+        $resultadoConsulta = $query->fetchAll(PDO::FETCH_ASSOC);
         $arrayCategorias = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
 
         return $arrayCategorias;
