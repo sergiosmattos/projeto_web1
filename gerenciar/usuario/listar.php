@@ -85,11 +85,11 @@
                             <td>
                                 <div class="td-acoes">
                                     <form action="excluir.php" method="post">
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId() ) ?>">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $usuario->getId() ) ?>">
                                         <input type="submit" class="botao-excluir" value="Excluir">
                                     </form>
                                     <form action="form.php" method="post">
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $obra->getId() ) ?>">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $usuario->getId() ) ?>">
                                         <input type="submit" class="botao-editar" value="Editar">
                                     </form>
                                 </div>
