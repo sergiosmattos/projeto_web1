@@ -4,11 +4,11 @@ require __DIR__.'/Obra.php';
 
 class Produto {
 
-    private ?int $id;
-    private string $nome;
-    private string $descricao;
-    private float $preco;
-    private Obra $obra;
+        private ?int $id;
+        private string $nome;
+        private string $descricao;
+        private float $preco;
+        private Obra $obra;
 
     function __construct(?int $id, string $nome, string $descricao, float $preco, Obra $obra) {
 

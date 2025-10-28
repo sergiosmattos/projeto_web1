@@ -34,7 +34,7 @@ class UsuarioRepositorio {
 
     public function findById(int $id): ?Usuario {
 
-        $sql = 'select tbUsuario.* from tbUsuairo where id_usuario = ? limit 1';
+        $sql = 'select tbUsuario.* from tbUsuario where id_usuario = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
@@ -77,18 +77,22 @@ class UsuarioRepositorio {
 
     public function atualizar(Usuario $usuario) : void {
         
-        $sql = 'update tbUsuario '.
-        'set tipo_usuario = ?, '.
-        'set nome_usuario = ?, '.
-        'set email_usuario = ?, '.
-        'set senha_usuario = ?, '.
-        'set data_nascimento_usuario = ?) '.
-        'where id_usuario = ?';
+        $sql = 'UPDATE tbUsuario SET 
+                tipo_usuario = ?, 
+                nome_usuario = ?, 
+                email_usuario = ?, 
+                senha_usuario = ?, 
+                data_nascimento_usuario = ? 
+            WHERE id_usuario = ?';
 
         $stmt = $this->pdo->prepare($sql);
 
+        $stmt->bindValue(1, $usuario->getTipo());
+        $stmt->bindValue(2, $usuario->getNome());
+        $stmt->bindValue(3, $usuario->getEmail());
+        $stmt->bindValue(4, $usuario->getSenha());
+        $stmt->bindValue(5, $usuario->getDataNascimento()->format('Y-m-d'));
         $stmt->bindValue(6, $usuario->getId());
-        $this->setStmtValues($stmt, $usuario);
 
         $stmt->execute();
 

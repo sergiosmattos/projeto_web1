@@ -20,6 +20,8 @@
 
     $usuarioRepositorio = new UsuarioRepositorio($pdo);
     $usuario = $usuarioRepositorio->findByEmail($emailUsuario);
+
+    $dataFormatada = $usuario->getDataNascimento()->format('Y-m-d');
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +31,7 @@
     <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/perfil.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
@@ -36,7 +39,7 @@
     <?php include_once 'header.php' ?>
 
     <main>
-        <h2><?= htmlspecialchars($usuario->getNome()) ?></h2>
+        <h2>Seu perfil</h2>
 
 
         <div class="foto-perfil">
@@ -51,38 +54,43 @@
 
             
             <div class="campo">
-                <form action="#" method="post">
-                    <label>Nome</label>
+                <label>Nome</label>
+                <form action="alterarUsuarioPerfil.php" method="post">
+                    
                     <input type="text" name="nome" value="<?= htmlspecialchars($usuario->getNome()) ?>">
                     <button type="submit" class="botao-editar">ALTERAR</button>
                 </form>
             </div>
 
             <div class="campo">
-                <form action="#" method="post">
-                    <label>E-mail</label>
+                <label>E-mail</label>
+                <form action="alterarUsuarioPerfil.php" method="post">
                     <input type="email" name="email" value="<?= htmlspecialchars($usuario->getEmail()) ?>">
                     <button type="submit" class="botao-editar">ALTERAR</button>
                 </form>
             </div>
 
             <div class="campo">
-                <form action="#" method="post">
-                    <label>Senha</label>
-                    <input type=" password" name="campo" value="<?= htmlspecialchars($usuario->getSenha())?>">
+                <label>Senha</label>
+                <form action="alterarUsuarioPerfil.php" method="post">
+                    <input type=" password" name="senha" value="<?= htmlspecialchars($usuario->getSenha())?>">
                     <button type="submit" class="botao-editar">ALTERAR</button>
                 </form>
             </div>
 
             <div class="campo">
-                <form action="#" method="post">
-                    <label>Data de Nascimento</label>
-                    <input type="datetime" name="dataNascimnto" value="<?= htmlspecialchars($usuario->getDataNascimento())?>">
+                <label>Data de Nascimento</label>
+                <form action="alterarUsuarioPerfil.php" method="post">
+                    <input type="date" name="dataNascimento" value="<?= $dataFormatada ?>">
                     <button type="submit" class="botao-editar">ALTERAR</button>
                 </form>
             </div>
 
         </div>
+
+        <form action="alterarUsuarioPerfil.php" method="post">
+            <button type="submit" class="botao-sair-perfil">SAIR</button>
+        </form>
     </main>
 </body>
 </html>
