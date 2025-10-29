@@ -1,3 +1,5 @@
+@import "mensagem.css";
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -150,44 +152,4 @@ main {
   padding-top: 15px;
   gap: 20px;
   border-radius: 5px; 
-}
-
-.botoes .botao-sair, .botoes .botao-dashboard {
-    
-  width: 150px;
-  text-align: center;
-  
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #7b42f6;
-  color: #ffffff;
-  font-weight: bold;
-  
-}
-
-.mensagem-erro, .mensagem-ok {
-  background: #fff0f0;
-  padding: 8px 12px;
-  border-radius: 6px;
-  margin: 12px 0;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.mensagem-erro {
-  color: #c0392b;
-  border: 1px solid #c0392b;
-}
-
-.mensagem-ok {
-  color: #2da322ea;
-  border: 1px solid #2da322ea;
-}
-
-.oculto {
-
-  opacity: 0;
-  transform: translateY(-10);
-
 }

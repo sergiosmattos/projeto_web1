@@ -1,3 +1,5 @@
+@import "mensagem.css";
+
 .all-form {
     display: flex;
     flex-direction: column;
@@ -47,10 +49,23 @@
 
 }
 
-.grupo-input input:hover{
+.grupo-input input:hover:enabled:not(:focus){
 
     border-color: #7b42f6;
 
+}
+
+.grupo-input :focus{
+
+    outline: 0;
+    outline: #7b42f6 1.5px solid ;
+
+}
+
+input:disabled {
+    background-color: rgba(231, 231, 231, 0.72);
+    border-color: rgba(128, 128, 128, 0.288);
+    color: black;
 }
 
 .grupo-input label {
@@ -90,3 +105,5 @@
 .form-cadastro label {
     font-weight: bold;
 }
+
+@import "/css/mensagem.css";

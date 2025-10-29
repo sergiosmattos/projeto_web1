@@ -1,4 +1,4 @@
-<aside class="menu-gereniciar">
+<aside class="asidemenu">
 
     <a href="/projeto_web1/dashboardAdmin.php">Painel de controle</a>
     <a href="/projeto_web1/gerenciar/obra/listar.php">Obras</a>

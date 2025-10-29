@@ -1,11 +1,12 @@
 <?php
     
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
-    require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
     
     session_start();
 
-    $obraRepositorio = new ObraRepositorio($pdo);
+    $usuarioRepositorio = new UsuarioRepositorio($pdo);
+    $timezone = new DateTimeZone('UTC');
 
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
         header('Location: listar.php');
@@ -15,14 +16,19 @@
     $id = $_POST['id'] ?? '';
 
     $id = $id !== '' ? (int) $id : null;
-    $nome = trim($_POST['nome'] ?? '');
-    $descricao = trim($_POST['descricao'] ?? '');
 
-    if ($nome === '' || $descricao === '') {
+    $nome = trim($_POST['nome']) ?? '';
+    $email = trim($_POST['email']) ?? '';
+    $senha = trim($_POST['senha']) ?? '';
+    $dataNascimento = $_POST['dataNascimento'] ?? '';
 
-        header('Location: form.php' . ($id ? '?id=' . $id . '&erro=campos' : '?erro=campos'));
+    $dataNascimento = isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : '';
+
+    if ( $nome === '' || $email === '' || $senha === '' || $dataNascimento === '' ) {
+
+        header('Location: cadastro.php?erro=campos');
         exit;
-        
+
     }
 
     $obra = new Obra($id, $nome, $descricao);

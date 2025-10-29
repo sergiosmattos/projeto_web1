@@ -15,7 +15,7 @@ $novoregistro = $_GET['novoregistro'] ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/logo_geek.png">
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/acesso.css">
     <title>Login</title>
 </head>
 <body>

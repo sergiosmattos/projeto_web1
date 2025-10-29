@@ -38,9 +38,9 @@
 
 <body>
     
-    <?php include_once DIR_PROJETOWEB . 'header.php' ?>
+    <?php include_once DIR_PROJETOWEB . '/reutilizar/header.php' ?>
 
-    <?php include DIR_PROJETOWEB . 'menu-gerenciar.php'?>
+    <?php include DIR_PROJETOWEB . '/reutilizar/asidemenu.php'?>
 
     <div class="container-listar">
 

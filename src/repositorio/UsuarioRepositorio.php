@@ -35,7 +35,7 @@ class UsuarioRepositorio {
 
     public function findById(int $id): ?Usuario {
 
-        $sql = 'select tbUsuario.* from tbUsuairo where id_usuario = ? limit 1';
+        $sql = 'select tbUsuario.* from tbUsuario where id_usuario = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);

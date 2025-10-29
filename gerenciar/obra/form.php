@@ -36,7 +36,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo_geek.png">
+    <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
     <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
     <link rel="stylesheet" href="/projeto_web1/css/form.css">
@@ -45,9 +45,9 @@
 
 <body>
     
-    <?php include_once DIR_PROJETOWEB . 'header.php' ?>
+    <?php include_once DIR_PROJETOWEB . 'reutilizar/header.php' ?>
 
-    <?php include_once DIR_PROJETOWEB . 'menu-gerenciar.php' ?>
+    <?php include_once DIR_PROJETOWEB . 'reutilizar/asidemenu.php' ?>
 
     <section class="all-form">
 

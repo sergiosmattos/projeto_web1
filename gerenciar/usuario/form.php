@@ -1,7 +1,7 @@
 <?php
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
-    require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
 
     session_start();
 
@@ -14,20 +14,27 @@
 
     $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
-    $obraRepositorio = new ObraRepositorio($pdo);
+    $usuarioRepositorio = new UsuarioRepositorio($pdo);
 
     $erro = $_GET['erro'] ?? '';
-    $id = $_POST['id'] ?? null;
 
-    $modoEdicao = $id ? true : false;
+    $userIdPost = isset($_POST['id']) ? (int) $_POST['id'] : null;
+    $userIdSession = $usuarioRepositorio->findByEmail($emailUsuario)->getId();
 
-    $obra = $modoEdicao ? $obraRepositorio->findById($id) : null;
+    $modoEdicao = $userIdPost ? true : false;
 
-    $valorNome = $modoEdicao ? $obra->getNome() : '';
-    $valorDescricao = $modoEdicao ? $obra->getDescricao() : '';
+    $usuario = $modoEdicao ? $usuarioRepositorio->findById($userIdPost) : null;
 
-    $textoTitulo = $modoEdicao ? 'Editar Obra' : 'Cadastrar Obra';
+    $valorNome = $modoEdicao ? $usuario->getNome() : '';
+    $valorTipo = $modoEdicao ? $usuario->getTipo() : '';
+    $valorEmail = $modoEdicao ? $usuario->getEmail() : '';
+    $valorDataNascimento = $modoEdicao ? $usuario->getDataNascimento()->format('Y-m-d') : '';
+    $valorSenha = $modoEdicao ? $usuario->getSenha() : '';
+
+    $textoTitulo = $modoEdicao ? 'Editar Usuário' : 'Cadastrar Usuário';
     $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
+
+    $lockOwnTipo = $userIdPost === $userIdSession;
 
 ?>
 
@@ -36,7 +43,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo_geek.png">
+    <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
     <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
     <link rel="stylesheet" href="/projeto_web1/css/form.css">
@@ -45,9 +52,9 @@
 
 <body>
     
-    <?php include_once DIR_PROJETOWEB . 'header.php' ?>
+    <?php include_once DIR_PROJETOWEB . 'reutilizar/header.php' ?>
 
-    <?php include_once DIR_PROJETOWEB . 'menu-gerenciar.php' ?>
+    <?php include_once DIR_PROJETOWEB . 'reutilizar/asidemenu.php' ?>
 
     <section class="all-form">
 
@@ -61,18 +68,33 @@
                     <p class="mensagem-erro">Preencha todos os campos!</p>
                 <?php endif; ?>
 
-                <input name="id" type="hidden" value=<?= $id ?>>
+                <input name="id" type="hidden" value=<?= $userIdPost ?>>
 
                 <div class="grupo-input">
 
                     <div>
-                        <label>Nome </label>
+                        <label>Nome</label>
                         <input name="nome" type="text" value="<?= $valorNome?>">
                     </div>
 
                     <div>
-                        <label>Descrição </label>
-                        <input name="descricao" type="text" value="<?= $valorDescricao?>">
+                        <label>Tipo de Usuário</label>
+                        <input name="tipo" type="text" value="<?= $valorTipo?>" <?php if($lockOwnTipo){echo "disabled";}  ?>>
+                    </div>
+
+                    <div>
+                        <label>Email</label>
+                        <input name="email" type="email" value="<?= $valorEmail?>">
+                    </div>
+
+                    <div>
+                        <label>Data de Nascimento</label>
+                        <input name="dataNascimento" type="date" value="<?= $valorDataNascimento?>">
+                    </div>
+
+                    <div>
+                        <label>Senha</label>
+                        <input name="senha" type="text" value="<?= $valorSenha?>">
                     </div>
 
                 </div>
@@ -88,7 +110,6 @@
     </section>
 
     <script src="js/form.js"></script>
-
 
 </body>
 </html>

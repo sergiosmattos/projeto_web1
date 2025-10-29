@@ -31,11 +31,11 @@
 </head>
 <body>
 
-    <?php include_once 'header.php' ?>
+    <?php include_once 'reutilizar/header.php' ?>
 
     <main>
         
-        <?php include_once 'menu-gerenciar.php' ?>
+        <?php include_once 'reutilizar/asidemenu.php' ?>
 
         <section class="container-dashboard">
         
