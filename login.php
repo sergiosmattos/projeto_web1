@@ -55,7 +55,7 @@ $novoregistro = $_GET['novoregistro'] ?? '';
                 <form action="autenticar.php" method="post">
 
                     <input name="email" type="email" placeholder="Email">
-                    <input name="senha" type="password" placeholder="Senha">
+                    <input name="senha" type="password" placeholder="Senha" autocomplete="off">
 
                     <a href="#">Esqueci minha senha</a>
                     <button type="submit">Entrar</button>
