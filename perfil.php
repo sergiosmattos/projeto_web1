@@ -56,7 +56,6 @@
             <div class="campo">
                 <label>Nome</label>
                 <form action="alterarUsuarioPerfil.php" method="post">
-                    
                     <input type="text" name="nome" value="<?= htmlspecialchars($usuario->getNome()) ?>">
                     <button type="submit" class="botao-editar">ALTERAR</button>
                 </form>
@@ -88,7 +87,7 @@
 
         </div>
 
-        <form action="alterarUsuarioPerfil.php" method="post">
+        <form action="logout.php" method="post">
             <button type="submit" class="botao-sair-perfil">SAIR</button>
         </form>
     </main>
