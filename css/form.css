@@ -40,7 +40,7 @@
 
 }
 
-.grupo-input :not(:not(input, select)){
+.grupo-input :is(input, select){
 
     padding: 10px;
     border-radius: 5px;
@@ -49,7 +49,7 @@
 
 }
 
-.grupo-input *:hover:enabled:not(:focus){
+.grupo-input :is(input,select):hover:enabled:not(:focus){
 
     border-color: #7b42f6;
 
@@ -62,7 +62,7 @@
 
 }
 
-input:disabled, select:disabled {
+:is(input, select):disabled {
     background-color: rgba(231, 231, 231, 0.72);
     border-color: rgba(128, 128, 128, 0.288);
     color: black;

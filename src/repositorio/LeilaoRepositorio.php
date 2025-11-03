@@ -97,8 +97,10 @@ class LeilaoRepositorio {
     public function remover(int $id) : bool {
         
         $sql = 'delete from tbLeilao where id_leilao = ?';
-        
+
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $id);
+        
         return $stmt->execute();
 
     }

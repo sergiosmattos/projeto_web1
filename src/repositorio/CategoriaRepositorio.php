@@ -82,8 +82,10 @@ class CategoriaRepositorio {
     public function remover(int $id) : bool {
         
         $sql = 'delete from tbCategoria where id_categoria = ?';
-        
+
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $id);
+        
         return $stmt->execute();
 
     }

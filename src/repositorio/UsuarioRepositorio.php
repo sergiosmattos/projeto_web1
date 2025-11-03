@@ -116,6 +116,8 @@ class UsuarioRepositorio {
         $sql = 'delete from tbUsuario where id_usuario = ?';
         
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $id);
+
         return $stmt->execute();
 
     }
@@ -132,7 +134,6 @@ class UsuarioRepositorio {
 
     public function autenticarByEmailSenha(string $email, string $senha) : bool {
         
-        // $usuarioEncontrado = $this->findByEmail($email);
         // $isPasswordOk = $usuarioEncontrado ? $usuarioEncontrado->getSenha() === $senha : false ;
         // //$isPasswordOk = $usuarioEncontrado ? password_verify($usuarioEncontrado->getSenha, $senhaUsuario) === $senha : false ;
         // return $isPasswordOk;
