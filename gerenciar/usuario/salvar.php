@@ -18,6 +18,7 @@
     $id = $id !== '' ? (int) $id : null;
 
     $nome = trim($_POST['nome']) ?? '';
+    $tipo = trim($_POST['tipo']) ?? 'User';
     $email = trim($_POST['email']) ?? '';
     $senha = trim($_POST['senha']) ?? '';
     $dataNascimento = $_POST['dataNascimento'] ?? '';
@@ -31,26 +32,25 @@
 
     }
 
-    $obra = new Obra($id, $nome, $descricao);
-
+    $usuario = new Usuario($id, $tipo, $nome, $dataNascimento, $email, $senha);
 
     if ($id) {
 
-        $existenteObra = $obraRepositorio->findById($id);
+        $objetoExistente = $usuarioRepositorio->findById($id);
 
-        if (!$existenteObra) {
+        if (!$objetoExistente) {
             header('Location: listar.php?erro=inexistente');
             exit;
         }
         
-        $obraRepositorio->atualizar($obra);
+        $usuarioRepositorio->atualizar($usuario);
         header('Location: listar.php?editadoregistro=true');
         exit;
 
     }
     else {
             
-        $obraRepositorio->cadastrar($obra);
+        $usuarioRepositorio->cadastrar($usuario);
         header('Location: listar.php?novoregistro=true');
         exit;
 

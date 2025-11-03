@@ -30,9 +30,9 @@
 
     if ($id) {
 
-        $existenteObra = $obraRepositorio->findById($id);
+        $objetoExistente = $obraRepositorio->findById($id);
 
-        if (!$existenteObra) {
+        if (!$objetoExistente) {
             header('Location: listar.php?erro=inexistente');
             exit;
         }
