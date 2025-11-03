@@ -65,12 +65,23 @@ class UsuarioRepositorio {
 
     public function cadastrar(Usuario $usuario) : void {
         
-        $sql = 'insert into tbUsuario (tipo_usuario, nome_usuario, email_usuario, senha_usuario, data_nascimento_usuario) '.
-        'values (?, ?, ?, ?, ?)';
+        $sql = 'insert into tbUsuario (tipo_usuario, nome_usuario, email_usuario, senha_usuario, data_nascimento_usuario, imagem_usuario) '.
+        'values (?, ?, ?, ?, ?, ?)';
 
         $stmt = $this->pdo->prepare($sql);
-        $this->setStmtValues($stmt, $usuario);
 
+        $imagem = $usuario->getImagem();
+
+        if ( $imagem === null || $imagem === '' ) {
+            $imagem = 'icon_user_branco.svg';
+        }
+
+        $stmt->bindValue(1, $usuario->getTipo());
+        $stmt->bindValue(2, $usuario->getNome());
+        $stmt->bindValue(3, $usuario->getEmail());
+        $stmt->bindValue(4, $usuario->getSenha());
+        $stmt->bindValue(5, $usuario->getDataNascimento()->format('Y-m-d'));
+        $stmt->bindValue(6, $imagem);
         $stmt->execute();
 
     }
@@ -78,12 +89,14 @@ class UsuarioRepositorio {
     public function atualizar(Usuario $usuario) : void {
         
         $sql = 'UPDATE tbUsuario SET 
-                tipo_usuario = ?, 
-                nome_usuario = ?, 
-                email_usuario = ?, 
-                senha_usuario = ?, 
-                data_nascimento_usuario = ? 
-            WHERE id_usuario = ?';
+        tipo_usuario = ?, 
+        nome_usuario = ?, 
+        email_usuario = ?, 
+        senha_usuario = ?, 
+        data_nascimento_usuario = ? ,
+        imagem_usuario = ?
+        WHERE id_usuario = ?';
+
 
         $stmt = $this->pdo->prepare($sql);
 
@@ -92,8 +105,16 @@ class UsuarioRepositorio {
         $stmt->bindValue(3, $usuario->getEmail());
         $stmt->bindValue(4, $usuario->getSenha());
         $stmt->bindValue(5, $usuario->getDataNascimento()->format('Y-m-d'));
-        $stmt->bindValue(6, $usuario->getId());
 
+        $imagem = $usuario->getImagem();
+        if ( $imagem === null || $imagem === '' ) {
+            $stmt->bindValue(6, 'icon_user_branco.svg');
+        } else {
+            $stmt->bindValue(6, $usuario->getImagem());
+        }
+
+        $stmt->bindValue(7, $usuario->getId());
+        
         $stmt->execute();
 
     }
@@ -111,13 +132,37 @@ class UsuarioRepositorio {
 
     }
 
-    public function remover(int $id) : bool {
-        
-        $sql = 'delete from tbUsuario where id_usuario = ?';
-        
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute();
+    public function remover(int $id) : bool
+    {
+    $sql = "SELECT imagem_usuario FROM tbUsuario WHERE id_usuario = ?";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(1, $id, PDO::PARAM_INT);
+    $stmt->execute();
 
+    // pega resultado da consulta e retorna um array associativo
+    $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+    $imagem = $dados['imagem_usuario'] ?? null;
+
+
+    $sqlDel = "DELETE FROM tbUsuario WHERE id_usuario = ?";
+    $stmtDel = $this->pdo->prepare($sqlDel);
+    $stmtDel->bindValue(1, $id);
+    $resultadoExecult = $stmtDel->execute();
+
+    if ( $resultadoExecult && $stmtDel->rowCount() > 0 && !empty($imagem) ) {
+
+        
+        if ($imagem !== 'icon_user_branco.svg') {
+
+            $caminho = DIR_PROJETOWEB . 'uploads/' . $imagem;
+
+            if (is_file($caminho)) {
+                unlink($caminho);
+            }
+        }
+    }
+
+    return $resultadoExecult;
     }
 
     private function setStmtValues(PDOStatement $stmt, Usuario $usuario) {
