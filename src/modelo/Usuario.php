@@ -63,14 +63,16 @@ class Usuario
 
     public function getImagemDiretorio(): string
     {
+        
         $nomeImagem = $this->imagem ?: 'icon_user_branco.svg';
         
-        $caminhoUploads = DIR_PROJETOWEB . 'uploads/' . $nomeImagem;
+        $caminhoUploads = DIR_PROJETOWEB . 'uploads/usuarios/' . $nomeImagem;
+        
+        // var_dump($caminhoUploads);
         
         if (file_exists($caminhoUploads)) {
             return 'uploads/usuarios/' . $nomeImagem;
         }
-
         
         return 'img/' . $nomeImagem;
     }

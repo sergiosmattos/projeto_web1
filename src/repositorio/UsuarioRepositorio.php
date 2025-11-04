@@ -25,7 +25,8 @@ class UsuarioRepositorio {
             $atributos['nome_usuario'] ?? '',
             isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : new DateTime('0000-00-00', $timezone),
             $atributos['email_usuario'] ?? '',
-            $atributos['senha_usuario'] ?? ''
+            $atributos['senha_usuario'] ?? '',
+            $atributos['imagem_usuario'] ?? ''
 
         );
 
