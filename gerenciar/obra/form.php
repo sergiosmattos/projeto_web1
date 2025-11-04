@@ -72,7 +72,7 @@
 
                     <div>
                         <label>Descrição </label>
-                        <input name="descricao" type="text" value="<?= $valorDescricao?>">
+                        <textarea name="descricao" spellcheck="false"><?= $valorDescricao?></textarea>
                     </div>
 
                 </div>
@@ -88,7 +88,6 @@
     </section>
 
     <script src="js/form.js"></script>
-
 
 </body>
 </html>

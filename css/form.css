@@ -40,7 +40,20 @@
 
 }
 
-.grupo-input :is(input, select){
+.grupo-input :focus{
+
+    outline: 0;
+    outline: #7b42f6 1.5px solid ;
+
+}
+
+.grupo-input textarea {
+    resize: none;
+    font-family: Arial, sans-serif;
+    min-height: 80px;
+}
+
+.grupo-input :is(input, select, textarea){
 
     padding: 10px;
     border-radius: 5px;
@@ -49,20 +62,13 @@
 
 }
 
-.grupo-input :is(input,select):hover:enabled:not(:focus){
+.grupo-input :is(input, select, textarea):hover:enabled:not(:focus){
 
     border-color: #7b42f6;
 
 }
 
-.grupo-input :focus{
-
-    outline: 0;
-    outline: #7b42f6 1.5px solid ;
-
-}
-
-:is(input, select):disabled {
+:is(input, select, textarea):disabled {
     background-color: rgba(231, 231, 231, 0.72);
     border-color: rgba(128, 128, 128, 0.288);
     color: black;
