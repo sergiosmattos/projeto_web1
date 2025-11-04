@@ -1,5 +1,8 @@
 <?php
 
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
+    require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
+
     session_start();
 
     $emailUsuario = $_SESSION['usuario'] ?? null;
@@ -15,6 +18,9 @@
         header('Location: dashboardUsuario.php');
         exit;
     }
+
+    $usuarioRepositorio = new UsuarioRepositorio($pdo);
+    $usuario = $usuarioRepositorio->findByEmail($emailUsuario);
 
 ?>
 

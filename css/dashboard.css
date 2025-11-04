@@ -76,8 +76,10 @@ main h1 {
 }
 
 .iconUser {
-    width: auto;
-    height: 35px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }
 
 .iconLogo {
