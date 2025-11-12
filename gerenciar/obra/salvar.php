@@ -18,6 +18,8 @@
     $nome = trim($_POST['nome'] ?? '');
     $descricao = trim($_POST['descricao'] ?? '');
 
+    var_dump($_POST);
+
     if ($nome === '' || $descricao === '') {
 
         header('Location: form.php' . ($id ? '?id=' . $id . '&erro=campos' : '?erro=campos'));
