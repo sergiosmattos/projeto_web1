@@ -57,6 +57,11 @@
             $filename = uniqid('user_', true) . $ext;
             $destination = $uploadsDir . $filename;
 
+        $imagemAntiga = $usuarioExistente->getImagem();
+        if ($imagemAntiga && file_exists($uploadsDir . $imagemAntiga)) {
+            unlink($uploadsDir . $imagemAntiga);
+        }
+
             if (move_uploaded_file($tmpPath, $destination)) {
                 $imagemFinal = $filename;
             }

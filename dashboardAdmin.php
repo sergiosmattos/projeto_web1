@@ -67,7 +67,7 @@
                     <p>Gerenciar Leilões</p>
                 </a>
                 
-                <a href="#" class="dashboard-option-odd">
+                <a href="gerenciar/obra/listar.php" class="dashboard-option-odd">
                     <h2>Obras</h2>
                     <p>Gerenciar Obras</p>
                 </a>
