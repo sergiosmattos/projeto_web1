@@ -40,7 +40,7 @@
 
 }
 
-.grupo-input :focus{
+.grupo-input :focus :not(input[type="checkbox"]){
 
     outline: 0;
     outline: #7b42f6 1.5px solid ;
@@ -53,7 +53,7 @@
     min-height: 80px;
 }
 
-.grupo-input :is(input, select, textarea){
+.grupo-input :is(input, select, textarea), .select-multiple{
 
     padding: 10px;
     border-radius: 5px;
@@ -74,13 +74,14 @@
     color: black;
 }
 
-.grupo-input label {
+.grupo-input > div > label {
 
     padding-bottom: 10px;
 
 }
 
 .grupo-botoes {
+
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -96,6 +97,7 @@
     text-decoration: none;
     text-align: center;
     font-weight: bold;
+
 }
 
 .botao-executar {
@@ -116,40 +118,39 @@
 
     background-color: white;
     color: black;
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin: 10px 0;
 
 }
 
-.select-multiple div {
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-
-}
-
-.select-multiple div :is(label, input){
+.select-multiple > label{
 
     user-select: none;
-    vertical-align: middle;
     text-align: center;
-    padding: 10px 0;
+    font-weight: lighter;
 
-    width: 100%;
-
-
+    margin: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #878787;
+    border: 2px solid transparent;
 
 }
 
-.select-multiple div input:checked {
-    
-    outline: none;
+.select-multiple label > input[type="checkbox"] {
+
+    vertical-align: middle;
+    display: none;
+
+}
+
+.select-multiple > label:has(input[type="checkbox"]:checked) {
+
+    background-color: green;
+
+}
+
+.select-multiple > label:hover {
+
+    border-color: #7b42f6;
 
 }
 

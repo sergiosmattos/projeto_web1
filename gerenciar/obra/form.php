@@ -79,20 +79,15 @@
                         <label>Categorias </label>
                         <div class="select-multiple">
 
-                            <div>
-                                <label for="1">Anime</label>
-                                <input id="1" type="checkbox" value="Anime" name="categorias[]">
-                            </div>
+                            <label>
+                                Livro
+                                <input type="checkbox" value="Livro" name="categorias[]">
+                            </label>
 
-                            <div>
-                                <label for="2">Filme</label>
-                                <input id="2" type="checkbox" value="Filme" name="categorias[]">
-                            </div>
-
-                            <div>
-                                <label for="3">Livro</label>
-                                <input id="3" type="checkbox" value="Livro" name="categorias[]">
-                            </div>
+                            <label>
+                                Livro
+                                <input type="checkbox" value="Livro" name="categorias[]">
+                            </label>
 
                         </div>
                     </div>
