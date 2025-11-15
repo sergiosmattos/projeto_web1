@@ -21,12 +21,9 @@
 
         </div>
 
-        <div>
-            <a href="/projeto_web1/perfil.php">
-                <img src="<?= $usuario->getImagemDiretorio() ?>" class="iconUser" alt="IconUsuario">
-            </a>
-            <p><?= htmlspecialchars($usuario->getNome()) ?></p>
-        </div>
+        <a href="/projeto_web1/perfil.php">
+            <img src="/projeto_web1/img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
+        </a>
         
     </section>
 
