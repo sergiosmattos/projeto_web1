@@ -3,7 +3,6 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
     require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
-    require DIR_PROJETOWEB . 'src/repositorio/ObraCategoriaRepositorio.php';
 
     session_start();
 
@@ -16,22 +15,17 @@
 
     $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
-    $obraRepo = new ObraRepositorio($pdo);
-    $catgRepo = new CategoriaRepositorio($pdo);
-    $oCRepo = new ObraCategoriaRepositorio(
-        $pdo, 
-        $obraRepo, 
-        $catgRepo
-    );
+    $obraRepositorio = new ObraRepositorio($pdo);
+    $categoriaRepositorio = new CategoriaRepositorio($pdo);
 
-    $categorias = $catgRepo->listar();
+    $categorias = $categoriaRepositorio->listar();
 
     $erro = $_GET['erro'] ?? '';
     $id = $_POST['id'] ?? null;
 
     $modoEdicao = $id ? true : false;
 
-    $obra = $modoEdicao ? $obraRepo->findById($id) : null;
+    $obra = $modoEdicao ? $obraRepositorio->findById($id) : null;
 
     $valorNome = $modoEdicao ? $obra->getNome() : '';
     $valorDescricao = $modoEdicao ? $obra->getDescricao() : '';
@@ -96,6 +90,7 @@
                                 <input type="checkbox" value="<?= $categoria->getId()?>" name="categorias[]" 
                                 
                                 <?php
+                                
                                     if( $modoEdicao ) {
 
                                         $idObra = $id;
