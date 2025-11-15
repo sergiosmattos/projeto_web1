@@ -1,8 +1,7 @@
 <?php
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
-    require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
-    require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
     
     session_start();
 
@@ -20,8 +19,8 @@
         exit;
     }
 
-    $usuarioRepositorio = new UsuarioRepositorio($pdo);
-    $usuarios = $usuarioRepositorio->listar();
+    $categoriaRepositorio = new categoriaRepositorio($pdo);
+    $categorias = $categoriaRepositorio->listar();
 
 ?>
 
@@ -34,7 +33,7 @@
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
     <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
     <link rel="stylesheet" href="/projeto_web1/css/listar.css">
-    <title>Gerenciar - Usuarios</title>
+    <title>Gerenciar - Categorias</title>
 </head>
 
 <body>
@@ -45,14 +44,14 @@
 
     <div class="container-listar">
 
-        <h1>Gerenciar Usuário</h1>
+        <h1>Gerenciar Categorias</h1>
 
         <div class="container-topo">
 
-            <a href="form.php"><button class="botao-adicionar">Adicionar Usuários</button></a>
+            <a href="form.php"><button class="botao-adicionar">Adicionar Categoria</button></a>
             
             <div class="barra-pesquisar">
-                <input type="text" placeholder="Pesquisar usuário...">
+                <input type="text" placeholder="Pesquisar obra...">
             </div>
 
         </div>
@@ -64,38 +63,31 @@
 
                     <tr>
                         <th>ID</th>
-                        <th>Tipo de Usuário</th>
                         <th>Nome</th>
-                        <th>Email</th>
-                        <th>Data de Nascimento</th>
                         <th>Ações</th>
                     </tr>
 
                 </thead>
                 <tbody>
 
-                    <?php foreach ($usuarios as $usuario): ?>
-
+                    <?php foreach ($categorias as $categoria): ?>
                         <tr>
-                            <td><?= htmlspecialchars($usuario->getId()) ?></td>
-                            <td><?= htmlspecialchars($usuario->getTipo()) ?></td>
-                            <td><?= htmlspecialchars($usuario->getNome()) ?></td>
-                            <td><?= htmlspecialchars($usuario->getEmail()) ?></td>
-                            <td><?= htmlspecialchars($usuario->getDataNascimento()->format('d/m/Y')) ?></td>
+                            <td><?= htmlspecialchars($categoria->getId()) ?></td>
+                            <td><?= htmlspecialchars($categoria->getNome()) ?></td>
                             <td>
                                 <div class="td-acoes">
                                     <form action="excluir.php" method="post">
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $usuario->getId() ) ?>">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $categoria->getId() ) ?>">
                                         <input type="submit" class="botao-excluir" value="Excluir">
                                     </form>
                                     <form action="form.php" method="post">
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $usuario->getId() ) ?>">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars( $categoria->getId() ) ?>">
                                         <input type="submit" class="botao-editar" value="Editar">
                                     </form>
                                 </div>
                             </td>
+                            
                         </tr>
-
                     <?php endforeach; ?>
 
                 </tbody>

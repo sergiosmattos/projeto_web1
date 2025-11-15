@@ -1,12 +1,10 @@
 <?php
     
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
-    require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
     require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
     
     session_start();
 
-    $obraRepositorio = new ObraRepositorio($pdo);
     $categoriaRepositorio = new CategoriaRepositorio($pdo);
 
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -18,39 +16,38 @@
 
     $id = $id !== '' ? (int) $id : null;
     $nome = trim($_POST['nome'] ?? '');
-    $descricao = trim($_POST['descricao'] ?? '');
-    $categoriasIds = $_POST['categorias'] ?? [];
 
-    if ($nome === '' || $descricao === '' || is_null($categoriasIds) ) {
+    var_dump($_POST);
+
+    if ($nome === '') {
 
         header('Location: form.php' . ($id ? '?id=' . $id . '&erro=campos' : '?erro=campos'));
         exit;
         
     }
 
-    $obra = new Obra($id, $nome, $descricao);
+    $categoria = new Categoria($id, $nome);
+
 
     if ($id) {
 
-        $objetoExistente = $obraRepositorio->findById($id);
+        $objetoExistente = $categoriaRepositorio->findById($id);
 
         if (!$objetoExistente) {
             header('Location: listar.php?erro=inexistente');
             exit;
         }
         
-        $obraRepositorio->atualizar($obra);
-
+        $categoriaRepositorio->atualizar($categoria);
         header('Location: listar.php?editadoregistro=true');
         exit;
 
     }
     else {
             
-        $obraRepositorio->cadastrar($obra);
+        $categoriaRepositorio->cadastrar($categoria);
         header('Location: listar.php?novoregistro=true');
         exit;
 
     }
-
 ?>

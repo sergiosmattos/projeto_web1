@@ -34,6 +34,7 @@ class ProdutoRepositorio {
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
+        $stmt->execute();
 
         $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
         $produto = $atributos ? $this->makeObject($atributos) : null;
@@ -88,8 +89,10 @@ class ProdutoRepositorio {
     public function remover(int $id) : bool {
         
         $sql = 'delete from tbProduto where id_produto = ?';
-        
+
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $id);
+        
         return $stmt->execute();
 
     }

@@ -21,9 +21,11 @@
 
         </div>
 
-        <a href="/projeto_web1/perfil.php">
-            <img src="/projeto_web1/img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
-        </a>
+        <div>
+            <a href="/projeto_web1/perfil.php">
+                <img src="/projeto_web1/img/icon_user_branco.svg" class="iconUser" alt="IconUsuario">
+            </a>
+        </div>
         
     </section>
 

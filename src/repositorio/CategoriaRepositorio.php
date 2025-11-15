@@ -28,10 +28,11 @@ class CategoriaRepositorio {
 
     public function findById(int $id): ?Categoria {
 
-        $sql = 'select tbCategoria.* from tbCategoria where id = ? limit 1';
+        $sql = 'select tbCategoria.* from tbCategoria where id_categoria = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
+        $stmt->execute();
 
         $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
         $categoria = $atributos ? $this->makeObject($atributos) : null;
@@ -82,8 +83,10 @@ class CategoriaRepositorio {
     public function remover(int $id) : bool {
         
         $sql = 'delete from tbCategoria where id_categoria = ?';
-        
+
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $id);
+        
         return $stmt->execute();
 
     }
