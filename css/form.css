@@ -40,10 +40,10 @@
 
 }
 
-.grupo-input :focus :not(input[type="checkbox"]){
+.grupo-input :focus:not(input[type="checkbox"]){
 
     outline: 0;
-    outline: #7b42f6 1.5px solid ;
+    outline: #7b42f6 1.8px solid ;
 
 }
 

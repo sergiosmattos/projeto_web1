@@ -34,6 +34,7 @@ class ProdutoRepositorio {
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
+        $stmt->execute();
 
         $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
         $produto = $atributos ? $this->makeObject($atributos) : null;

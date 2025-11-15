@@ -36,6 +36,7 @@ class LeilaoRepositorio {
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
+        $stmt->execute();
 
         $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
         $leilao = $atributos ? $this->makeObject($atributos) : null;

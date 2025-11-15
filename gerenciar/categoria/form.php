@@ -1,9 +1,7 @@
 <?php
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
-    require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
     require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
-    require DIR_PROJETOWEB . 'src/repositorio/ObraCategoriaRepositorio.php';
 
     session_start();
 
@@ -16,27 +14,18 @@
 
     $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
-    $obraRepo = new ObraRepositorio($pdo);
-    $catgRepo = new CategoriaRepositorio($pdo);
-    $oCRepo = new ObraCategoriaRepositorio(
-        $pdo, 
-        $obraRepo, 
-        $catgRepo
-    );
-
-    $categorias = $catgRepo->listar();
+    $categoriaRepositorio = new CategoriaRepositorio($pdo);
 
     $erro = $_GET['erro'] ?? '';
     $id = $_POST['id'] ?? null;
 
     $modoEdicao = $id ? true : false;
 
-    $obra = $modoEdicao ? $obraRepo->findById($id) : null;
+    $categoria = $modoEdicao ? $categoriaRepositorio->findById($id) : null;
 
-    $valorNome = $modoEdicao ? $obra->getNome() : '';
-    $valorDescricao = $modoEdicao ? $obra->getDescricao() : '';
+    $valorNome = $modoEdicao ? $categoria->getNome() : '';
 
-    $textoTitulo = $modoEdicao ? 'Editar Obra' : 'Cadastrar Obra';
+    $textoTitulo = $modoEdicao ? 'Editar Categoria' : 'Cadastrar Categoria';
     $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
 
 ?>
@@ -50,7 +39,7 @@
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
     <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
     <link rel="stylesheet" href="/projeto_web1/css/form.css">
-    <title>Gerenciar Obras</title>
+    <title>Gerenciar Categorias</title>
 </head>
 
 <body>
@@ -78,43 +67,6 @@
                     <div>
                         <label>Nome </label>
                         <input name="nome" type="text" value="<?= $valorNome?>">
-                    </div>
-
-                    <div>
-                        <label>Descrição </label>
-                        <textarea name="descricao" spellcheck="false"><?= $valorDescricao?></textarea>
-                    </div>
-
-                    <div>
-                        <label>Categorias </label>
-                        <div class="select-multiple">
-
-                            <?php foreach($categorias as $categoria):?>
-
-                            <label>
-                                <?= $categoria->getNome()?>
-                                <input type="checkbox" value="<?= $categoria->getId()?>" name="categorias[]" 
-                                
-                                <?php
-                                    if( $modoEdicao ) {
-
-                                        $idObra = $id;
-                                        $idCategoria = $categoria->getId();
-                                        
-                                        if($oCRepo->findById($idObra, $idCategoria)){
-
-                                            echo "checked";
-
-                                        }
-                                    
-                                    }
-                                ?>
-                                >
-                            </label>
-
-                            <?php endforeach;?>
-
-                        </div>
                     </div>
 
                 </div>

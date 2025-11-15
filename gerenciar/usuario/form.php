@@ -115,7 +115,7 @@
 
     </section>
 
-    <script src="js/form.js"></script>
+    <script src="/projeto_web1/js/form.js"></script>
 
 </body>
 </html>
