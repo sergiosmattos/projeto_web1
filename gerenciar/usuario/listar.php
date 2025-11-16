@@ -45,14 +45,14 @@
 
     <div class="container-listar">
 
-        <h1>Gerenciar Usuario</h1>
+        <h1>Gerenciar Usuário</h1>
 
         <div class="container-topo">
 
-            <a href="form.php"><button class="botao-adicionar">Adicionar Usuarios</button></a>
+            <a href="form.php"><button class="botao-adicionar">Adicionar Usuários</button></a>
             
             <div class="barra-pesquisar">
-                <input type="text" placeholder="Pesquisar obra...">
+                <input type="text" placeholder="Pesquisar usuário...">
             </div>
 
         </div>
@@ -64,7 +64,7 @@
 
                     <tr>
                         <th>ID</th>
-                        <th>Tipo de Usuario</th>
+                        <th>Tipo de Usuário</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Data de Nascimento</th>

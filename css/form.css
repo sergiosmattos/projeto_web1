@@ -37,22 +37,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-}
-
-.grupo-input input{
-
-    padding: 10px;
-    border-radius: 5px;
-    border: #ffffff 2px solid;
-    font-size: 16px;
-
-}
-
-.grupo-input input:hover:enabled:not(:focus){
-
-    border-color: #7b42f6;
-
 }
 
 .grupo-input :focus{
@@ -62,7 +46,28 @@
 
 }
 
-input:disabled {
+.grupo-input textarea {
+    resize: none;
+    font-family: Arial, sans-serif;
+    min-height: 80px;
+}
+
+.grupo-input :is(input, select, textarea){
+
+    padding: 10px;
+    border-radius: 5px;
+    border: #ffffff 2px solid;
+    font-size: 16px;
+
+}
+
+.grupo-input :is(input, select, textarea):hover:enabled:not(:focus){
+
+    border-color: #7b42f6;
+
+}
+
+:is(input, select, textarea):disabled {
     background-color: rgba(231, 231, 231, 0.72);
     border-color: rgba(128, 128, 128, 0.288);
     color: black;
@@ -104,6 +109,47 @@ input:disabled {
 
 .form-cadastro label {
     font-weight: bold;
+}
+
+.select-multiple {
+
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px 0;
+
+}
+
+.select-multiple div {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+
+}
+
+.select-multiple div :is(label, input){
+
+    user-select: none;
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px 0;
+
+    width: 100%;
+
+
+
+}
+
+.select-multiple div input:checked {
+    
+    outline: none;
+
 }
 
 @import "/css/mensagem.css";

@@ -79,7 +79,13 @@
 
                     <div>
                         <label>Tipo de Usuário</label>
-                        <input name="tipo" type="text" value="<?= $valorTipo?>" <?php if($lockOwnTipo){echo "disabled";}  ?>>
+
+                        <select name="tipo" <?php if($lockOwnTipo){echo "disabled";}?>>
+
+                            <option <?php if ($valorTipo == 'User') {echo "selected";}?> value="User">Usuário</option>
+                            <option <?php if ($valorTipo == 'Admin') {echo "selected";}?> value="Admin">Administrador</option>
+                        
+                        </select>
                     </div>
 
                     <div>

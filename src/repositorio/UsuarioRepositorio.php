@@ -140,7 +140,6 @@ class UsuarioRepositorio {
     $stmt->bindValue(1, $id, PDO::PARAM_INT);
     $stmt->execute();
 
-    // pega resultado da consulta e retorna um array associativo
     $dados = $stmt->fetch(PDO::FETCH_ASSOC);
     $imagem = $dados['imagem_usuario'] ?? null;
 
