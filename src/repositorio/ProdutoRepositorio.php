@@ -2,7 +2,8 @@
 
 require __DIR__.'/../conexaoBD.php';
 require __DIR__.'/../modelo/Produto.php';
-require __DIR__.'/../modelo/Obra.php';
+require_once __DIR__.'/../modelo/Obra.php';
+require_once __DIR__.'/ObraRepositorio.php';
 
 class ProdutoRepositorio {
 
@@ -12,35 +13,38 @@ class ProdutoRepositorio {
         $this->pdo = $pdo;
     }
 
-    public function makeObject(array $atributos) : Produto {
+   public function makeObject(array $atributos) : Produto {
 
-        $id = $atributos['id'];
-        
-        $produto = new Produto(isset($id) ? (int) $id : null,
-            $atributos['nome'],
-            $atributos['descricao'],
-            $atributos['preco'],
-            $atributos['obra']
+    $id = $atributos['id_produto'];
+    
+    $obraRepositorio = new ObraRepositorio($this->pdo);
+    $obra = $obraRepositorio->findById($atributos['id_obra']);
+    
+    $produto = new Produto(
+        isset($id) ? (int) $id : null,
+        $atributos['nome_produto'],
+        $atributos['descricao_produto'],
+        (float) $atributos['preco_produto'],
+        $obra
+    );
 
-        );
+    return $produto;
+}
 
-        return $produto;
-
-    }
+    
 
     public function findById(int $id): ?Produto {
 
-        $sql = 'select tbProduto.* from tbProduto where id = ? limit 1';
+    $sql = 'SELECT * FROM tbProduto WHERE id_produto = ? LIMIT 1';
 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $id);
-        $stmt->execute();
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(1, $id, PDO::PARAM_INT);
+    $stmt->execute();
 
-        $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
-        $produto = $atributos ? $this->makeObject($atributos) : null;
+    $atributos = $stmt->fetch(PDO::FETCH_ASSOC);
+    $produto = $atributos ? $this->makeObject($atributos) : null;
 
-        return $produto;
-
+    return $produto;
     }
 
     public function cadastrar(Produto $produto) : void {
@@ -91,8 +95,7 @@ class ProdutoRepositorio {
         $sql = 'delete from tbProduto where id_produto = ?';
 
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $id);
-        
+        $stmt->bindValue(1, $id, PDO::PARAM_INT);
         return $stmt->execute();
 
     }

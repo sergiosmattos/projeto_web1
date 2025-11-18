@@ -44,10 +44,16 @@
         <h2>Seu perfil</h2>
 
         <div class="foto-perfil">
-            <div class="avatar"></div>
-            <form action="#" method="post">
-                <input type="file" name="foto" id="foto" hidden>
-                <label for="foto" class="botao-editar">Editar</label>
+            <img src="<?= $usuario->getImagemDiretorio() ?>" class="avatar">
+
+            <form action="alterarUsuarioPerfil.php" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="imagem_atual" value="<?= $usuario->getImagem(); ?>">
+
+                <input type="file" name="imagem" id="foto" hidden>
+                <label for="foto" class="botao-editar">Selecionar Foto</label>
+
+                <button type="submit" class="botao-editar">Salvar Foto</button>
             </form>
         </div>
 

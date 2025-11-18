@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/Obra.php';
+require_once __DIR__.'/Obra.php';
 
 class Produto {
 
@@ -12,11 +12,11 @@ class Produto {
 
     function __construct(?int $id, string $nome, string $descricao, float $preco, Obra $obra) {
 
-        $this->$id = $id;
-        $this->$nome = $nome;
-        $this->$descricao = $descricao;
-        $this->$preco = $preco;
-        $this->$obra = $obra;
+        $this->id = $id;
+        $this->nome = $nome;
+        $this->descricao = $descricao;
+        $this->preco = $preco;
+        $this->obra = $obra;
 
     }
 

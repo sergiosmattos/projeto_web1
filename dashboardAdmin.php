@@ -1,5 +1,8 @@
 <?php
 
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
+    require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
+
     session_start();
 
     $emailUsuario = $_SESSION['usuario'] ?? null;
@@ -15,6 +18,9 @@
         header('Location: dashboardUsuario.php');
         exit;
     }
+
+    $usuarioRepositorio = new UsuarioRepositorio($pdo);
+    $usuario = $usuarioRepositorio->findByEmail($emailUsuario);
 
 ?>
 
@@ -61,7 +67,7 @@
                     <p>Gerenciar Leilões</p>
                 </a>
                 
-                <a href="#" class="dashboard-option-odd">
+                <a href="gerenciar/obra/listar.php" class="dashboard-option-odd">
                     <h2>Obras</h2>
                     <p>Gerenciar Obras</p>
                 </a>

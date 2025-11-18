@@ -5,6 +5,6 @@
     <a href="/projeto_web1/gerenciar/usuario/listar.php">Usuários</a>
     <a href="#">Leilões</a>
     <a href="/projeto_web1/gerenciar/categoria/listar.php">Categorias</a>
-    <a href="#">Produtos</a>
+    <a href="/projeto_web1/gerenciar/produto/listar.php">Produtos</a>
 
 </aside>

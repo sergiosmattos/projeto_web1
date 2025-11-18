@@ -26,17 +26,61 @@
     $dataNascimento = $_POST['dataNascimento'] ?? $usuarioExistente->getDataNascimento()->format('Y-m-d');
 
 
-    // Valida campos obrigatórios
+
+    
+    $uploadsDir = DIR_PROJETOWEB . 'uploads/usuarios/';
+
+    //is_dir verifica se o uploadsDir realmente existe
+    //se nao tiver mkdir cria o mkdir cria com nome uploadsDir
+    if (!is_dir($uploadsDir)) {
+        mkdir($uploadsDir, 0755, true);
+    }
+
+    $imagemFinal = $_POST['imagem_atual'] ?? $usuarioExistente->getImagem();
+
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+
+        // caminho do arquivo temporário
+        $tmpPath = $_FILES['imagem']['tmp_name'];
+        // verifica se é uma imagem valida e retorna uma array com as informaçoes da imagem
+        $imgInfo = @getimagesize($tmpPath);
+
+        if ($imgInfo !== false) {
+            $ext = '';
+            switch ($imgInfo['mime']) {
+                case 'image/jpeg': $ext = '.jpg'; break;
+                case 'image/png':  $ext = '.png'; break;
+                case 'image/gif':  $ext = '.gif'; break;
+                default: $ext = image_type_to_extension($imgInfo[2]) ?: '';
+            }
+
+            $filename = uniqid('user_', true) . $ext;
+            $destination = $uploadsDir . $filename;
+
+        $imagemAntiga = $usuarioExistente->getImagem();
+        if ($imagemAntiga && file_exists($uploadsDir . $imagemAntiga)) {
+            unlink($uploadsDir . $imagemAntiga);
+        }
+
+            if (move_uploaded_file($tmpPath, $destination)) {
+                $imagemFinal = $filename;
+            }
+    }
+
+
+}
+
+
+    // Valida os campos
     if ($nome === '' || $email === '' || $senha === '' || $dataNascimento === '') {
         header('Location: perfil.php?erro=campos');
         exit;
     }
 
-    $usuario = new Usuario($id, $tipo, $nome, new DateTime($dataNascimento), $email, $senha);
+    $usuarioAtualizado = new Usuario($id, $tipo, $nome, new DateTime($dataNascimento), $email,$senha, $imagemFinal);
 
-    $usuarioRepositorio->atualizar($usuario);
+    $usuarioRepositorio->atualizar($usuarioAtualizado);
 
     header('Location: perfil.php?editadoregistro=true');
     exit;
-
 ?>

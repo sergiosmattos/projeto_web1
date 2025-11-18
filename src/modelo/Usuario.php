@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
+
 class Usuario
 {
     private ?int $id;
@@ -9,7 +11,9 @@ class Usuario
     private string $email;
     private string $senha;
 
-    public function __construct( ?int $id, ?string $tipo, string $nome, DateTime $dataNascimento, string $email, string $senha) {
+    private ?string $imagem;
+
+    public function __construct( ?int $id, ?string $tipo, string $nome, DateTime $dataNascimento, string $email, string $senha, ?string $imagem = null) {
 
         $this->id = $id;
         $this->tipo = $tipo ?? 'User';
@@ -17,6 +21,7 @@ class Usuario
         $this->dataNascimento = $dataNascimento;
         $this->email = $email;
         $this->senha = $senha;
+        $this->imagem = $imagem ?? 'icon_user_branco.svg';
         
     }
 
@@ -50,5 +55,27 @@ class Usuario
     {
         return $this->dataNascimento;
     }
+
+    public function getImagem(): ?string
+    {
+        return $this->imagem;
+    }
+
+    public function getImagemDiretorio(): string
+    {
+        
+        $nomeImagem = $this->imagem ?: 'icon_user_branco.svg';
+        
+        $caminhoUploads = DIR_PROJETOWEB . 'uploads/usuarios/' . $nomeImagem;
+        
+        // var_dump($caminhoUploads);
+        
+        if (file_exists($caminhoUploads)) {
+            return 'uploads/usuarios/' . $nomeImagem;
+        }
+        
+        return 'img/' . $nomeImagem;
+    }
+
     
 }
