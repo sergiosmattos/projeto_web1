@@ -11,6 +11,7 @@ CREATE TABLE tbUsuario (
     email_usuario VARCHAR(200) NOT NULL,
     senha_usuario VARCHAR(100) NOT NULL,
     tipo_usuario VARCHAR(15) NOT NULL DEFAULT 'User',
+    imagem_usuario varchar(255) NOT NULL DEFAULT 'icon_user_branco.svg',
     
     CONSTRAINT pk_tbUsuario PRIMARY KEY (id_usuario),
     constraint un_EmailUsuario_tbUsuario unique (email_usuario),
@@ -33,6 +34,7 @@ create table tbProduto (
 	id_produto int auto_increment,
     nome_produto varchar(50) not null,
     descricao_produto varchar(255) not null,
+    imagem_produto varchar(255) not null,
     preco_produto decimal not null,
     id_obra int not null,
     
@@ -46,7 +48,8 @@ create table tbCategoria (
 	id_categoria int auto_increment,
     nome_categoria varchar(50) not null,
     
-    constraint pk_tbCategoria primary key (id_categoria)
+    constraint pk_tbCategoria primary key (id_categoria),
+    constraint un_NomeCategoria_tbCategoria unique (nome_categoria)
 
 );
 
