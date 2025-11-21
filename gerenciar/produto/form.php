@@ -32,6 +32,8 @@ $valorNome = $produto ? $produto->getNome() : '';
 $valorDescricao = $produto ? $produto->getDescricao() : '';
 $valorPreco = $produto ? $produto->getPreco() : '';
 $valorIdObra = $produto ? $produto->getObra()->getId() : '';
+$valorImagem = $produto ? $produto->getImagem() : '';
+
 
 $obras = $obraRepositorio->listar();
 
@@ -101,6 +103,11 @@ $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
                                 </option>
                             <?php endforeach; ?>
                         </select>
+                    </div>
+
+                    <div>
+                        <label for="imagem">Imagem do produto</label>
+                        <input id="imagem" name="imagem" type="file" accept="image/*">
                     </div>
 
                 </div>

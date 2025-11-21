@@ -55,10 +55,11 @@ $produtos = $produtoRepositorio->listar();
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Imagem</th>
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Preço</th>
-                        <th>ID Obra</th>
+                        <th>Obra</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -67,10 +68,18 @@ $produtos = $produtoRepositorio->listar();
                     <?php foreach ($produtos as $produto): ?>
                         <tr>
                             <td><?= $produto->getId() ?></td>
+                            <td>
+                                <img 
+                                    src="/projeto_web1/<?= htmlspecialchars($produto->getImagemDiretorio()) ?>" 
+                                    alt="<?= htmlspecialchars($produto->getNome()) ?>"
+                                    class="imagemList"
+                                >
+
+                            </td>
                             <td><?= htmlspecialchars($produto->getNome()) ?></td>
                             <td><?= htmlspecialchars($produto->getDescricao()) ?></td>
                             <td>R$ <?= number_format($produto->getPreco(), 2, ',', '.') ?></td>
-                            <td><?= $produto->getObra()->getId() ?></td>
+                            <td><?= $produto->getObra()->getNome() ?></td>
 
                             <td>
                                 <div class="td-acoes">

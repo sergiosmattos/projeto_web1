@@ -1,5 +1,6 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
 require_once __DIR__.'/Obra.php';
 
 class Produto {
@@ -8,11 +9,13 @@ class Produto {
         private string $nome;
         private string $descricao;
         private float $preco;
+        private ?string $imagem;
         private Obra $obra;
 
-    function __construct(?int $id, string $nome, string $descricao, float $preco, Obra $obra) {
+    function __construct(?int $id, string $nome, string $descricao, float $preco, Obra $obra, ?string $imagem = null) {
 
         $this->id = $id;
+        $this->imagem = $imagem ?? 'semImagem.png';
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->preco = $preco;
@@ -38,6 +41,27 @@ class Produto {
 
     function getObra() : Obra {
         return $this->obra;
+    }
+
+    public function getImagem(): ?string
+    {
+        return $this->imagem;
+    }
+
+    public function getImagemDiretorio(): string
+    {
+        
+        $nomeImagem = $this->imagem ?: 'semImagem.png';
+        
+        $caminhoUploads = DIR_PROJETOWEB . 'uploads/produtos/' . $nomeImagem;
+        
+        // var_dump($caminhoUploads);
+        
+        if (file_exists($caminhoUploads)) {
+            return 'uploads/produtos/' . $nomeImagem;
+        }
+        
+        return 'img/' . $nomeImagem;
     }
 
 }
