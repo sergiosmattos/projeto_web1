@@ -20,8 +20,40 @@ if ($tipoUsuario !== 'Admin') {
 }
 
 $produtoRepositorio = new ProdutoRepositorio($pdo);
-$produtos = $produtoRepositorio->listar();
 
+// Configuração da paginação
+$itens_por_pagina = filter_input(INPUT_GET, 'itens_por_pagina', FILTER_VALIDATE_INT) ?: 10;
+
+// Pega o número da página atual
+$pagina_atual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1;
+
+// Calcula o offset
+$offset = ($pagina_atual - 1) * $itens_por_pagina;
+
+// Parâmetros de ordenação
+$ordem = filter_input(INPUT_GET, 'ordem') ?: null;
+$direcao = filter_input(INPUT_GET, 'direcao') ?: 'ASC';
+
+// Busca total de registros e calcula total de páginas
+$total_produtos = $produtoRepositorio->contarTotal();
+$total_paginas = ceil($total_produtos / $itens_por_pagina);
+
+// Busca produtos da página atual com ordenação
+$produtos = $produtoRepositorio->listarPaginado($itens_por_pagina, $offset, $ordem, $direcao);
+
+// Função para gerar URLs de ordenação
+function gerarUrlOrdenacao($campo, $paginaAtual, $ordemAtual, $direcaoAtual, $itensPorPagina) {
+    $novaDirecao = ($ordemAtual === $campo && $direcaoAtual === 'ASC') ? 'DESC' : 'ASC';
+    return "?pagina={$paginaAtual}&ordem={$campo}&direcao={$novaDirecao}&itens_por_pagina={$itensPorPagina}";
+}
+
+// Função para mostrar ícone de ordenação
+function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
+    if ($ordemAtual !== $campo) {
+        return '⇅';
+    }
+    return $direcaoAtual === 'ASC' ? '↑' : '↓';
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,14 +83,39 @@ $produtos = $produtoRepositorio->listar();
 
         <section class="container-tabela">
 
+            <div class="numero-paginacao">
+                <form method="GET" action="" class="form-itens-pagina">
+                    <label for="itens_por_pagina">Itens por página:</label>
+                    <select name="itens_por_pagina" id="itens_por_pagina" onchange="this.form.submit()">
+                        <option value="5" <?= $itens_por_pagina == 5 ? 'selected' : '' ?>>5</option>
+                        <option value="10" <?= $itens_por_pagina == 10 ? 'selected' : '' ?>>10</option>
+                        <option value="20" <?= $itens_por_pagina == 20 ? 'selected' : '' ?>>20</option>
+                        <option value="50" <?= $itens_por_pagina == 50 ? 'selected' : '' ?>>50</option>
+                    </select>
+
+                    <input type="hidden" name="ordem" value="<?= htmlspecialchars($ordem ?? '') ?>">
+                    <input type="hidden" name="direcao" value="<?= htmlspecialchars($direcao) ?>">
+                </form>
+            </div>
+
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Imagem</th>
-                        <th>Nome</th>
+                        <th>
+                            <a href="<?= gerarUrlOrdenacao('nome_produto', $pagina_atual, $ordem, $direcao, $itens_por_pagina) ?>" 
+                               style="color: inherit; text-decoration: none; cursor: pointer;">
+                                Nome <?= mostrarIconeOrdenacao('nome_produto', $ordem, $direcao) ?>
+                            </a>
+                        </th>
                         <th>Descrição</th>
-                        <th>Preço</th>
+                        <th>
+                            <a href="<?= gerarUrlOrdenacao('preco_produto', $pagina_atual, $ordem, $direcao, $itens_por_pagina) ?>" 
+                               style="color: inherit; text-decoration: none; cursor: pointer;">
+                                Preço <?= mostrarIconeOrdenacao('preco_produto', $ordem, $direcao) ?>
+                            </a>
+                        </th>
                         <th>Obra</th>
                         <th>Ações</th>
                     </tr>
@@ -100,6 +157,29 @@ $produtos = $produtoRepositorio->listar();
 
                 </tbody>
             </table>
+
+            <div class="container-paginacao">
+                <div class="paginacao">
+                    <?php if ($total_paginas > 1): ?>
+                        <?php if ($pagina_atual > 1): ?>
+                            <a href="?pagina=<?= $pagina_atual - 1 ?>&ordem=<?= htmlspecialchars($ordem ?? '') ?>&direcao=<?= htmlspecialchars($direcao) ?>&itens_por_pagina=<?= $itens_por_pagina ?>">« Anterior</a>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                            <?php if ($i == $pagina_atual): ?>
+                                <strong class="pagina-atual"><?= $i ?></strong>
+                            <?php else: ?>
+                                <a href="?pagina=<?= $i ?>&ordem=<?= htmlspecialchars($ordem ?? '') ?>&direcao=<?= htmlspecialchars($direcao) ?>&itens_por_pagina=<?= $itens_por_pagina ?>"><?= $i ?></a>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+
+                        <?php if ($pagina_atual < $total_paginas): ?>
+                            <a href="?pagina=<?= $pagina_atual + 1 ?>&ordem=<?= htmlspecialchars($ordem ?? '') ?>&direcao=<?= htmlspecialchars($direcao) ?>&itens_por_pagina=<?= $itens_por_pagina ?>">Próximo »</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+
+            </div>
 
         </section>
 

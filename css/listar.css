@@ -7,6 +7,8 @@
     margin-right: 40px;
     border-radius: 10px;
     padding: 40px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
 
     min-height: calc(100vh - 140px);
     width: calc(100% - 280px);
@@ -140,3 +142,32 @@ th, td{
     height: auto;
     object-fit: cover;
 }
+
+
+.numero-paginacao {
+    margin-left: 45px;
+    margin-top: 20px;
+    font-size: 17px;
+    
+}
+
+.container-paginacao {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.paginacao a {
+    padding: 6px 12px;
+    background-color: #b6b6b6;
+    border-radius: 6px;
+    color: #000;
+    text-decoration: none;
+    margin: 0 4px;
+    transition: background-color 0.2s;
+}
+
+.paginacao a:hover {
+    background-color: #6a5acd;
+}
+

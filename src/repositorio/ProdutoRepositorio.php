@@ -137,4 +137,34 @@ class ProdutoRepositorio {
 
         return $resultadoExecult;
     }
+
+    public function contarTotal(): int {
+        $sql = "SELECT COUNT(*) as total FROM tbProduto";
+        $stmt = $this->pdo->query($sql);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $resultado['total'];
+    }
+
+    public function listarPaginado(int $limite, int $offset, ?string $ordem = null, ?string $direcao = 'ASC'): array {
+        $colunasPermitidas = ['nome_produto', 'preco_produto'];
+        
+        $sql = 'SELECT tbProduto.* FROM tbProduto';
+        
+        if ($ordem !== null && in_array(strtolower($ordem), array_map('strtolower', $colunasPermitidas))) {
+            $direcao = strtoupper($direcao) === 'DESC' ? 'DESC' : 'ASC';
+            $sql .= " ORDER BY {$ordem} {$direcao}";
+        }
+        
+        $sql .= " LIMIT ? OFFSET ?";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $limite, PDO::PARAM_INT);
+        $stmt->bindValue(2, $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $resultadoConsulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $arrayProdutos = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
+        
+        return $arrayProdutos;
+    }
 }
