@@ -1,7 +1,7 @@
 <?php
 
-require __DIR__.'/../conexaoBD.php';
-require __DIR__.'/../modelo/Usuario.php';
+require_once __DIR__.'/../conexaoBD.php';
+require_once __DIR__.'/../modelo/Usuario.php';
 class UsuarioRepositorio {
 
     private PDO $pdo;
@@ -77,12 +77,9 @@ class UsuarioRepositorio {
             $imagem = 'icon_user_branco.svg';
         }
 
-        $stmt->bindValue(1, $usuario->getTipo());
-        $stmt->bindValue(2, $usuario->getNome());
-        $stmt->bindValue(3, $usuario->getEmail());
-        $stmt->bindValue(4, $usuario->getSenha());
-        $stmt->bindValue(5, $usuario->getDataNascimento()->format('Y-m-d'));
+        $this->bindStmtValues($stmt, $usuario);
         $stmt->bindValue(6, $imagem);
+
         $stmt->execute();
 
     }
@@ -101,11 +98,7 @@ class UsuarioRepositorio {
 
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->bindValue(1, $usuario->getTipo());
-        $stmt->bindValue(2, $usuario->getNome());
-        $stmt->bindValue(3, $usuario->getEmail());
-        $stmt->bindValue(4, $usuario->getSenha());
-        $stmt->bindValue(5, $usuario->getDataNascimento()->format('Y-m-d'));
+        $this->bindStmtValues($stmt, $usuario);
 
         $imagem = $usuario->getImagem();
         if ( $imagem === null || $imagem === '' ) {
@@ -166,7 +159,7 @@ class UsuarioRepositorio {
         return $resultadoExecult;
     }
 
-    private function setStmtValues(PDOStatement $stmt, Usuario $usuario) {
+    private function bindStmtValues(PDOStatement $stmt, Usuario $usuario) {
 
         $stmt->bindValue(1, $usuario->getTipo());
         $stmt->bindValue(2, $usuario->getNome());

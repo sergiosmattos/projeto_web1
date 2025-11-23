@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `tbcategoria`;
 CREATE TABLE `tbcategoria` (
   `id_categoria` int NOT NULL AUTO_INCREMENT,
   `nome_categoria` varchar(50) NOT NULL,
-  `imagem_categoria` varchar(255) NOT NULL DEFAULT 'semImagem.png',
+  `imagem_categoria` varchar(255) NOT NULL DEFAULT 'sem_imagem.png',
   PRIMARY KEY (`id_categoria`),
   UNIQUE KEY `un_NomeCategoria_tbCategoria` (`nome_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -53,7 +53,7 @@ CREATE TABLE `tbcompra` (
   `id_compra` int NOT NULL AUTO_INCREMENT,
   `data_hora_compra` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `unidades_compra` int NOT NULL,
-  `valor_total_compra` decimal(10,0) NOT NULL,
+  `valor_total_compra` double NOT NULL,
   `id_usuario` int NOT NULL,
   `id_produto` int NOT NULL,
   PRIMARY KEY (`id_compra`),
@@ -83,8 +83,8 @@ DROP TABLE IF EXISTS `tbleilao`;
 CREATE TABLE `tbleilao` (
   `id_leilao` int NOT NULL AUTO_INCREMENT,
   `data_horario_inicio_leilao` date NOT NULL,
-  `lance_inicial_leilao` float NOT NULL,
-  `lance_atual_leilao` float NOT NULL,
+  `lance_inicial_leilao` double NOT NULL,
+  `lance_atual_leilao` double NOT NULL,
   `id_produto` int NOT NULL,
   PRIMARY KEY (`id_leilao`),
   KEY `fk_tbLelao_tbProduto` (`id_produto`),
@@ -112,7 +112,6 @@ CREATE TABLE `tbobra` (
   `id_obra` int NOT NULL AUTO_INCREMENT,
   `nome_obra` varchar(80) DEFAULT NULL,
   `descricao_obra` varchar(255) DEFAULT NULL,
-  `imagem_obra` varchar(255) NOT NULL DEFAULT 'semImagem.png',
   PRIMARY KEY (`id_obra`),
   UNIQUE KEY `un_NomeObra_tbUsuario` (`nome_obra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -164,9 +163,9 @@ CREATE TABLE `tbproduto` (
   `id_produto` int NOT NULL AUTO_INCREMENT,
   `nome_produto` varchar(50) NOT NULL,
   `descricao_produto` varchar(255) NOT NULL,
-  `preco_produto` decimal(10,0) NOT NULL,
+  `preco_produto` double NOT NULL,
   `quantidade_produto` int NOT NULL,
-  `imagem_produto` varchar(255) NOT NULL DEFAULT 'semImagem.png',
+  `imagem_produto` varchar(255) NOT NULL DEFAULT 'sem_imagem.png',
   `id_obra` int NOT NULL,
   PRIMARY KEY (`id_produto`),
   KEY `fk_tbProduto_tbObra` (`id_obra`),
@@ -251,4 +250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-23 11:57:36
+-- Dump completed on 2025-11-23 12:40:23

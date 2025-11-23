@@ -1,20 +1,24 @@
 <?php
 
-require __DIR__.'/../conexaoBD.php';
-require __DIR__.'/../modelo/Leilao.php';
-require __DIR__.'/../modelo/Produto.php';
+require_once __DIR__.'/../conexaoBD.php';
+require_once __DIR__.'/../modelo/Leilao.php';
+require_once __DIR__.'/../modelo/Produto.php';
 
 class LeilaoRepositorio {
 
     private PDO $pdo;
+    private ProdutoRepositorio $produtoRepo;
 
-    public function __construct($pdo) {
+    public function __construct($pdo, ProdutoRepositorio $produtoRepo) {
+        
         $this->pdo = $pdo;
+        $this->produtoRepo = $produtoRepo;
+
     }
 
     public function makeObject(array $atributos) : Leilao {
 
-        $id = $atributos['id'];
+        $id = $atributos['id_leilao'];
         
         $obra = new Leilao(
 
@@ -22,7 +26,7 @@ class LeilaoRepositorio {
             $atributos['dataHorarioInicio'],
             $atributos['lanceInicial'],
             $atributos['lanceAtual'],
-            $atributos['produtoLeiloado'],
+            $this->produtoRepo->findById($atributos['produtoLeiloado']),
 
         );
 
@@ -51,11 +55,8 @@ class LeilaoRepositorio {
         values (?, ?, ?, ?)';
 
         $stmt = $this->pdo->prepare($sql);
-
-        $stmt->bindValue(1, $leilao->getDataHorarioInicio());
-        $stmt->bindValue(1, $leilao->getLanceInicial());
-        $stmt->bindValue(3, $leilao->getLanceAtual());
-        $stmt->bindValue(4, $leilao->getProdutoLeiloado()->getId());
+        
+        $this->bindStmtValues($stmt, $leilao);
 
         $stmt->execute();
 
@@ -71,11 +72,8 @@ class LeilaoRepositorio {
         where id_leilao = ?';
 
         $stmt = $this->pdo->prepare($sql);
-
-        $stmt->bindValue(1, $leilao->getDataHorarioInicio());
-        $stmt->bindValue(1, $leilao->getLanceInicial());
-        $stmt->bindValue(3, $leilao->getLanceAtual());
-        $stmt->bindValue(4, $leilao->getProdutoLeiloado()->getId());
+        
+        $this->bindStmtValues($stmt, $leilao);
         $stmt->bindValue(5, $leilao->getId());
 
         $stmt->execute();
@@ -103,6 +101,15 @@ class LeilaoRepositorio {
         $stmt->bindValue(1, $id);
         
         return $stmt->execute();
+
+    }
+
+    private function bindStmtValues(PDOStatement $stmt, Leilao $leilao) : void {
+
+        $stmt->bindValue(1, $leilao->getDataHorarioInicio());
+        $stmt->bindValue(1, $leilao->getLanceInicial());
+        $stmt->bindValue(3, $leilao->getLanceAtual());
+        $stmt->bindValue(4, $leilao->getProdutoLeiloado()->getId());
 
     }
 

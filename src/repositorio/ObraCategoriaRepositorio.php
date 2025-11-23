@@ -1,8 +1,8 @@
 <?php
 
-require __DIR__.'/../modelo/ObraCategoria.php';
-require __DIR__.'/ObraRepositorio.php';
-require __DIR__.'/CategoriaRepositorio.php';
+require_once __DIR__.'/../modelo/ObraCategoria.php';
+require_once __DIR__.'/ObraRepositorio.php';
+require_once __DIR__.'/CategoriaRepositorio.php';
 
 class ObraCategoriaRepositorio {
 
@@ -20,7 +20,7 @@ class ObraCategoriaRepositorio {
         
         $obraCategoria = new ObraCategoria(
 
-            $this->obraRepo->findById($atributos['id_obra']) ,
+            $this->obraRepo->findById($atributos['id_obra']),
             $this->categoriaRepo->findById($atributos['id_categoria'])
 
         );

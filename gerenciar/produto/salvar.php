@@ -5,8 +5,9 @@ require_once DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
 
 session_start();
 
-$produtoRepositorio = new ProdutoRepositorio($pdo);
-$obraRepositorio = new ObraRepositorio($pdo);
+$obraRepo = new ObraRepositorio($pdo);
+
+$produtoRepo = new ProdutoRepositorio($pdo, $obraRepo);
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header('Location: listar.php');
@@ -18,16 +19,16 @@ $id = $id !== '' ? (int)$id : null;
 
 $nome = trim($_POST['nome'] ?? '');
 $descricao = trim($_POST['descricao'] ?? '');
+$quantidate = trim($_POST['quantidade'] ?? '');
 $preco = trim($_POST['preco'] ?? '');
-$idObra = trim($_POST['id_obra'] ?? '');
+$obra = trim($_POST['id_obra'] ?? '');
 
+//Arrumar objeto e obra
 
-if ($nome === '' || $descricao === '' || $preco === '' || $idObra === '') {
+if ($nome === '' || $descricao === '' || $preco === '' || $obra === '') {
     header("Location: form.php?erro=campos");
     exit;
 }
-
-$obra = $obraRepositorio->findById((int)$idObra);
 
 
 $uploadsDir = DIR_PROJETOWEB . 'uploads/produtos/';
@@ -42,7 +43,7 @@ $imagemFinal = 'semImagem.png';
 
 
 if ($id) {
-    $produtoExistente = $produtoRepositorio->findById($id);
+    $produtoExistente = $produtoRepo->findById($id);
     
     if (!$produtoExistente) {
         header('Location: listar.php?erro=inexistente');
@@ -100,11 +101,11 @@ $produto = new Produto(
 );
 
 if ($id) {
-    $produtoRepositorio->atualizar($produto);
+    $produtoRepo->atualizar($produto);
     header('Location: listar.php?editadoregistro=true');
     exit;
 } else {
-    $produtoRepositorio->cadastrar($produto);
+    $produtoRepo->cadastrar($produto);
     header('Location: listar.php?novoregistro=true');
     exit;
 }

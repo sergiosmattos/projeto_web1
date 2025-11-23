@@ -1,31 +1,31 @@
 <?php
 
-require __DIR__.'/../conexaoBD.php';
-require __DIR__.'/../modelo/Produto.php';
-require_once __DIR__.'/../modelo/Obra.php';
+require_once __DIR__.'/../conexaoBD.php';
+require_once __DIR__.'/../modelo/Produto.php';
 require_once __DIR__.'/ObraRepositorio.php';
 
 class ProdutoRepositorio {
 
     private PDO $pdo;
 
-    public function __construct($pdo) {
+    private ObraRepositorio $obraRepo;
+
+    public function __construct($pdo, ObraRepositorio $obraRepo) {
         $this->pdo = $pdo;
+        $this->obraRepo = $obraRepo;
     }
 
     public function makeObject(array $atributos) : Produto {
 
         $id = $atributos['id_produto'] ?? null;
         
-        $obraRepositorio = new ObraRepositorio($this->pdo);
-        $obra = $obraRepositorio->findById($atributos['id_obra']);
-        
         $produto = new Produto(
             isset($id) ? (int) $id : null,
-            $atributos['nome_produto'] ?? '',
-            $atributos['descricao_produto'] ?? '',
-            (float) ($atributos['preco_produto'] ?? 0),
-            $obra,
+            $atributos['nome_produto'],
+            $atributos['descricao_produto'],
+            $atributos['preco_produto'],
+            $atributos['preco_produto'],
+            $this->obraRepo->findById($atributos['id_obra']),
             $atributos['imagem_produto'] ?? null
         );
 
@@ -34,7 +34,7 @@ class ProdutoRepositorio {
 
     public function findById(int $id): ?Produto {
 
-        $sql = 'SELECT * FROM tbProduto WHERE id_produto = ? LIMIT 1';
+        $sql = 'select * from tbProduto where id_produto = ? limit 1';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id, PDO::PARAM_INT);
@@ -48,8 +48,8 @@ class ProdutoRepositorio {
 
     public function cadastrar(Produto $produto) : void {
         
-        $sql = 'INSERT INTO tbProduto (nome_produto, descricao_produto, preco_produto, id_obra, imagem_produto) ' .
-               'VALUES (?, ?, ?, ?, ?)';
+        $sql = 'insert into tbProduto (nome_produto, descricao_produto, preco_produto, id_obra, imagem_produto) 
+        values (?, ?, ?, ?, ?)';
 
         $stmt = $this->pdo->prepare($sql);
         
@@ -58,10 +58,7 @@ class ProdutoRepositorio {
             $imagem = 'semImagem.png';
         }
 
-        $stmt->bindValue(1, $produto->getNome());
-        $stmt->bindValue(2, $produto->getDescricao());
-        $stmt->bindValue(3, $produto->getPreco());
-        $stmt->bindValue(4, $produto->getObra()->getId());
+        $this->bindStmtValues($stmt, $produto);
         $stmt->bindValue(5, $imagem);
         
         $stmt->execute();
@@ -69,20 +66,17 @@ class ProdutoRepositorio {
 
     public function atualizar(Produto $produto) : void {
         
-        $sql = 'UPDATE tbProduto SET
-                nome_produto = ?,
-                descricao_produto = ?,
-                preco_produto = ?,
-                id_obra = ?,
-                imagem_produto = ?
-                WHERE id_produto = ?';
+        $sql = 'update tbProduto set
+        nome_produto = ?,
+        descricao_produto = ?,
+        preco_produto = ?,
+        id_obra = ?,
+        imagem_produto = ?
+        where id_produto = ?';
 
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->bindValue(1, $produto->getNome());
-        $stmt->bindValue(2, $produto->getDescricao());
-        $stmt->bindValue(3, $produto->getPreco());
-        $stmt->bindValue(4, $produto->getObra()->getId());
+        $this->bindStmtValues($stmt, $produto);
         
         $imagem = $produto->getImagem();
         if ($imagem === null || $imagem === '') {
@@ -125,7 +119,7 @@ class ProdutoRepositorio {
 
         if ($resultadoExecult && $stmtDel->rowCount() > 0 && !empty($imagem)) {
             
-            if ($imagem !== 'semImagem.png') {
+            if ($imagem !== 'sem_imagem.png') {
                 
                 $caminho = DIR_PROJETOWEB . 'uploads/produtos/' . $imagem;
 
@@ -136,6 +130,15 @@ class ProdutoRepositorio {
         }
 
         return $resultadoExecult;
+    }
+
+    private function bindStmtValues(PDOStatement $stmt, Produto $produto) : void {
+
+        $stmt->bindValue(1, $produto->getNome());
+        $stmt->bindValue(2, $produto->getDescricao());
+        $stmt->bindValue(3, $produto->getPreco());
+        $stmt->bindValue(4, $produto->getObra()->getId());
+        
     }
 
     public function contarTotal(): int {

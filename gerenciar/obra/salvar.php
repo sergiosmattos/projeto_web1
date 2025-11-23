@@ -6,8 +6,14 @@
     
     session_start();
 
-    $obraRepositorio = new ObraRepositorio($pdo);
-    $categoriaRepositorio = new CategoriaRepositorio($pdo);
+    $obraRepo = new ObraRepositorio($pdo);
+    $categoriaRepo = new CategoriaRepositorio($pdo);
+
+    $obraCategoriaRepo = new ObraCategoriaRepositorio (
+        $pdo, 
+        $obraRepo, 
+        $categoriaRepo
+    );
 
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
         header('Location: listar.php');
@@ -32,14 +38,14 @@
 
     if ($id) {
 
-        $objetoExistente = $obraRepositorio->findById($id);
+        $objetoExistente = $obraRepo->findById($id);
 
         if (!$objetoExistente) {
             header('Location: listar.php?erro=inexistente');
             exit;
         }
         
-        $obraRepositorio->atualizar($obra);
+        $obraRepo->atualizar($obra);
 
         header('Location: listar.php?editadoregistro=true');
         exit;
@@ -47,7 +53,7 @@
     }
     else {
             
-        $obraRepositorio->cadastrar($obra);
+        $obraRepo->cadastrar($obra);
         header('Location: listar.php?novoregistro=true');
         exit;
 

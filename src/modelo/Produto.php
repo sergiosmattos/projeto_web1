@@ -9,46 +9,57 @@ class Produto {
         private string $nome;
         private string $descricao;
         private float $preco;
+        private int $quantidade;
         private ?string $imagem;
         private Obra $obra;
 
-    function __construct(?int $id, string $nome, string $descricao, float $preco, Obra $obra, ?string $imagem = null) {
+    function __construct(?int $id, string $nome, string $descricao, int $quantidade, float $preco, Obra $obra, ?string $imagem = null) {
 
         $this->id = $id;
-        $this->imagem = $imagem ?? 'semImagem.png';
+        $this->imagem = $imagem ?? 'sem_imagem.png';
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->preco = $preco;
+        $this->quantidade = $quantidade;
         $this->obra = $obra;
 
     }
 
-    function getId() : int {
+    function getId() : int 
+    {
         return $this->id;
     }
 
-    function getNome() : string {
+    function getNome() : string 
+    {
         return $this->nome;
     }
 
-    function getDescricao() : string {
+    function getDescricao() : string 
+    {
         return $this->descricao;
     }
 
-    function getPreco() : float {
+    function getPreco() : float 
+    {
         return $this->preco;
+    }
+
+    function getQuantidade() : int 
+    {
+        return $this->quantidade;
     }
 
     function getObra() : Obra {
         return $this->obra;
     }
 
-    public function getImagem(): ?string
+    public function getImagem(): ?string 
     {
         return $this->imagem;
     }
 
-    public function getImagemDiretorio(): string
+    public function getImagemDiretorio(): string 
     {
         
         $nomeImagem = $this->imagem ?: 'semImagem.png';

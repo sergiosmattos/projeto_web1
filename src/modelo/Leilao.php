@@ -10,7 +10,8 @@ class Leilao {
     private float $lanceAtual;
     private Produto $produtoLeiloado;
     
-    public function __construct(?int $id, $dataHorarioInicio, $lanceInicial, $lanceAtual, $produtoLeiloado) {
+    public function __construct(?int $id, $dataHorarioInicio, $lanceInicial, $lanceAtual, $produtoLeiloado) 
+    {
         
         $this->id = $id;
         $this->dataHorarioInicio = $dataHorarioInicio;
@@ -20,23 +21,28 @@ class Leilao {
 
     }
 
-    function getId() : ?int {
+    function getId() : ?int 
+    {
         return $this->id;
     }
 
-    function getDataHorarioInicio() : DateTime {
+    function getDataHorarioInicio() : DateTime 
+    {
         return $this->dataHorarioInicio;
     }
 
-    function getLanceInicial() : float {
+    function getLanceInicial() : float 
+    {
         return $this->lanceInicial;
     }
 
-    function getLanceAtual() : float {
+    function getLanceAtual() : float 
+    {
         return $this->lanceAtual;
     }
 
-    function getProdutoLeiloado() : Produto {
+    function getProdutoLeiloado() : Produto 
+    {
         return $this->produtoLeiloado;
     }
 

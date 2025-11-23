@@ -1,7 +1,7 @@
 <?php
 
-require __DIR__.'/../conexaoBD.php';
-require __DIR__.'/../modelo/Categoria.php';
+require_once __DIR__.'/../conexaoBD.php';
+require_once __DIR__.'/../modelo/Categoria.php';
 
 class CategoriaRepositorio {
 
@@ -18,7 +18,7 @@ class CategoriaRepositorio {
         $categoria = new Categoria(
 
             isset($id) ? (int) $id : null,
-            $atributos['nome_categoria'] ?? '',
+            $atributos['nome_categoria'],
             $atributos['imagem_categoria'] ?? null
 
         );

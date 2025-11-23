@@ -10,10 +10,11 @@ class Usuario
     private DateTime $dataNascimento;
     private string $email;
     private string $senha;
+    private ?float $saldo;
 
     private ?string $imagem;
 
-    public function __construct( ?int $id, ?string $tipo, string $nome, DateTime $dataNascimento, string $email, string $senha, ?string $imagem = null) {
+    public function __construct( ?int $id, ?string $tipo, string $nome, DateTime $dataNascimento, string $email, string $senha, ?float $saldo, ?string $imagem = null) {
 
         $this->id = $id;
         $this->tipo = $tipo ?? 'User';
@@ -21,6 +22,7 @@ class Usuario
         $this->dataNascimento = $dataNascimento;
         $this->email = $email;
         $this->senha = $senha;
+        $this->saldo = $saldo;
         $this->imagem = $imagem ?? 'icon_user_branco.svg';
         
     }
@@ -54,6 +56,11 @@ class Usuario
     public function getDataNascimento(): DateTime
     {
         return $this->dataNascimento;
+    }
+
+    public function getSaldo(): float
+    {
+        return $this->saldo;
     }
 
     public function getImagem(): ?string

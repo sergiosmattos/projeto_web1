@@ -1,7 +1,7 @@
 <?php
 
-require __DIR__.'/Obra.php';
-require __DIR__.'/Categoria.php';
+require_once __DIR__.'/Obra.php';
+require_once __DIR__.'/Categoria.php';
 
 class ObraCategoria{
     
@@ -15,13 +15,15 @@ class ObraCategoria{
 
     }
 
-    function getObra() : Obra {
+    function getObra() : Obra 
+    {
         
         return $this->obra;
 
     }
 
-    function getCategoria() : Categoria {
+    function getCategoria() : Categoria 
+    {
         
         return $this->categoria;
 
