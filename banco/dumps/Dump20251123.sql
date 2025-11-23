@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `dbgeekartifacts` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `dbgeekartifacts`;
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: localhost    Database: dbgeekartifacts
@@ -59,8 +57,8 @@ CREATE TABLE `tbcompra` (
   PRIMARY KEY (`id_compra`),
   KEY `fk_tbCompra_tbUsuario` (`id_usuario`),
   KEY `fk_tbCompra_tbProduto` (`id_produto`),
-  CONSTRAINT `fk_tbCompra_tbProduto` FOREIGN KEY (`id_produto`) REFERENCES `tbproduto` (`id_produto`),
-  CONSTRAINT `fk_tbCompra_tbUsuario` FOREIGN KEY (`id_usuario`) REFERENCES `tbusuario` (`id_usuario`)
+  CONSTRAINT `fk_tbCompra_tbProduto` FOREIGN KEY (`id_produto`) REFERENCES `tbproduto` (`id_produto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_tbCompra_tbUsuario` FOREIGN KEY (`id_usuario`) REFERENCES `tbusuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -138,8 +136,8 @@ CREATE TABLE `tbobracategoria` (
   `id_categoria` int NOT NULL,
   PRIMARY KEY (`id_obra`,`id_categoria`),
   KEY `fk_tbObraCategoria_tbCategoria` (`id_categoria`),
-  CONSTRAINT `fk_tbObraCategoria_tbCategoria` FOREIGN KEY (`id_categoria`) REFERENCES `tbcategoria` (`id_categoria`),
-  CONSTRAINT `fk_tbObraCategoria_tbObra` FOREIGN KEY (`id_obra`) REFERENCES `tbobra` (`id_obra`)
+  CONSTRAINT `fk_tbObraCategoria_tbCategoria` FOREIGN KEY (`id_categoria`) REFERENCES `tbcategoria` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_tbObraCategoria_tbObra` FOREIGN KEY (`id_obra`) REFERENCES `tbobra` (`id_obra`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -169,7 +167,7 @@ CREATE TABLE `tbproduto` (
   `id_obra` int NOT NULL,
   PRIMARY KEY (`id_produto`),
   KEY `fk_tbProduto_tbObra` (`id_obra`),
-  CONSTRAINT `fk_tbProduto_tbObra` FOREIGN KEY (`id_obra`) REFERENCES `tbobra` (`id_obra`)
+  CONSTRAINT `fk_tbProduto_tbObra` FOREIGN KEY (`id_obra`) REFERENCES `tbobra` (`id_obra`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -250,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-23 12:40:23
+-- Dump completed on 2025-11-23 19:27:44
