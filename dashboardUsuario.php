@@ -2,6 +2,7 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/ProdutoRepositorio.php';
 
 
 
@@ -18,6 +19,9 @@
 
     $categoriaRepositorio = new CategoriaRepositorio($pdo);
     $categorias = $categoriaRepositorio->listar();
+
+    $produtoRepositorio = new ProdutoRepositorio($pdo);
+    $produtosDestaque = $produtoRepositorio->listarDestaque(4);
 
 ?>
 
@@ -41,17 +45,57 @@
 
         <div class="categorias-container">
 
-            <h2> - Top Categorias</h2>
+            <h2>- Top Categorias</h2>
             
             <div class="categorias-itens">
                 
                 <?php foreach ($categorias as $categoria): ?>
-                    <p><?= htmlspecialchars($categoria->getNome()) ?></p>
+                    <a href="#" class="categoria-item">
+                        <img 
+                            src="/projeto_web1/<?= htmlspecialchars($categoria->getImagemDiretorio()) ?>" 
+                            alt="<?= htmlspecialchars($categoria->getNome()) ?>"
+                            class="imagemList">
+                        <p><?= htmlspecialchars($categoria->getNome()) ?></p>
+                    </a>
                 <?php endforeach; ?>
 
             </div>
 
         </div>
+
+        <div class="produtos-container">
+
+            <h2>- Top produtos mais cobiçados</h2>
+
+            <div class="produtos-itens">
+
+                <?php if (empty($produtosDestaque)): ?>
+                    <p>Nenhum produto disponível no momento.</p>
+                <?php else: ?>
+                    <?php foreach ($produtosDestaque as $produto): ?>
+                        <div class="produto-card">
+                            <a href="#">
+                                <img 
+                                src="/projeto_web1/<?= htmlspecialchars($produto->getImagemDiretorio()) ?>" 
+                                alt="<?= htmlspecialchars($produto->getNome()) ?>">
+                                <h3><?= htmlspecialchars($produto->getNome()) ?></h3>
+                                <p class="descricao"><?= htmlspecialchars($produto->getDescricao()) ?></p>
+                                <p class="preco">R$ <?= number_format($produto->getPreco(), 2, ',', '.') ?></p>
+                                
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+            </div>
+
+            <a href="#" class="botao-mais">VER MAIS</a>
+
+        </div>
+
+
+</div>
+
     </main>
 
 </body>
