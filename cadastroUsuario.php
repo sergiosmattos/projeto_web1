@@ -34,7 +34,7 @@ if ( $nome === '' || $email === '' || $senha === '' || $dataNascimento === '' ) 
 
 //>>
 
-$usuario = new Usuario(null, null, $nome, $dataNascimento, $email, $senha);
+$usuario = new Usuario(null, null, $nome, $dataNascimento, $email, $senha, null);
 
 $usuarioRepositorio->cadastrar($usuario);
 

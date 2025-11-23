@@ -19,7 +19,9 @@ if ($tipoUsuario !== 'Admin') {
     exit;
 }
 
-$produtoRepositorio = new ProdutoRepositorio($pdo);
+$obraRepo = new ObraRepositorio($pdo);
+
+$produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepo);
 
 // Configuração da paginação
 $itens_por_pagina = filter_input(INPUT_GET, 'itens_por_pagina', FILTER_VALIDATE_INT) ?: 10;

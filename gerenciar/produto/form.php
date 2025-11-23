@@ -15,8 +15,8 @@ if (!isset($emailUsuario)) {
 
 $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
-$produtoRepositorio = new ProdutoRepositorio($pdo);
-$obraRepositorio = new ObraRepositorio($pdo);
+$obraRepo = new ObraRepositorio($pdo);
+$produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepo);
 
 $erro = $_GET['erro'] ?? '';
 $id = $_POST['id'] ?? null;
@@ -35,7 +35,7 @@ $valorIdObra = $produto ? $produto->getObra()->getId() : '';
 $valorImagem = $produto ? $produto->getImagem() : '';
 
 
-$obras = $obraRepositorio->listar();
+$obras = $obraRepo->listar();
 
 $textoTitulo = $modoEdicao ? 'Editar Produto' : 'Cadastrar Produto';
 $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';

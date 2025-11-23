@@ -2,6 +2,8 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/ObraCategoriaRepositorio.php';
     
     session_start();
 
@@ -19,8 +21,15 @@
         exit;
     }
 
-    $obraRepositorio = new ObraRepositorio($pdo);
-    $obras = $obraRepositorio->listar();
+    $categoriaRepo = new CategoriaRepositorio($pdo);
+    $obraRepo = new ObraRepositorio($pdo);
+    $obraCategoriaRepo = new ObraCategoriaRepositorio(
+        $pdo,
+        $obraRepo,
+        $categoriaRepo
+    );
+
+    $obras = $obraRepo->listar();
 
 ?>
 
@@ -65,6 +74,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Descrição</th>
+                        <th>Categorias</th>
                         <th>Ações</th>
                     </tr>
 
@@ -76,6 +86,24 @@
                             <td><?= htmlspecialchars($obra->getId()) ?></td>
                             <td><?= htmlspecialchars($obra->getNome()) ?></td>
                             <td><?= htmlspecialchars($obra->getDescricao()) ?></td>
+                            <td>
+                                <ul>
+
+                                    <?php
+                                        $relacionamentos = $obraCategoriaRepo->listByObra($obra);
+                                        if(isset($relacionamentos)):
+                                    ?>
+
+                                    <?php foreach($relacionamentos as $relacionamento): ?>
+                                        <li><?=htmlspecialchars($relacionamento->getCategoria()->getNome())?></li>
+                                    <?php endforeach; ?>
+
+                                    <?php else: ?>
+                                        Nenhuma Categoria
+                                    <?php endif;?>
+
+                                </ul>
+                            </td>
                             <td>
                                 <div class="td-acoes">
                                     <form action="excluir.php" method="post">

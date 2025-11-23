@@ -3,6 +3,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
     require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/ObraCategoriaRepositorio.php';
 
     session_start();
 
@@ -15,17 +16,24 @@
 
     $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
-    $obraRepositorio = new ObraRepositorio($pdo);
-    $categoriaRepositorio = new CategoriaRepositorio($pdo);
+    $obraRepo = new ObraRepositorio($pdo);
+    $categoriaRepo = new CategoriaRepositorio($pdo);
 
-    $categorias = $categoriaRepositorio->listar();
+    $obraCategoriaRepo = new ObraCategoriaRepositorio($pdo,
+        $obraRepo,
+        $categoriaRepo
+    );
 
-    $erro = $_GET['erro'] ?? '';
+    $categorias = $categoriaRepo->listar();
+
+    $erro = $_GET['erro'] ?? [];
     $id = $_POST['id'] ?? null;
+
+    var_dump($erro);
 
     $modoEdicao = $id ? true : false;
 
-    $obra = $modoEdicao ? $obraRepositorio->findById($id) : null;
+    $obra = $modoEdicao ? $obraRepo->findById($id) : null;
 
     $valorNome = $modoEdicao ? $obra->getNome() : '';
     $valorDescricao = $modoEdicao ? $obra->getDescricao() : '';
@@ -61,8 +69,11 @@
 
             <form action="salvar.php" method="POST" class="form-cadastro" autocomplete="off">
 
-                <?php if ($erro === 'campos'): ?>
-                    <p class="mensagem-erro">Preencha todos os campos!</p>
+                <?php if (in_array('campos',$erro)): ?>
+                    <p class="mensagem-erro">Preencha todos os campos.</p>
+                <?php endif; ?>
+                <?php if (in_array('selecao',$erro)): ?>
+                    <p class="mensagem-erro">Selecione uma categoria.</p>
                 <?php endif; ?>
 
                 <input name="id" type="hidden" value=<?= $id ?>>
@@ -86,24 +97,24 @@
                             <?php foreach($categorias as $categoria):?>
 
                             <label>
+                                
                                 <?= $categoria->getNome()?>
                                 <input type="checkbox" value="<?= $categoria->getId()?>" name="categorias[]" 
                                 
-                                <?php
-                                
-                                    if( $modoEdicao ) {
-
-                                        $idObra = $id;
-                                        $idCategoria = $categoria->getId();
-                                        
-                                        if($oCRepo->findById($idObra, $idCategoria)){
-
-                                            echo "checked";
-
-                                        }
+                                    <?php
                                     
-                                    }
-                                ?>
+                                        if( $modoEdicao ) {
+
+                                            $idObra = $id;
+                                            $idCategoria = $categoria->getId();
+                                            $relacionamento = $obraCategoriaRepo->findById($id, $idCategoria);
+                                            
+                                            if(isset( $relacionamento )){
+                                                echo "checked";
+                                            }
+                                        
+                                        }
+                                    ?>
                                 >
                             </label>
 

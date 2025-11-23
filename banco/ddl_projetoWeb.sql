@@ -41,7 +41,7 @@ create table tbProduto (
     id_obra int not null,
     
     constraint pk_tbProduto primary key (id_produto),
-    constraint fk_tbProduto_tbObra foreign key (id_obra) references tbObra (id_obra)
+    constraint fk_tbProduto_tbObra foreign key (id_obra) references tbObra (id_obra) on delete cascade on update cascade
 
 );
 
@@ -62,8 +62,8 @@ create table tbObraCategoria (
 	id_categoria int not null,
 
 	constraint pk_tbObraCategoria primary key (id_obra, id_categoria),
-    constraint fk_tbObraCategoria_tbObra foreign key (id_obra) references tbObra (id_obra),
-    constraint fk_tbObraCategoria_tbCategoria foreign key (id_categoria) references tbCategoria (id_categoria)
+    constraint fk_tbObraCategoria_tbObra foreign key (id_obra) references tbObra (id_obra) on update cascade on delete cascade,
+    constraint fk_tbObraCategoria_tbCategoria foreign key (id_categoria) references tbCategoria (id_categoria) on delete cascade on update cascade
 
 );
 
@@ -77,8 +77,8 @@ create table tbCompra(
     id_produto int not null,
     
     constraint pk_tbCompra primary key (id_compra),
-    constraint fk_tbCompra_tbUsuario foreign key (id_usuario) references tbUsuario(id_usuario),
-    constraint fk_tbCompra_tbProduto foreign key (id_produto) references tbProduto (id_produto)
+    constraint fk_tbCompra_tbUsuario foreign key (id_usuario) references tbUsuario(id_usuario) on update cascade on delete cascade,
+    constraint fk_tbCompra_tbProduto foreign key (id_produto) references tbProduto (id_produto) on delete cascade on update cascade
     
 );
 
