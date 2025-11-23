@@ -1,7 +1,7 @@
--- drop database dbProjetoWeb1;
+-- drop database dbgeekartifacts;
 
-CREATE DATABASE dbProjetoWeb1;
-use dbProjetoWeb1;
+CREATE DATABASE dbgeekartifacts;
+use dbgeekartifacts;
 
 CREATE TABLE tbUsuario (
 
@@ -12,7 +12,7 @@ CREATE TABLE tbUsuario (
     senha_usuario VARCHAR(100) NOT NULL,
     tipo_usuario VARCHAR(15) NOT NULL DEFAULT 'User',
     imagem_usuario varchar(255) NOT NULL DEFAULT 'icon_user_branco.svg',
-    saldo_usuario double not null,
+    saldo_usuario double not null default 0,
     
     CONSTRAINT pk_tbUsuario PRIMARY KEY (id_usuario),
     constraint un_EmailUsuario_tbUsuario unique (email_usuario),
