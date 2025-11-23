@@ -34,8 +34,8 @@ create table tbProduto (
 	id_produto int auto_increment,
     nome_produto varchar(50) not null,
     descricao_produto varchar(255) not null,
-    imagem_produto varchar(255) not null,
     preco_produto decimal not null,
+    imagem_produto varchar(255) NOT NULL DEFAULT 'semImagem.png',
     id_obra int not null,
     
     constraint pk_tbProduto primary key (id_produto),

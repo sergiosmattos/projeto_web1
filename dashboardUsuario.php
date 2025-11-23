@@ -30,7 +30,7 @@
     <?php include_once 'reutilizar/header.php' ?>
     
     <main>
-        
+        <h2>Categorias</h2>
     </main>
 
 </body>
