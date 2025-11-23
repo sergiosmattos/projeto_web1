@@ -179,3 +179,20 @@ main h1 {
 .dashboard-option-odd {
     background-color: #9567f8;
 }
+
+/* dashboard do Usuario */
+
+.categorias-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #1b1a1a;
+    align-items: center;
+}
+
+.categorias-itens {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    gap: 30px;
+}
+

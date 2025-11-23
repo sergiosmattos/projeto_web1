@@ -18,7 +18,8 @@ class CategoriaRepositorio {
         $categoria = new Categoria(
 
             isset($id) ? (int) $id : null,
-            $atributos['nome_categoria']
+            $atributos['nome_categoria'] ?? '',
+            $atributos['imagem_categoria'] ?? null
 
         );
 
@@ -43,11 +44,18 @@ class CategoriaRepositorio {
 
     public function cadastrar(Categoria $categoria) : void {
         
-        $sql = 'insert into tbCategoria (nome_categoria)
-        values (?)';
+        $sql = 'INSERT INTO tbCategoria (nome_categoria, imagem_categoria) ' .
+               'VALUES (?, ?)';
 
         $stmt = $this->pdo->prepare($sql);
+
+        $imagem = $categoria->getImagem();
+        if ($imagem === null || $imagem === '') {
+            $imagem = 'semImagem.png';
+        }
+        
         $stmt->bindValue(1, $categoria->getNome());
+        $stmt->bindValue(2, $imagem);
 
         $stmt->execute();
 
@@ -55,13 +63,23 @@ class CategoriaRepositorio {
 
     public function atualizar(Categoria $categoria) : void {
         
-        $sql = 'update tbCategoria set
-        nome_categoria = ?
-        where id_categoria = ?';
+        $sql = 'UPDATE tbCategoria SET
+                nome_categoria = ?,
+                imagem_categoria = ?
+                WHERE id_categoria = ?';
 
         $stmt = $this->pdo->prepare($sql);
+
         $stmt->bindValue(1, $categoria->getNome());
-        $stmt->bindValue(2, $categoria->getId());
+        
+        $imagem = $categoria->getImagem();
+        if ($imagem === null || $imagem === '') {
+            $stmt->bindValue(2, 'semImagem.png');
+        } else {
+            $stmt->bindValue(2, $categoria->getImagem());
+        }
+        
+        $stmt->bindValue(3, $categoria->getId());
 
         $stmt->execute();
 
@@ -82,13 +100,62 @@ class CategoriaRepositorio {
 
     public function remover(int $id) : bool {
         
-        $sql = 'delete from tbCategoria where id_categoria = ?';
-
+        $sql = "SELECT imagem_categoria FROM tbCategoria WHERE id_categoria = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $id);
-        
-        return $stmt->execute();
+        $stmt->bindValue(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
 
+        $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+        $imagem = $dados['imagem_categoria'] ?? null;
+
+        $sqlDel = 'DELETE FROM tbCategoria WHERE id_categoria = ?';
+        $stmtDel = $this->pdo->prepare($sqlDel);
+        $stmtDel->bindValue(1, $id, PDO::PARAM_INT);
+        $resultadoExecult = $stmtDel->execute();
+
+        if ($resultadoExecult && $stmtDel->rowCount() > 0 && !empty($imagem)) {
+            
+            if ($imagem !== 'semImagem.png') {
+                
+                $caminho = DIR_PROJETOWEB . 'uploads/categorias/' . $imagem;
+
+                if (is_file($caminho)) {
+                    unlink($caminho);
+                }
+            }
+        }
+
+        return $resultadoExecult;
+    }
+
+    public function contarTotal(): int {
+        $sql = "SELECT COUNT(*) as total FROM tbCategoria";
+        $stmt = $this->pdo->query($sql);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $resultado['total'];
+    }
+
+    public function listarPaginado(int $limite, int $offset, ?string $ordem = null, ?string $direcao = 'ASC'): array {
+        $colunasPermitidas = ['nome_categoria'];
+        
+        $sql = 'SELECT tbCategoria.* FROM tbCategoria';
+        
+        if ($ordem !== null && in_array(strtolower($ordem), array_map('strtolower', $colunasPermitidas))) {
+            $direcao = strtoupper($direcao) === 'DESC' ? 'DESC' : 'ASC';
+            $sql .= " ORDER BY {$ordem} {$direcao}";
+        }
+        
+        $sql .= " LIMIT ? OFFSET ?";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $limite, PDO::PARAM_INT);
+        $stmt->bindValue(2, $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $resultadoConsulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $arrayCategorias = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
+        
+        return $arrayCategorias;
     }
 
 }

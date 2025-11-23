@@ -5,10 +5,12 @@ class Categoria {
 
     private ?int $id;
     private string $nome;
+    private ?string $imagem;
 
-    public function __construct(?int $id, string $nome) {
+    public function __construct(?int $id, string $nome, ?string $imagem = null) {
         $this->id = $id;
         $this->nome = $nome;
+        $this->imagem = $imagem ?? 'semImagem.png';
     }
 
     public function getId() : ?int {
@@ -17,6 +19,27 @@ class Categoria {
 
     public function getNome() : string {
         return $this->nome;
+    }
+
+    public function getImagem(): ?string
+    {
+        return $this->imagem;
+    }
+
+    public function getImagemDiretorio(): string
+    {
+        
+        $nomeImagem = $this->imagem ?: 'semImagem.png';
+        
+        $caminhoUploads = DIR_PROJETOWEB . 'uploads/categorias/' . $nomeImagem;
+        
+        // var_dump($caminhoUploads);
+        
+        if (file_exists($caminhoUploads)) {
+            return 'uploads/categorias/' . $nomeImagem;
+        }
+        
+        return 'img/' . $nomeImagem;
     }
 
 }

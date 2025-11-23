@@ -19,6 +19,8 @@
     $erro = $_GET['erro'] ?? '';
     $id = $_POST['id'] ?? null;
 
+    var_dump($id);
+
     $modoEdicao = $id ? true : false;
 
     $categoria = $modoEdicao ? $categoriaRepositorio->findById($id) : null;
@@ -69,6 +71,11 @@
                         <input name="nome" type="text" value="<?= $valorNome?>">
                     </div>
 
+                </div>
+
+                <div>
+                        <label for="imagem">Imagem do produto</label>
+                        <input id="imagem" name="imagem" type="file" accept="image/*">
                 </div>
                 
                 <div class="grupo-botoes">

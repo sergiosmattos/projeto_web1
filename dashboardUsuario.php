@@ -1,5 +1,10 @@
 <?php
 
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
+    require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
+
+
+
     session_start();
 
     $emailUsuario = $_SESSION['usuario'] ?? null;
@@ -10,6 +15,9 @@
     }
 
     $tipoUsuario = $_SESSION['tipo'] ?? 'User';
+
+    $categoriaRepositorio = new CategoriaRepositorio($pdo);
+    $categorias = $categoriaRepositorio->listar();
 
 ?>
 
@@ -30,7 +38,20 @@
     <?php include_once 'reutilizar/header.php' ?>
     
     <main>
-        <h2>Categorias</h2>
+
+        <div class="categorias-container">
+
+            <h2> - Top Categorias</h2>
+            
+            <div class="categorias-itens">
+                
+                <?php foreach ($categorias as $categoria): ?>
+                    <p><?= htmlspecialchars($categoria->getNome()) ?></p>
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
     </main>
 
 </body>
