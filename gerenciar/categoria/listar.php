@@ -63,6 +63,7 @@
 
                     <tr>
                         <th>ID</th>
+                        <th>Imagem</th>
                         <th>Nome</th>
                         <th>Ações</th>
                     </tr>
@@ -73,6 +74,12 @@
                     <?php foreach ($categorias as $categoria): ?>
                         <tr>
                             <td><?= htmlspecialchars($categoria->getId()) ?></td>
+                            <td>
+                                <img 
+                                src="/projeto_web1/<?= htmlspecialchars($categoria->getImagemDiretorio()) ?>" 
+                                alt="<?= htmlspecialchars($categoria->getNome()) ?>"
+                                class="imagemList">
+                            </td>
                             <td><?= htmlspecialchars($categoria->getNome()) ?></td>
                             <td>
                                 <div class="td-acoes">

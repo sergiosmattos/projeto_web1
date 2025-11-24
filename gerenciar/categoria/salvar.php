@@ -5,6 +5,21 @@ require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
 
 session_start();
 
+// Verifica autenticação
+$emailUsuario = $_SESSION['usuario'] ?? null;
+
+if (!isset($emailUsuario)) {
+    header('Location: login.php');
+    exit;
+}
+
+$tipoUsuario = $_SESSION['tipo'] ?? 'User';
+
+if ($tipoUsuario !== 'Admin') {
+    header('Location: dashboardUsuario.php');
+    exit;
+}
+
 $categoriaRepositorio = new CategoriaRepositorio($pdo);
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -58,6 +73,9 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
                 break;
             case 'image/gif':  
                 $ext = '.gif'; 
+                break;
+            case 'image/webp':  
+                $ext = '.webp'; 
                 break;
             default: 
                 $ext = image_type_to_extension($imgInfo[2]) ?: '';

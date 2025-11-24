@@ -172,4 +172,18 @@ class ProdutoRepositorio {
         
         return $arrayProdutos;
     }
+
+    public function listarDestaque(int $limite = 4): array {
+    
+        $sql = 'SELECT tbProduto.* FROM tbProduto ORDER BY id_produto DESC LIMIT ?';
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $limite, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $resultadoConsulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $arrayProdutos = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
+        
+        return $arrayProdutos;
+    }
 }
