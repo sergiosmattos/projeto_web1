@@ -15,7 +15,7 @@
     $tipoUsuario = $_SESSION['tipo'] ?? 'User';
 
     $produtoRepositorio = new ProdutoRepositorio($pdo, new ObraRepositorio($pdo));
-    $produtosDestaque = $produtoRepositorio->listarDestaque(4);
+    $produtosDestaque = $produtoRepositorio->listar();
 
 ?>
 
@@ -28,6 +28,7 @@
     <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
     <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
+    <link rel="stylesheet" href="/projeto_web1/css/catalogo.css">
     <title>Geek Artifacts</title>
     
 </head>
@@ -37,14 +38,25 @@
     
     <main>
 
-        <div class="produtos-container">
+        <div class="container-banner">
+
+            <div class="container-titulo">
+                <h2>Produtos</h2>
+            </div>
+
+        </div>
+
+        <div class="produtos-itens">
 
             <?php if (empty($produtosDestaque)): ?>
                 <p>Nenhum produto disponível no momento.</p>
             <?php else: ?>
+
                 <?php foreach ($produtosDestaque as $produto): ?>
+
                     <div class="produto-card">
-                        <a href="#">
+                        <a href="/projeto_web1/compra.php?id=<?=htmlspecialchars($produto->getId())?>">
+
                             <img 
                             src="/projeto_web1/<?= htmlspecialchars($produto->getImagemDiretorio()) ?>" 
                             alt="<?= htmlspecialchars($produto->getNome()) ?>">
@@ -54,12 +66,12 @@
                             
                         </a>
                     </div>
+
                 <?php endforeach; ?>
+                
             <?php endif; ?>
 
         </div>
-
-</div>
 
     </main>
 

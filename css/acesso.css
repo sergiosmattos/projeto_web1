@@ -1,5 +1,11 @@
 @import "mensagem.css";
 
+main {
+
+  --cor_padrao-logo: #4c3df7; 
+
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;

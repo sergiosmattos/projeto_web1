@@ -26,7 +26,6 @@ class Usuario
         $this->imagem = $imagem ?? 'icon_user_branco.svg';
         
     }
-
     
     public function getId(): ?int
     {

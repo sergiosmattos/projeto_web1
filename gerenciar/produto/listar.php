@@ -95,8 +95,9 @@ function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
                         <option value="50" <?= $itens_por_pagina == 50 ? 'selected' : '' ?>>50</option>
                     </select>
 
-                    <input type="hidden" name="ordem" value="<?= htmlspecialchars($ordem ?? '') ?>">
+                    <input type="hidden" name="ordem" value="<?= htmlspecialchars($ordem ?? '')?>">
                     <input type="hidden" name="direcao" value="<?= htmlspecialchars($direcao) ?>">
+                    
                 </form>
             </div>
 

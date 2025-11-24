@@ -73,7 +73,9 @@
                     <p>Nenhum produto disponível no momento.</p>
                 <?php else: ?>
                     <?php foreach ($produtosDestaque as $produto): ?>
+
                         <div class="produto-card">
+
                             <a href="#">
                                 <img 
                                 src="/projeto_web1/<?= htmlspecialchars($produto->getImagemDiretorio()) ?>" 
@@ -83,13 +85,15 @@
                                 <p class="preco">R$ <?= number_format($produto->getPreco(), 2, ',', '.') ?></p>
                                 
                             </a>
+
                         </div>
+
                     <?php endforeach; ?>
                 <?php endif; ?>
 
             </div>
 
-            <a href="#" class="botao-mais">VER MAIS</a>
+            <a href="catalogoCompra.php" class="botao-mais">VER MAIS</a>
 
         </div>
 

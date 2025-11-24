@@ -1,0 +1,45 @@
+
+main {
+
+    --cor-padrao-1: #2E2358;
+    --cor-padrao-2: #2B1B38;
+
+}
+
+.container-banner {
+
+    width: 100%;
+    height: 200px;
+
+    align-content: center;
+
+    background: linear-gradient(
+        30deg, 
+        var(--cor-padrao-1) 19%, 
+        var(--cor-padrao-2) 100%
+    );
+
+}
+
+.container-banner .container-titulo {
+
+    width: 50%;
+    height: 50%;
+
+    margin: 0 25%;
+
+    border-radius: 10px;
+    background-color: #3B3B3B;
+
+    align-content: center;
+    
+}
+
+.container-titulo h2 {
+
+    width: 100%;
+    font-size: 35px;
+
+    text-align: center;
+
+}

@@ -43,7 +43,7 @@ if (!is_dir($uploadsDir)) {
     mkdir($uploadsDir, 0755, true);
 }
 
-$imagemFinal = 'semImagem.png';
+$imagemFinal = 'sem_imagem.png';
 
 if ($id) {
     $categoriaExistente = $categoriaRepositorio->findById($id);
@@ -87,7 +87,7 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
         // Se for edição, remover imagem antiga
         if ($id && isset($categoriaExistente)) {
             $imagemAntiga = $categoriaExistente->getImagem();
-            if ($imagemAntiga && $imagemAntiga !== 'semImagem.png' && file_exists($uploadsDir . $imagemAntiga)) {
+            if ($imagemAntiga && $imagemAntiga !== 'sem_imagem.png' && file_exists($uploadsDir . $imagemAntiga)) {
                 unlink($uploadsDir . $imagemAntiga);
             }
         }
