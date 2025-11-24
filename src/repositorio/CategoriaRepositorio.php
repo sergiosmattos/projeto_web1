@@ -136,6 +136,7 @@ class CategoriaRepositorio {
     }
 
     public function listarPaginado(int $limite, int $offset, ?string $ordem = null, ?string $direcao = 'ASC'): array {
+        
         $colunasPermitidas = ['nome_categoria'];
         
         $sql = 'SELECT tbCategoria.* FROM tbCategoria';

@@ -24,7 +24,7 @@
         $categoriaRepo
     );
 
-    $categorias = $categoriaRepo->listar();
+    $categorias = $categoriaRepo->listarPaginado(50, 0, "nome_categoria");
 
     $erro = $_GET['erro'] ?? [];
     $id = $_POST['id'] ?? null;

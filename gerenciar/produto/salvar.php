@@ -6,7 +6,6 @@ require_once DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
 session_start();
 
 $obraRepo = new ObraRepositorio($pdo);
-
 $produtoRepo = new ProdutoRepositorio($pdo, $obraRepo);
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -19,30 +18,27 @@ $id = $id !== '' ? (int)$id : null;
 
 $nome = trim($_POST['nome'] ?? '');
 $descricao = trim($_POST['descricao'] ?? '');
-$quantidate = trim($_POST['quantidade'] ?? '');
+$quantidade = trim($_POST['quantidade'] ?? '');
 $preco = trim($_POST['preco'] ?? '');
-$obra = trim($_POST['id_obra'] ?? '');
+$id_obra = trim($_POST['id_obra'] ?? '');
 
-//Arrumar objeto e obra
-
-if ($nome === '' || $descricao === '' || $preco === '' || $obra === '') {
+if ($nome === '' || $descricao === '' || $quantidade == '' || $preco === '' || $id_obra === '' ) {
     header("Location: form.php?erro=campos");
     exit;
 }
 
+$obra = $obraRepo->findById($id_obra);
 
 $uploadsDir = DIR_PROJETOWEB . 'uploads/produtos/';
-
 
 if (!is_dir($uploadsDir)) {
     mkdir($uploadsDir, 0755, true);
 }
 
-
-$imagemFinal = 'semImagem.png';
-
+$imagemFinal = 'sem_imagem.png';
 
 if ($id) {
+
     $produtoExistente = $produtoRepo->findById($id);
     
     if (!$produtoExistente) {
@@ -51,6 +47,7 @@ if ($id) {
     }
     
     $imagemFinal = $_POST['imagem_atual'] ?? $produtoExistente->getImagem();
+
 }
 
 if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
@@ -80,7 +77,7 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
         
         if ($id && isset($produtoExistente)) {
             $imagemAntiga = $produtoExistente->getImagem();
-            if ($imagemAntiga && $imagemAntiga !== 'semImagem.png' && file_exists($uploadsDir . $imagemAntiga)) {
+            if ($imagemAntiga && $imagemAntiga !== 'sem_imagem.png' && file_exists($uploadsDir . $imagemAntiga)) {
                 unlink($uploadsDir . $imagemAntiga);
             }
         }
@@ -92,12 +89,15 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
 }
 
 $produto = new Produto(
+
     $id, 
     $nome, 
-    $descricao, 
+    $descricao,
+    $quantidade,
     (float)$preco, 
     $obra,
     $imagemFinal
+    
 );
 
 if ($id) {

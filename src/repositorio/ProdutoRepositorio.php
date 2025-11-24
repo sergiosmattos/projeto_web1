@@ -48,8 +48,8 @@ class ProdutoRepositorio {
 
     public function cadastrar(Produto $produto) : void {
         
-        $sql = 'insert into tbProduto (nome_produto, descricao_produto, preco_produto, id_obra, imagem_produto) 
-        values (?, ?, ?, ?, ?)';
+        $sql = 'insert into tbProduto (nome_produto, descricao_produto, quantidade_produto, preco_produto, id_obra, imagem_produto) 
+        values (?, ?, ?, ?, ?, ?)';
 
         $stmt = $this->pdo->prepare($sql);
         
@@ -59,7 +59,7 @@ class ProdutoRepositorio {
         }
 
         $this->bindStmtValues($stmt, $produto);
-        $stmt->bindValue(5, $imagem);
+        $stmt->bindValue(6, $imagem);
         
         $stmt->execute();
     }
@@ -69,6 +69,7 @@ class ProdutoRepositorio {
         $sql = 'update tbProduto set
         nome_produto = ?,
         descricao_produto = ?,
+        quantidade_produto = ?,
         preco_produto = ?,
         id_obra = ?,
         imagem_produto = ?
@@ -80,12 +81,12 @@ class ProdutoRepositorio {
         
         $imagem = $produto->getImagem();
         if ($imagem === null || $imagem === '') {
-            $stmt->bindValue(5, 'semImagem.png');
+            $stmt->bindValue(6, 'semImagem.png');
         } else {
-            $stmt->bindValue(5, $produto->getImagem());
+            $stmt->bindValue(6, $produto->getImagem());
         }
         
-        $stmt->bindValue(6, $produto->getId());
+        $stmt->bindValue(7, $produto->getId());
 
         $stmt->execute();
     }
@@ -136,8 +137,9 @@ class ProdutoRepositorio {
 
         $stmt->bindValue(1, $produto->getNome());
         $stmt->bindValue(2, $produto->getDescricao());
-        $stmt->bindValue(3, $produto->getPreco());
-        $stmt->bindValue(4, $produto->getObra()->getId());
+        $stmt->bindValue(3, $produto->getQuantidade());
+        $stmt->bindValue(4, $produto->getPreco());
+        $stmt->bindValue(5, $produto->getObra()->getId());
         
     }
 
@@ -149,7 +151,7 @@ class ProdutoRepositorio {
     }
 
     public function listarPaginado(int $limite, int $offset, ?string $ordem = null, ?string $direcao = 'ASC'): array {
-        $colunasPermitidas = ['nome_produto', 'preco_produto'];
+        $colunasPermitidas = ['nome_produto', 'quantidade_produto','preco_produto'];
         
         $sql = 'SELECT tbProduto.* FROM tbProduto';
         

@@ -113,6 +113,12 @@ function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
                         </th>
                         <th>Descrição</th>
                         <th>
+                            <a href="<?= gerarUrlOrdenacao('quantidade_produto', $pagina_atual, $ordem, $direcao, $itens_por_pagina) ?>" 
+                               style="color: inherit; text-decoration: none; cursor: pointer;">
+                                Quantidade <?= mostrarIconeOrdenacao('quantidade_produto', $ordem, $direcao) ?>
+                            </a>
+                        </th>
+                        <th>
                             <a href="<?= gerarUrlOrdenacao('preco_produto', $pagina_atual, $ordem, $direcao, $itens_por_pagina) ?>" 
                                style="color: inherit; text-decoration: none; cursor: pointer;">
                                 Preço <?= mostrarIconeOrdenacao('preco_produto', $ordem, $direcao) ?>
@@ -128,6 +134,7 @@ function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
                         <tr>
                             <td><?= $produto->getId() ?></td>
                             <td>
+
                                 <img 
                                     src="/projeto_web1/<?= htmlspecialchars($produto->getImagemDiretorio()) ?>" 
                                     alt="<?= htmlspecialchars($produto->getNome()) ?>"
@@ -137,6 +144,7 @@ function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
                             </td>
                             <td><?= htmlspecialchars($produto->getNome()) ?></td>
                             <td><?= htmlspecialchars($produto->getDescricao()) ?></td>
+                            <td><?= htmlspecialchars($produto->getQuantidade()) ?>
                             <td>R$ <?= number_format($produto->getPreco(), 2, ',', '.') ?></td>
                             <td><?= $produto->getObra()->getNome() ?></td>
 

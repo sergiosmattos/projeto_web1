@@ -34,7 +34,6 @@ $valorPreco = $produto ? $produto->getPreco() : '';
 $valorIdObra = $produto ? $produto->getObra()->getId() : '';
 $valorImagem = $produto ? $produto->getImagem() : '';
 
-
 $obras = $obraRepo->listar();
 
 $textoTitulo = $modoEdicao ? 'Editar Produto' : 'Cadastrar Produto';
@@ -82,7 +81,12 @@ $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
 
                     <div>
                         <label>Descrição</label>
-                        <input name="descricao" type="text" value="<?= $valorDescricao ?>">
+                        <textarea name="descricao"><?= $valorDescricao ?></textarea>
+                    </div>
+
+                    <div>
+                        <label>Quantidade</label>
+                        <input name="quantidade" type="number" step="1" value="<?= $valorQuantidade ?>">
                     </div>
 
                     <div>
@@ -91,9 +95,11 @@ $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
                     </div>
 
                     <div>
+
                         <label for="obra">Obra</label>
                         <select name="id_obra" id="obra">
-                            <option value="">Selecione uma obra</option>
+                            <option value="" hidden>Selecione uma obra</option>
+
                             <?php foreach ($obras as $obra): ?>
                                 <option 
                                     value="<?= htmlspecialchars($obra->getId()) ?>"
@@ -102,7 +108,9 @@ $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
                                     <?= htmlspecialchars($obra->getNome()) ?>
                                 </option>
                             <?php endforeach; ?>
+
                         </select>
+
                     </div>
 
                     <div>

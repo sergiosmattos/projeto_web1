@@ -8,7 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
-$produtoRepositorio = new ProdutoRepositorio($pdo);
+$obraRepo = new ObraRepositorio($pdo); 
+$produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepo);
 $produtoRepositorio->remover($_POST['id']);
 
 header("Location: listar.php");
