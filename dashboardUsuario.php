@@ -20,7 +20,7 @@
     $categoriaRepositorio = new CategoriaRepositorio($pdo);
     $categorias = $categoriaRepositorio->listar();
 
-    $produtoRepositorio = new ProdutoRepositorio($pdo);
+    $produtoRepositorio = new ProdutoRepositorio($pdo, new ObraRepositorio($pdo));
     $produtosDestaque = $produtoRepositorio->listarDestaque(4);
 
 ?>

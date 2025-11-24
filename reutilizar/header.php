@@ -17,7 +17,7 @@
             <?php endif?>
             
             <a href="#">Leilao</a>
-            <a href="/projeto_web1/dashboardUsuario.php">Compra</a>
+            <a href="/projeto_web1/catalogoCompra.php">Compra</a>
 
         </div>
 
