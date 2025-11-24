@@ -22,6 +22,7 @@
     $email = trim($_POST['email']) ?? '';
     $senha = trim($_POST['senha']) ?? '';
     $dataNascimento = $_POST['dataNascimento'] ?? '';
+    $saldo = $_POST['saldo'] ?? 0;
 
     $dataNascimento = isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : '';
 
@@ -32,7 +33,7 @@
 
     }
 
-    $usuario = new Usuario($id, $tipo, $nome, $dataNascimento, $email, $senha);
+    $usuario = new Usuario($id, $tipo, $nome, $dataNascimento, $email, $senha, $saldo);
 
     if ($id) {
 

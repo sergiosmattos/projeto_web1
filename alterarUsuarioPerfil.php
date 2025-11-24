@@ -24,8 +24,7 @@
     $email = $_POST['email'] ?? $usuarioExistente->getEmail();
     $senha = $_POST['senha'] ?? $usuarioExistente->getSenha();
     $dataNascimento = $_POST['dataNascimento'] ?? $usuarioExistente->getDataNascimento()->format('Y-m-d');
-
-
+    $saldo = $usuarioExistente->getSaldo();
 
     
     $uploadsDir = DIR_PROJETOWEB . 'uploads/usuarios/';
@@ -77,7 +76,7 @@
         exit;
     }
 
-    $usuarioAtualizado = new Usuario($id, $tipo, $nome, new DateTime($dataNascimento), $email,$senha, $imagemFinal);
+    $usuarioAtualizado = new Usuario($id, $tipo, $nome, new DateTime($dataNascimento), $email,$senha, $saldo, $imagemFinal);
 
     $usuarioRepositorio->atualizar($usuarioAtualizado);
 

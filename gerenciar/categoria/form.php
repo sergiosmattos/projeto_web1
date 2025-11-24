@@ -56,7 +56,7 @@
 
         <div class="form-wrapper">
 
-            <form action="salvar.php" method="POST" class="form-cadastro" autocomplete="off">
+            <form action="salvar.php" method="POST" class="form-cadastro" enctype="multipart/form-data" autocomplete="off">
 
                 <?php if ($erro === 'campos'): ?>
                     <p class="mensagem-erro">Preencha todos os campos!</p>

@@ -81,6 +81,10 @@ function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
 
         <div class="container-topo">
             <a href="form.php"><button class="botao-adicionar">Adicionar Produto</button></a>
+
+            <div class="barra-pesquisar">
+                <input type="text" placeholder="Pesquisar obra...">
+            </div>
         </div>
 
         <section class="container-tabela">

@@ -151,23 +151,97 @@ th, td{
     
 }
 
+.numero-paginacao {
+    margin-left: 45px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 17px;
+}
+
+.numero-paginacao form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.numero-paginacao label {
+    font-weight: bold;
+    color: #000;
+}
+
+.numero-paginacao select {
+    padding: 5px 10px;
+    border: 2px solid #6a5acd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.numero-paginacao select:hover {
+    background-color: #f0f0f0;
+}
+
+/* Contain*/
 .container-paginacao {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin-top: 20px;
     margin-bottom: 20px;
+    padding: 15px;
+}
+
+.container-paginacao p {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .paginacao a {
-    padding: 6px 12px;
+    padding: 8px 14px;
     background-color: #b6b6b6;
     border-radius: 6px;
     color: #000;
     text-decoration: none;
-    margin: 0 4px;
-    transition: background-color 0.2s;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .paginacao a:hover {
     background-color: #6a5acd;
+    color: white;
+    border-color: #5a4abd;
+    transform: translateY(-2px);
 }
 
+.paginacao strong {
+    padding: 8px 12px;
+    background: #7b42f6;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.nomeColuna a{
+    text-decoration: none;
+    color: black;
+}
+
+thead th a {
+    text-decoration: none;
+    color: black;
+}
