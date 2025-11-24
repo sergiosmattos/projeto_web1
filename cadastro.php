@@ -31,6 +31,7 @@ $erro = $_GET['erro'] ?? '';
                 <input name="dataNascimento" type="date">
                 <input name="email" type="email" placeholder="Email">
                 <input name="senha" type="password" placeholder="Senha">
+                <input type="hidden" name="saldo" value="0">
                 
                 <a href="#">Esqueci minha senha</a>
 
