@@ -35,7 +35,7 @@ if (!is_dir($uploadsDir)) {
     mkdir($uploadsDir, 0755, true);
 }
 
-$imagemFinal = 'sem_imagem.png';
+$imagemFinal = 'semImagem.png';
 
 if ($id) {
 

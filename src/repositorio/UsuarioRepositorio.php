@@ -67,8 +67,8 @@ class UsuarioRepositorio {
 
     public function cadastrar(Usuario $usuario) : void {
         
-        $sql = 'insert into tbUsuario (tipo_usuario, nome_usuario, email_usuario, senha_usuario, data_nascimento_usuario, imagem_usuario) '.
-        'values (?, ?, ?, ?, ?, ?)';
+        $sql = 'insert into tbUsuario (tipo_usuario, nome_usuario, email_usuario, senha_usuario, data_nascimento_usuario, saldo_usuario, imagem_usuario) '.
+        'values (?, ?, ?, ?, ?, ?, ?)';
 
         $stmt = $this->pdo->prepare($sql);
 
@@ -79,7 +79,7 @@ class UsuarioRepositorio {
         }
 
         $this->bindStmtValues($stmt, $usuario);
-        $stmt->bindValue(6, $imagem);
+        $stmt->bindValue(7, $imagem);
 
         $stmt->execute();
 
@@ -93,6 +93,7 @@ class UsuarioRepositorio {
         email_usuario = ?, 
         senha_usuario = ?, 
         data_nascimento_usuario = ? ,
+        saldo_usuario = ?,
         imagem_usuario = ?
         WHERE id_usuario = ?';
 
@@ -103,12 +104,12 @@ class UsuarioRepositorio {
 
         $imagem = $usuario->getImagem();
         if ( $imagem === null || $imagem === '' ) {
-            $stmt->bindValue(6, 'icon_user_branco.svg');
+            $stmt->bindValue(7, 'icon_user_branco.svg');
         } else {
-            $stmt->bindValue(6, $usuario->getImagem());
+            $stmt->bindValue(7, $usuario->getImagem());
         }
 
-        $stmt->bindValue(7, $usuario->getId());
+        $stmt->bindValue(8, $usuario->getId());
         
         $stmt->execute();
 
@@ -167,6 +168,7 @@ class UsuarioRepositorio {
         $stmt->bindValue(3, $usuario->getEmail());
         $stmt->bindValue(4, $usuario->getSenha());
         $stmt->bindValue(5, $usuario->getDataNascimento()->format('Y-m-d'));
+        $stmt->bindValue(6, $usuario->getSaldo());
 
     }
 
@@ -189,6 +191,37 @@ class UsuarioRepositorio {
 
         return $isPasswordOk;
 
+    }
+
+    public function contarTotal(): int {
+        $sql = "SELECT COUNT(*) as total FROM tbUsuario";
+        $stmt = $this->pdo->query($sql);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $resultado['total'];
+    }
+
+    public function listarPaginado(int $limite, int $offset, ?string $ordem = null, ?string $direcao = 'ASC'): array {
+        
+        $colunasPermitidas = ['nome_usuario'];
+        
+        $sql = 'SELECT tbUsuario.* FROM tbUsuario';
+        
+        if ($ordem !== null && in_array(strtolower($ordem), array_map('strtolower', $colunasPermitidas))) {
+            $direcao = strtoupper($direcao) === 'DESC' ? 'DESC' : 'ASC';
+            $sql .= " ORDER BY {$ordem} {$direcao}";
+        }
+        
+        $sql .= " LIMIT ? OFFSET ?";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $limite, PDO::PARAM_INT);
+        $stmt->bindValue(2, $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $resultadoConsulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $arrayCategorias = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
+        
+        return $arrayCategorias;
     }
 
 }

@@ -21,7 +21,20 @@
     }
 
     $usuarioRepositorio = new UsuarioRepositorio($pdo);
-    $usuarios = $usuarioRepositorio->listar();
+
+    // Paginação
+    $itens_por_pagina = $_GET['itens'] ?? 10;
+    $pagina_atual = $_GET['pagina'] ?? 1;
+    $offset = ($pagina_atual - 1) * $itens_por_pagina;
+
+    // Ordenação
+    $ordem = $_GET['ordem'] ?? null;
+    $direcao = $_GET['direcao'] ?? 'ASC';
+
+    // Buscar dados
+    $total_usuario = $usuarioRepositorio->contarTotal();
+    $total_paginas = ceil($total_usuario / $itens_por_pagina);
+    $usuarios = $usuarioRepositorio->listarPaginado($itens_por_pagina, $offset, $ordem, $direcao);
 
 ?>
 
@@ -59,15 +72,57 @@
 
         <section class="container-tabela">
 
+
+            <div class="numero-paginacao">
+                <!-- Itens por página -->
+                <form method="GET">
+                    <label>Itens por página:</label>
+                    <select name="itens" onchange="this.form.submit()">
+                        <option value="5" <?= $itens_por_pagina == 5 ? 'selected' : '' ?>>5</option>
+                        <option value="10" <?= $itens_por_pagina == 10 ? 'selected' : '' ?>>10</option>
+                        <option value="20" <?= $itens_por_pagina == 20 ? 'selected' : '' ?>>20</option>
+                        <option value="50" <?= $itens_por_pagina == 50 ? 'selected' : '' ?>>50</option>
+                    </select>
+                </form>
+            </div>
+
             <table>
                 <thead>
 
                     <tr>
                         <th>ID</th>
                         <th>Tipo de Usuário</th>
-                        <th>Nome</th>
-                        <th>Email</th>
+                        <th>
+                            <div class="nomeColuna">
+                                <a href="?ordem=nome_usuario&direcao=<?= $ordem == 'nome_usuario' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&usuarios=<?= $itens_por_pagina ?>">
+                                Nome ⟳
+                                <?php if($ordem == 'nome_usuario'): ?>
+                                    <?= $direcao == 'ASC' ? '⭡A' : '⭣Z' ?>
+                                <?php endif; ?>
+                                </a>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="nomeColuna">
+                                <a href="?ordem=email_usuario&direcao=<?= $ordem == 'email_usuario' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
+                                Email ⟳
+                                <?php if($ordem == 'email_usuario'): ?>
+                                    <?= $direcao == 'ASC' ? '⭡A' : '⭣Z' ?>
+                                <?php endif; ?>
+                                </a>
+                            </div>
+                        </th>
                         <th>Data de Nascimento</th>
+                        <th>
+                            <div class="nomeColuna">
+                                <a href="?ordem=email_usuario&direcao=<?= $ordem == 'email_usuario' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
+                                Saldo ⟳
+                                <?php if($ordem == 'saldo_usuario'): ?>
+                                    <?= $direcao == 'ASC' ? '⭡A' : '⭣Z' ?>
+                                <?php endif; ?>
+                                </a>
+                            </div>
+                        </th>
                         <th>Ações</th>
                     </tr>
 
@@ -82,6 +137,7 @@
                             <td><?= htmlspecialchars($usuario->getNome()) ?></td>
                             <td><?= htmlspecialchars($usuario->getEmail()) ?></td>
                             <td><?= htmlspecialchars($usuario->getDataNascimento()->format('d/m/Y')) ?></td>
+                            <td><?= htmlspecialchars($usuario->getSaldo()) ?></td>
                             <td>
                                 <div class="td-acoes">
                                     <form action="excluir.php" method="post">
@@ -100,6 +156,39 @@
 
                 </tbody>
             </table>
+
+            <div class="container-paginacao">
+                <!-- Paginação -->
+                <?php if ($total_paginas > 1): ?>
+                    <div class="container-paginacao">
+                        <p>
+                            Página <?= $pagina_atual ?> de <?= $total_paginas ?> (Total: <?= $total_usuarios ?> categorias)
+                        </p>
+                        
+                        <div class="paginacao">
+                            <!-- Anterior -->
+                            <?php if ($pagina_atual > 1): ?>
+                                <a href="?pagina=<?= $pagina_atual - 1 ?>&itens=<?= $itens_por_pagina ?>&ordem=<?= $ordem ?>&direcao=<?= $direcao ?>">◀ Anterior</a>
+                            <?php endif; ?>
+
+                            <!-- Números -->
+                            <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                                <?php if ($i == $pagina_atual): ?>
+                                    <strong><?= $i ?></strong>
+                                <?php else: ?>
+                                    <a href="?pagina=<?= $i ?>&itens=<?= $itens_por_pagina ?>&ordem=<?= $ordem ?>&direcao=<?= $direcao ?>"><?= $i ?></a>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+
+                            <!-- Próximo -->
+                            <?php if ($pagina_atual < $total_paginas): ?>
+                                <a href="?pagina=<?= $pagina_atual + 1 ?>&itens=<?= $itens_por_pagina ?>&ordem=<?= $ordem ?>&direcao=<?= $direcao ?>">Próximo ▶</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+            </div>
 
         </section>
     

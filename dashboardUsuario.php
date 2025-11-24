@@ -20,7 +20,8 @@
     $categoriaRepositorio = new CategoriaRepositorio($pdo);
     $categorias = $categoriaRepositorio->listar();
 
-    $produtoRepositorio = new ProdutoRepositorio($pdo, new ObraRepositorio($pdo));
+    $obraRepositorio = new ObraRepositorio($pdo);
+    $produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepositorio);
     $produtosDestaque = $produtoRepositorio->listarDestaque(4);
 
 ?>
@@ -96,7 +97,6 @@
             <a href="catalogoCompra.php" class="botao-mais">VER MAIS</a>
 
         </div>
-
 
 </div>
 

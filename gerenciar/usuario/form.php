@@ -103,6 +103,15 @@
                         <input name="senha" type="text" value="<?= $valorSenha?>">
                     </div>
 
+                    <?php if ($modoEdicao): ?>
+                        <div>
+                            <label>Saldo</label>
+                            <input name="saldo" type="number" step="0.01" value="<?= $usuario->getSaldo() ?>">
+                        </div>
+                    <?php else: ?>
+                        <input type="hidden" name="saldo" value="0">
+                    <?php endif; ?>
+
                 </div>
                 
                 <div class="grupo-botoes">
