@@ -5,7 +5,7 @@
 
         <div class="logo">
             <a href="/projeto_web1/dashboardUsuario.php">
-                <img src="/projeto_web1/img/logo_geek.png" class="iconLogo" alt="logo geek artefacts">
+                <img src="/projeto_web1/img/logo_geek.png" class="iconLogo" alt="logo_geek_artifacts">
                 <h1>Geek Artifacts</h1>    
             </a>
         </div>

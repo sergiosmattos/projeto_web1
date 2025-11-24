@@ -40,7 +40,7 @@
 </head>
 <body>
 
-    <?php include_once 'reutilizar/header.php' ?>
+    <?php include_once(DIR_PROJETOWEB.'reutilizar/header.php') ?>
     
     <main>
 
