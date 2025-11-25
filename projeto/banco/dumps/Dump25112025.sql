@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `dbgeekartifacts` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `dbgeekartifacts`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: dbgeekartifacts
@@ -30,7 +28,7 @@ CREATE TABLE `tbcategoria` (
   `imagem_categoria` varchar(255) NOT NULL DEFAULT 'sem_imagem.png',
   PRIMARY KEY (`id_categoria`),
   UNIQUE KEY `un_NomeCategoria_tbCategoria` (`nome_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +37,7 @@ CREATE TABLE `tbcategoria` (
 
 LOCK TABLES `tbcategoria` WRITE;
 /*!40000 ALTER TABLE `tbcategoria` DISABLE KEYS */;
-INSERT INTO `tbcategoria` VALUES (2,'Quadrinhos','categoria_692513e360e548.05333419.jpg'),(7,'Mangá','categoria_692513ee83c835.04849685.jpg'),(8,'Jogo','categoria_692513f849d115.18007987.jpg'),(9,'Música','categoria_6925141722dfe2.91928605.jpg'),(10,'Série','categoria_6925141d81f607.18306708.jpg'),(12,'Anime','categoria_6925c4a49b4f65.61293827.jpg');
+INSERT INTO `tbcategoria` VALUES (2,'Quadrinhos','categoria_692513e360e548.05333419.jpg'),(7,'Mangá','categoria_692513ee83c835.04849685.jpg'),(8,'Jogo','categoria_692513f849d115.18007987.jpg'),(9,'Música','categoria_6925141722dfe2.91928605.jpg'),(10,'Série','categoria_6925141d81f607.18306708.jpg'),(12,'Anime','categoria_6925c4a49b4f65.61293827.jpg'),(13,'Filmes','categoria_6925c8d4df91a5.17704048.jpg'),(14,'Livros','categoria_6925c903b341f5.61352682.jpg');
 /*!40000 ALTER TABLE `tbcategoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +60,7 @@ CREATE TABLE `tbcompra` (
   KEY `fk_tbCompra_tbProduto` (`id_produto`),
   CONSTRAINT `fk_tbCompra_tbProduto` FOREIGN KEY (`id_produto`) REFERENCES `tbproduto` (`id_produto`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_tbCompra_tbUsuario` FOREIGN KEY (`id_usuario`) REFERENCES `tbusuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,6 +69,7 @@ CREATE TABLE `tbcompra` (
 
 LOCK TABLES `tbcompra` WRITE;
 /*!40000 ALTER TABLE `tbcompra` DISABLE KEYS */;
+INSERT INTO `tbcompra` VALUES (4,'2025-11-25 12:22:25',3,30,1,27),(5,'2025-11-25 12:22:39',2,20,1,27);
 /*!40000 ALTER TABLE `tbcompra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +114,7 @@ CREATE TABLE `tbobra` (
   `descricao_obra` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_obra`),
   UNIQUE KEY `un_NomeObra_tbUsuario` (`nome_obra`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +123,7 @@ CREATE TABLE `tbobra` (
 
 LOCK TABLES `tbobra` WRITE;
 /*!40000 ALTER TABLE `tbobra` DISABLE KEYS */;
-INSERT INTO `tbobra` VALUES (10,'Naruto','ab'),(11,'harry ptter','asdf'),(12,'Hunter X Hunet','nen');
+INSERT INTO `tbobra` VALUES (10,'Naruto','ab'),(12,'Hunter X Hunet','nen'),(13,'AWDADASD','asdasdAD'),(14,'asDASDasd','asdasdasdSD'),(15,'SADASDad','ASDASDaSDASDASD'),(16,'Harry Potter','Bruxos');
 /*!40000 ALTER TABLE `tbobra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +150,7 @@ CREATE TABLE `tbobracategoria` (
 
 LOCK TABLES `tbobracategoria` WRITE;
 /*!40000 ALTER TABLE `tbobracategoria` DISABLE KEYS */;
-INSERT INTO `tbobracategoria` VALUES (11,2),(12,2),(10,7),(12,7),(12,8),(11,10);
+INSERT INTO `tbobracategoria` VALUES (12,2),(13,2),(16,2),(10,7),(12,7),(13,7),(15,7),(12,8),(13,8),(14,8),(15,8),(14,9),(16,13),(16,14);
 /*!40000 ALTER TABLE `tbobracategoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +172,7 @@ CREATE TABLE `tbproduto` (
   PRIMARY KEY (`id_produto`),
   KEY `fk_tbProduto_tbObra` (`id_obra`),
   CONSTRAINT `fk_tbProduto_tbObra` FOREIGN KEY (`id_obra`) REFERENCES `tbobra` (`id_obra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,6 +181,7 @@ CREATE TABLE `tbproduto` (
 
 LOCK TABLES `tbproduto` WRITE;
 /*!40000 ALTER TABLE `tbproduto` DISABLE KEYS */;
+INSERT INTO `tbproduto` VALUES (26,'Samehada','A espada dos sete espadachins da nevoa.',12020,10,'produto_6925c79d844883.51418535.png',10),(27,'Varinha Magica','Faz magias',10,0,'produto_6925c97e4366c3.47768303.jpg',16);
 /*!40000 ALTER TABLE `tbproduto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +204,7 @@ CREATE TABLE `tbusuario` (
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `un_EmailUsuario_tbUsuario` (`email_usuario`),
   CONSTRAINT `ch_TipoUsuario_tbUsuario` CHECK ((`tipo_usuario` in (_utf8mb4'User',_utf8mb4'Admin')))
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +213,7 @@ CREATE TABLE `tbusuario` (
 
 LOCK TABLES `tbusuario` WRITE;
 /*!40000 ALTER TABLE `tbusuario` DISABLE KEYS */;
-INSERT INTO `tbusuario` VALUES (1,'Caronte','0001-01-01','caronte@gmail.com','1234567','Admin','icon_user_branco.svg',8894.3),(9,'User','2009-05-25','user@gmail.com','123456','User','icon_user_branco.svg',222),(10,'asdf','1111-11-11','sdf@sdf','23','User','icon_user_branco.svg',0),(11,'asdf','1111-11-11','asdf@sssssss','123','User','icon_user_branco.svg',0);
+INSERT INTO `tbusuario` VALUES (1,'Caronte','0001-01-01','caronte@gmail.com','1234567','Admin','icon_user_branco.svg',20844.3),(9,'User','2009-05-25','user@gmail.com','123456','User','icon_user_branco.svg',222),(10,'asdf','1111-11-11','sdf@sdf','23','User','icon_user_branco.svg',0),(11,'asdf','1111-11-11','asdf@sssssss','123','User','icon_user_branco.svg',0),(12,'adaDAD','5424-01-01','a@eadad','5.454161','User','icon_user_branco.svg',0),(13,'sadadsasd','0165-04-05','ASDda@fqawdfbadf','1532153465','User','icon_user_branco.svg',0);
 /*!40000 ALTER TABLE `tbusuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-25 12:02:21
+-- Dump completed on 2025-11-25 12:30:56
