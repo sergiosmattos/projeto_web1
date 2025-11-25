@@ -2,27 +2,16 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
 
-    session_start();
-
-    $emailUsuario = $_SESSION['usuario'] ?? null;
-    $confirmacao = $_GET['editadoregistro'] ?? false;
-
-    if (!isset($emailUsuario)) {
-        header('Location: login.php');
-        exit;
-    }
-
-    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
-
-    if( $tipoUsuario !== 'Admin' ) {
-        header('Location: dashboardUsuario.php');
-        exit;
-    }
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-logged.php");
 
     $usuarioRepositorio = new UsuarioRepositorio($pdo);
     $usuario = $usuarioRepositorio->findByEmail($emailUsuario);
 
     $dataFormatada = $usuario->getDataNascimento()->format('Y-m-d');
+
+    $confirmacao = $_GET['confirmacao'] ?? '';
+    $erro = $_GET['erro'] ?? '';
+
 ?>
 
 <!DOCTYPE html>
@@ -42,14 +31,38 @@
 
     <main>
 
-        <h2>Peça um saldo</h2>
-            
-        <div class="campo">
+        <div class="container-troca">
 
-            <label>Valor</label>
-            <form action="alterarUsuarioPerfil.php" method="post">
-                <input type="text" name="nome" value="<?= htmlspecialchars($usuario->getNome()) ?>">
-                <button type="submit" class="botao-editar">ALTERAR</button>
+            <h2>Peça um saldo</h2>
+
+            <?php if($confirmacao == 'true'):?>
+                <p class="mensagem-ok">Saldo Liberado!</p>
+            <?php elseif($confirmacao == 'false'):?>
+                <p class="mensagem-erro">Saldo Recusado.</p>
+            <?php endif;?>
+
+            <?php if($erro == 'campos'):?>
+                <p class="mensagem-erro">Digite um saldo!</p>
+            <?php endif;?>
+
+            <form method="post" action="/projeto_web1/autenticarSaldo.php" class="form-saldo">
+                
+                <div class="campo">
+                    <label>Saldo Atual</label>
+                    <input type="text" name="saldo_atual_aparente" value="R$ <?= number_format($usuario->getSaldo(), 2, ",", ".")?>">
+                
+                    <input type="hidden" name="saldo_atual" id="saldoAtual" value="<?= htmlspecialchars($usuario->getSaldo()) ?>">
+                </div>
+                
+                <div class="campo">
+
+                    <label for="saldoPedido">Saldo Desejado</label>
+                    <input type="number" name="saldo_pedido" id="saldoPedido" min="0.01" step="0.01" value="">
+
+                </div>
+
+                <input type="submit" value="Pedir Saldo" class="botao-trocar-perfil">
+
             </form>
 
         </div>

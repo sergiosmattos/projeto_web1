@@ -15,12 +15,12 @@
 
     $compraRepo = new CompraRepositorio($pdo, $usuarioRepo, $produtoRepo);
 
+    $idProduto = $_POST['id_produto'] ?? null;
+
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-        header('Location: listar.php');
+        header('Location: compra.php?id=' . $idProduto);
         exit;
     }
-
-    $idProduto = $_POST['id_produto'] ?? null;
     $idUsuario = $_POST['id_usuario'] ?? null;
     $precoTotal = $_POST['preco_total'] ?? null;
     $qtdEstoque = $_POST['quantidade_estoque'] ?? null;

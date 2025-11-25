@@ -4,7 +4,7 @@
     require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
     require DIR_PROJETOWEB . 'src/repositorio/ProdutoRepositorio.php';
 
-
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-logged.php");
 
     session_start();
 
@@ -75,19 +75,7 @@
                 <?php else: ?>
                     <?php foreach ($produtosDestaque as $produto): ?>
 
-                        <div class="produto-card">
-
-                            <a href="#">
-                                <img 
-                                src="/projeto_web1/<?= htmlspecialchars($produto->getImagemDiretorio()) ?>" 
-                                alt="<?= htmlspecialchars($produto->getNome()) ?>">
-                                <h3><?= htmlspecialchars($produto->getNome()) ?></h3>
-                                <p class="descricao"><?= htmlspecialchars($produto->getDescricao()) ?></p>
-                                <p class="preco">R$ <?= number_format($produto->getPreco(), 2, ',', '.') ?></p>
-                                
-                            </a>
-
-                        </div>
+                        <?php include(DIR_PROJETOWEB."/reutilizar/card-produto.php");?>
 
                     <?php endforeach; ?>
                 <?php endif; ?>

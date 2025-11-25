@@ -1,43 +1,35 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
-require_once DIR_PROJETOWEB . 'src/repositorio/ProdutoRepositorio.php';
-require_once DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
+    require_once DIR_PROJETOWEB . 'src/repositorio/ProdutoRepositorio.php';
+    require_once DIR_PROJETOWEB . 'src/repositorio/ObraRepositorio.php';
 
-session_start();
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-logged.php");
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-admin.php");
 
-$emailUsuario = $_SESSION['usuario'] ?? null;
+    $obraRepo = new ObraRepositorio($pdo);
+    $produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepo);
 
-if (!isset($emailUsuario)) {
-    header('Location: login.php');
-    exit;
-}
+    $erro = $_GET['erro'] ?? '';
+    $id = $_POST['id'] ?? null;
 
-$tipoUsuario = $_SESSION['tipo'] ?? 'User';
+    $modoEdicao = $id ? true : false;
 
-$obraRepo = new ObraRepositorio($pdo);
-$produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepo);
+    $produto = null;
+    if ($modoEdicao && $id) {
+        $produto = $produtoRepositorio->findById($id);
+    }
 
-$erro = $_GET['erro'] ?? '';
-$id = $_POST['id'] ?? null;
+    $valorNome = $produto ? $produto->getNome() : '';
+    $valorDescricao = $produto ? $produto->getDescricao() : '';
+    $valorPreco = $produto ? $produto->getPreco() : '';
+    $valorIdObra = $produto ? $produto->getObra()->getId() : '';
+    $valorImagem = $produto ? $produto->getImagem() : '';
 
-$modoEdicao = $id ? true : false;
+    $obras = $obraRepo->listar();
 
-$produto = null;
-if ($modoEdicao && $id) {
-    $produto = $produtoRepositorio->findById($id);
-}
-
-$valorNome = $produto ? $produto->getNome() : '';
-$valorDescricao = $produto ? $produto->getDescricao() : '';
-$valorPreco = $produto ? $produto->getPreco() : '';
-$valorIdObra = $produto ? $produto->getObra()->getId() : '';
-$valorImagem = $produto ? $produto->getImagem() : '';
-
-$obras = $obraRepo->listar();
-
-$textoTitulo = $modoEdicao ? 'Editar Produto' : 'Cadastrar Produto';
-$textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
+    $textoTitulo = $modoEdicao ? 'Editar Produto' : 'Cadastrar Produto';
+    $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
 
 ?>
 

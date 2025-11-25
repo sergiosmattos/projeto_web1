@@ -1,18 +1,10 @@
 <?php
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
-    require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';  
 
-    session_start();
-
-    $emailUsuario = $_SESSION['usuario'] ?? null;
-
-    if (!isset($emailUsuario)) {
-        header('Location: login.php');
-        exit;
-    }
-
-    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-logged.php");
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-admin.php");
 
     $usuarioRepositorio = new UsuarioRepositorio($pdo);
 
@@ -86,6 +78,7 @@
                             <option <?php if ($valorTipo == 'Admin') {echo "selected";}?> value="Admin">Administrador</option>
                         
                         </select>
+                        
                     </div>
 
                     <div>

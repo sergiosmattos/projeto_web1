@@ -3,21 +3,8 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
 
-    session_start();
-
-    $emailUsuario = $_SESSION['usuario'] ?? null;
-
-    if (!isset($emailUsuario)) {
-        header('Location: login.php');
-        exit;
-    }
-
-    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
-
-    if( $tipoUsuario !== 'Admin' ) {
-        header('Location: dashboardUsuario.php');
-        exit;
-    }
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-logged.php");
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-admin.php");
 
     $usuarioRepositorio = new UsuarioRepositorio($pdo);
     $usuario = $usuarioRepositorio->findByEmail($emailUsuario);
@@ -37,11 +24,11 @@
 </head>
 <body>
 
-    <?php include_once 'reutilizar/header.php' ?>
+    <?php include_once(DIR_PROJETOWEB."reutilizar/header.php"); ?>
 
     <main>
         
-        <?php include_once 'reutilizar/asidemenu.php' ?>
+        <?php include_once(DIR_PROJETOWEB."/reutilizar/asidemenu.php"); ?>
 
         <section class="container-dashboard">
         
@@ -52,27 +39,27 @@
 
             <div class="dashboard-opcoes">
 
-                <a href="#" class="dashboard-option-even">
+                <a href="/projeto_web1/gerenciar/usuario/listar.php" class="dashboard-option-even">
                     <h2>Usuários</h2>
                     <p>Gerenciar Usuarios</p>
                 </a>
         
-                <a href="#" class="dashboard-option-odd">
+                <a href="/projeto_web1/gerenciar/produto/listar.php" class="dashboard-option-odd">
                     <h2>Produtos</h2>
                     <p>Gerenciar Produtos</p>
                 </a>
         
-                <a href="#" class="dashboard-option-even">
+                <!-- <a href="#" class="dashboard-option-even">
                     <h2>Leilões</h2>
                     <p>Gerenciar Leilões</p>
-                </a>
+                </a> -->
                 
-                <a href="gerenciar/obra/listar.php" class="dashboard-option-odd">
+                <a href="/projeto_web1/gerenciar/obra/listar.php" class="dashboard-option-even">
                     <h2>Obras</h2>
                     <p>Gerenciar Obras</p>
                 </a>
 
-                <a href="#" class="dashboard-option-even">
+                <a href="/projeto_web1/gerenciar/categoria/listar.php" class="dashboard-option-odd">
                     <h2>Categorias</h2>
                     <p>Gerenciar Categorias</p>
                 </a>

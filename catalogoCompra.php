@@ -3,16 +3,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/ProdutoRepositorio.php';
 
-    session_start();
-
-    $emailUsuario = $_SESSION['usuario'] ?? null;
-
-    if (!isset($emailUsuario)) {
-        header('Location: login.php');
-        exit;
-    }
-
-    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
+    include_once(DIR_PROJETOWEB."/reutilizar/verify-logged.php");
 
     $produtoRepositorio = new ProdutoRepositorio($pdo, new ObraRepositorio($pdo));
     $produtosDestaque = $produtoRepositorio->listar();

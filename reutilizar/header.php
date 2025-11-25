@@ -16,7 +16,7 @@
             <a href="/projeto_web1/dashboardAdmin.php">Adminstração</a>
             <?php endif?>
             
-            <a href="#">Leilao</a>
+            <!-- <a href="#">Leilao</a> -->
             <a href="/projeto_web1/catalogoCompra.php">Compra</a>
 
         </div>

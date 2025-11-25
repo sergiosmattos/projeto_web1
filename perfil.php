@@ -2,22 +2,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/UsuarioRepositorio.php';
 
-    session_start();
-
-    $emailUsuario = $_SESSION['usuario'] ?? null;
-    $confirmacao = $_GET['editadoregistro'] ?? false;
-
-    if (!isset($emailUsuario)) {
-        header('Location: login.php');
-        exit;
-    }
-
-    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
-
-    if( $tipoUsuario !== 'Admin' ) {
-        header('Location: dashboardUsuario.php');
-        exit;
-    }
+    include_once(DIR_PROJETOWEB.'/reutilizar/verify-logged.php');
 
     $usuarioRepositorio = new UsuarioRepositorio($pdo);
     $usuario = $usuarioRepositorio->findByEmail($emailUsuario);
@@ -90,14 +75,20 @@
             <div class="campo">
                 <label>Data de Nascimento</label>
                 <form action="alterarUsuarioPerfil.php" method="post">
-                    <input type="date" name="dataNascimento" value="<?= $dataFormatada ?>">
+                    <input type="date" name="dataNascimento" value="<?= htmlspecialchars($dataFormatada) ?>">
                     <button type="submit" class="botao-editar">ALTERAR</button>
                 </form>
             </div>
 
-        </div>
+            <div class="campo">
+                <label>Saldo Atual</label>
+                <form action="converterMoeda.php" method="">
+                    <input disabled type="text"  value="R$ <?= number_format($usuario->getSaldo(), 2, ",", ".") ?>">
+                    <a href="converterMoeda.php"></a><button class="botao-trocar-perfil">Trocar Moeda</button></a>
+                </form>
+            </div>
 
-        <button class="botao-trocar-perfil"><a href="converterMoeda.php">Trocar Moeda</a></button>
+        </div>
 
         <form action="logout.php" method="post">
             <button type="submit" class="botao-sair-perfil">SAIR</button>
