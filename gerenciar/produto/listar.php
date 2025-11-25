@@ -100,17 +100,25 @@
                         </th>
                         <th>Quantidade</th>
                         <th>
-                            
                             <div class="nomeColuna">
                                 <a href="?ordem=preco_produto&direcao=<?= $ordem == 'preco_produto' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
                                 Preço ⟳
                                 <?php if($ordem == 'preco_produto'): ?>
-                                    <?= $direcao == 'ASC' ? '⭡A' : '⭣Z' ?>
+                                    <?= $direcao == 'ASC' ? '⭡' : '⭣' ?>
                                 <?php endif; ?>
                                 </a>
                             </div>
                         </th>
-                        <th>Obra</th>
+                        <th>
+                            <div class="nomeColuna">
+                                <a href="?ordem=id_obra&direcao=<?= $ordem == 'id_obra' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
+                                Obra ⟳
+                                <?php if($ordem == 'id_obra'): ?>
+                                    <?= $direcao == 'ASC' ? '⭡' : '⭣' ?>
+                                <?php endif; ?>
+                                </a>
+                            </div>
+                        </th>
                         <th>Ações</th>
                     </tr>
                 </thead>

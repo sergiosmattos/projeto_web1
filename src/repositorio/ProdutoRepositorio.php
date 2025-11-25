@@ -151,7 +151,7 @@ class ProdutoRepositorio {
     }
 
     public function listarPaginado(int $limite, int $offset, ?string $ordem = null, ?string $direcao = 'ASC'): array {
-        $colunasPermitidas = ['nome_produto', 'quantidade_produto','preco_produto'];
+        $colunasPermitidas = ['nome_produto', 'quantidade_produto','preco_produto', 'descricao_produto', 'id_obra'];
         
         $sql = 'SELECT tbProduto.* FROM tbProduto';
         

@@ -118,18 +118,51 @@ class ObraCategoriaRepositorio {
 
     }
 
-    public function relateObjects(array $idsCategoria): void {
+    public function relateObjects(array $idsParaAdd, ?int $idObra): void {
 
         $ultimoId = $this->pdo->lastInsertId();
-        $obra = $this->obraRepo->findById($ultimoId);
+        $idObra = $idObra ?? $ultimoId;
 
-        foreach($idsCategoria as $id) {
+        $obra = $this->obraRepo->findById($idObra);
+
+        $idsTodos = $this->categoriasObjectsToId($this->categoriaRepo->listar());
+        $idsParaRmv = array_diff($idsTodos, $idsParaAdd);
+
+        foreach($idsParaAdd as $id) {
 
             $categoria = $this->categoriaRepo->findById((int) $id);
+            $objeto = $this->findById($obra->getId(), $categoria->getId());
 
-            $this->cadastrar(new ObraCategoria($obra, $categoria));
+            if (!$objeto) {
+                $this->cadastrar(new ObraCategoria($obra, $categoria));
+            }
+            
+        }
+
+        foreach($idsParaRmv as $id) {
+
+            $categoria = $this->categoriaRepo->findById((int) $id);
+            $objeto = $this->findById($obra->getId(), $categoria->getId());
+
+            if ($objeto) {
+                $this->remover($obra->getId(), $categoria->getId());
+            }
+            
+        }
+
+    }
+
+    private function categoriasObjectsToId(array $arrayObjects) : array {
+        
+        $arrayIds = [];
+
+        foreach($arrayObjects as $object) {
+
+            $arrayIds[] = $object->getId();
 
         }
+
+        return $arrayIds;
 
     }
 

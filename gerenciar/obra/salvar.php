@@ -47,38 +47,42 @@
 
         $objetoExistente = $obraRepo->findById($id);
 
-        if (!$objetoExistente) {
+        if(!$objetoExistente) {
             header('Location: listar.php?erro=inexistente');
             exit;
         }
-        
-        $obraRepo->atualizar($obra);
-
-        header('Location: listar.php?editadoregistro=true');
-        exit;
 
     }
-    else {
+
+    try {
 
         $pdo->beginTransaction();
 
-        $obraRepo->cadastrar($obra);
-        $obraCategoriaRepo->relateObjects($categoriasIds);
+        if($id) {
 
+            $obraRepo->atualizar($obra);
+            $obraCategoriaRepo->relateObjects($categoriasIds, $id);
+            header('Location: listar.php?editadoregistro=true');
+
+        }
+        else {
+
+            $obraRepo->cadastrar($obra);
+            $obraCategoriaRepo->relateObjects($categoriasIds, null);
+            header('Location: listar.php?novoregistro=true');
+
+        }
         $pdo->commit();
 
-        try {
-            
-        } catch (Throwable $th) {
-
-            echo $th->getMessage();
-            $pdo->rollBack();
-            
-        }
-
-        header('Location: listar.php?novoregistro=true');
         exit;
+        
+    } catch (Throwable $th) {
 
+        echo $th->getMessage();
+        $pdo->rollBack();
+        header('Location: listar.php?erro=desconhecido');
+        exit;
+        
     }
 
 ?>

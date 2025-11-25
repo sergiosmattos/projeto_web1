@@ -202,7 +202,7 @@ class UsuarioRepositorio {
 
     public function listarPaginado(int $limite, int $offset, ?string $ordem = null, ?string $direcao = 'ASC'): array {
         
-        $colunasPermitidas = ['nome_usuario'];
+        $colunasPermitidas = ['nome_usuario','email_usuario','saldo_usuario'];
         
         $sql = 'SELECT tbUsuario.* FROM tbUsuario';
         

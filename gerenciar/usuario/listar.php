@@ -102,10 +102,10 @@
                         <th>Data de Nascimento</th>
                         <th>
                             <div class="nomeColuna">
-                                <a href="?ordem=email_usuario&direcao=<?= $ordem == 'email_usuario' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
+                                <a href="?ordem=saldo_usuario&direcao=<?= $ordem == 'saldo_usuario' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
                                 Saldo ⟳
                                 <?php if($ordem == 'saldo_usuario'): ?>
-                                    <?= $direcao == 'ASC' ? '⭡A' : '⭣Z' ?>
+                                    <?= $direcao == 'ASC' ? '⭡' : '⭣' ?>
                                 <?php endif; ?>
                                 </a>
                             </div>
