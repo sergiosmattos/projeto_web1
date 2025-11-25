@@ -69,7 +69,7 @@
 
         $pdo->commit();
 
-        header("Location: compra.php?id=". $idProduto . "&sucesso=novacompra");
+        header("Location: compra.php?id=". $idProduto . "&novacompra=true");
         exit;
 
     } 

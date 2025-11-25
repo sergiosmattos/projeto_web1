@@ -15,6 +15,9 @@
     $produtoRepo = new ProdutoRepositorio($pdo, $obraRepo);
 
     $produto = $produtoRepo->findById($idProduto);
+    
+    $erro = $_GET['erro'] ?? '';
+    $novacompra = $_GET['novacompra'] ?? '';
 
 ?>
 
@@ -48,6 +51,18 @@
                 </div>
                 
                 <form class="form-produto" action="autenticarCompra.php" method="post">
+
+                    <?php if($novacompra == 'true'):?>
+                        <p class="mensagem-ok">Compra efetuada com sucesso!</p>
+                    <?php elseif($erro == 'zerado'):?>
+                        <p class="mensagem-erro">Produto fora de Estoque.</p>
+                    <?php elseif($erro == 'saldo'):?>
+                        <p class="mensagem-erro">Produto fora de Estoque.</p>
+                    <?php elseif($erro == 'campos'):?>
+                        <p class="mensagem-erro">Selecione uma quanitdade!</p>
+                    <?php elseif($erro == 'desconhecido'):?>
+                        <p class="mensagem-erro">Erro Desconhecido.</p>
+                    <?php endif;?>
 
                     <h1><?= htmlspecialchars($produto->getNome())?></h1>
                     
@@ -92,7 +107,8 @@
     
     </main>
 
-    <script scr="js/form.js"></script>
+    <script src="js/form.js">
+    </script>
     
     <script>
 

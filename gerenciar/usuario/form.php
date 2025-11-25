@@ -12,7 +12,6 @@
 
     $userIdPost = isset($_POST['id']) ? (int) $_POST['id'] : null;
 
-
     $usuarioByEmail = $usuarioRepositorio->findByEmail($emailUsuario);
 
     $userIdSession = $usuarioByEmail ->getId();
