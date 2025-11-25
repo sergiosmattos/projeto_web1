@@ -48,45 +48,7 @@
 
             <h2>- Top Categorias</h2>
             
-            <div class="categorias-itens">
-                
-                <?php foreach ($categorias as $categoria): ?>
-                    <form action="GET">
-                        <a name="categoria" href="listaObra.php" class="categoria-item">
-                            <img 
-                                src="/projeto_web1/<?= htmlspecialchars($categoria->getImagemDiretorio()) ?>" 
-                                alt="<?= htmlspecialchars($categoria->getNome()) ?>"
-                                class="imagemList">
-                            <p><?= htmlspecialchars($categoria->getNome()) ?></p>
-                        </a>
-                    </form>
-                <?php endforeach; ?>
 
-            </div>
-
-        </div>
-
-        <div class="produtos-container">
-
-            <h2>- Top produtos mais cobiçados</h2>
-
-            <div class="produtos-itens">
-
-                <?php if (empty($produtosDestaque)): ?>
-                    <p>Nenhum produto disponível no momento.</p>
-                <?php else: ?>
-                    <?php foreach ($produtosDestaque as $produto): ?>
-
-                        <?php include(DIR_PROJETOWEB."/reutilizar/card-produto.php");?>
-
-                    <?php endforeach; ?>
-                <?php endif; ?>
-
-            </div>
-
-            <a href="catalogoCompra.php" class="botao-mais">VER MAIS</a>
-
-        </div>
 
 </div>
 

@@ -21,10 +21,10 @@
     $tipo = trim($_POST['tipo']) ?? 'User';
     $email = trim($_POST['email']) ?? '';
     $senha = trim($_POST['senha']) ?? '';
-    $saldo = trim($_POST['saldo']) ?? '';
+    $saldo = $_POST['saldo'] ?? '';
     $dataNascimento = $_POST['dataNascimento'] ?? '';
 
-    var_dump($_POST['quantidade']);
+
 
 
     $dataNascimento = isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : '';

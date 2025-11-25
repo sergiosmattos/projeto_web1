@@ -12,8 +12,8 @@ require "pdf.php";
 $html = ob_get_clean();
 
 $dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'landscape'); // paisagem para caber melhor as colunas
+$dompdf->setPaper('A4', 'landscape');
 $dompdf->render();
 
 $filename = 'Relatorio-produtos-' . date('d-m-Y') . '.pdf';
-$dompdf->stream($filename, ['Attachment' => 1]);
+$dompdf->stream($filename, ['Attachment' => 2]);

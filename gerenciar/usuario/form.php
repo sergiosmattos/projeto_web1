@@ -83,7 +83,9 @@
                         
                         </select>
 
-                        <input type="hidden" name="tipo" value="<?= $valorTipo?>">
+                        <?php if ($lockOwnTipo): ?>
+                            <input type="hidden" name="tipo" value="<?= $valorTipo?>">
+                        <?php endif; ?>
 
                     </div>
 
