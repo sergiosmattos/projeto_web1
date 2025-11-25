@@ -23,7 +23,9 @@
     $senha = trim($_POST['senha']) ?? '';
     $saldo = trim($_POST['saldo']) ?? '';
     $dataNascimento = $_POST['dataNascimento'] ?? '';
-    $saldo = $_POST['saldo'] ?? 0;
+
+    var_dump($_POST['quantidade']);
+
 
     $dataNascimento = isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : '';
 

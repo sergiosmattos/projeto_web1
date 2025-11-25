@@ -137,7 +137,7 @@
                             <td><?= htmlspecialchars($usuario->getNome()) ?></td>
                             <td><?= htmlspecialchars($usuario->getEmail()) ?></td>
                             <td><?= htmlspecialchars($usuario->getDataNascimento()->format('d/m/Y')) ?></td>
-                            <td><?= htmlspecialchars($usuario->getSaldo()) ?></td>
+                            <td>R$ <?= number_format($usuario->getSaldo(), 2, ',', '.') ?></td>
                             <td>
                                 <div class="td-acoes">
                                     <form action="excluir.php" method="post">
@@ -148,6 +148,7 @@
                                         <input type="hidden" name="id" value="<?= htmlspecialchars( $usuario->getId() ) ?>">
                                         <input type="submit" class="botao-editar" value="Editar">
                                     </form>
+                                    
                                 </div>
                             </td>
                         </tr>

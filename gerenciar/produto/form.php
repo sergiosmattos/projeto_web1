@@ -33,6 +33,7 @@ $valorDescricao = $produto ? $produto->getDescricao() : '';
 $valorPreco = $produto ? $produto->getPreco() : '';
 $valorIdObra = $produto ? $produto->getObra()->getId() : '';
 $valorImagem = $produto ? $produto->getImagem() : '';
+$valorQuantidade = $produto ? $produto->getQuantidade() : '';
 
 $obras = $obraRepo->listar();
 

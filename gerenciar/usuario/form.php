@@ -7,6 +7,7 @@
 
     $emailUsuario = $_SESSION['usuario'] ?? null;
 
+
     if (!isset($emailUsuario)) {
         header('Location: login.php');
         exit;
@@ -19,7 +20,14 @@
     $erro = $_GET['erro'] ?? '';
 
     $userIdPost = isset($_POST['id']) ? (int) $_POST['id'] : null;
-    $userIdSession = $usuarioRepositorio->findByEmail($emailUsuario)->getId();
+
+
+    $usuarioByEmail = $usuarioRepositorio->findByEmail($emailUsuario);
+    
+
+
+    $userIdSession = $usuarioByEmail ->getId();
+
 
     $modoEdicao = $userIdPost ? true : false;
 
@@ -86,6 +94,9 @@
                             <option <?php if ($valorTipo == 'Admin') {echo "selected";}?> value="Admin">Administrador</option>
                         
                         </select>
+
+                        <input type="hidden" name="tipo" value="<?= $valorTipo?>">
+
                     </div>
 
                     <div>
