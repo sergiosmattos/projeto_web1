@@ -28,8 +28,22 @@
 
     $obras = $obraRepo->listar();
 
-    $textoTitulo = $modoEdicao ? 'Editar Produto' : 'Cadastrar Produto';
-    $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
+$produto = null;
+if ($modoEdicao && $id) {
+    $produto = $produtoRepositorio->findById($id);
+}
+
+$valorNome = $produto ? $produto->getNome() : '';
+$valorDescricao = $produto ? $produto->getDescricao() : '';
+$valorPreco = $produto ? $produto->getPreco() : '';
+$valorIdObra = $produto ? $produto->getObra()->getId() : '';
+$valorImagem = $produto ? $produto->getImagem() : '';
+$valorQuantidade = $produto ? $produto->getQuantidade() : '';
+
+$obras = $obraRepo->listar();
+
+$textoTitulo = $modoEdicao ? 'Editar Produto' : 'Cadastrar Produto';
+$textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
 
 ?>
 

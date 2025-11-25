@@ -18,7 +18,7 @@ $id = $id !== '' ? (int)$id : null;
 
 $nome = trim($_POST['nome'] ?? '');
 $descricao = trim($_POST['descricao'] ?? '');
-$quantidade = trim($_POST['quantidade'] ?? '');
+$quantidade = $_POST['quantidade'] ?? '';
 $preco = trim($_POST['preco'] ?? '');
 $id_obra = trim($_POST['id_obra'] ?? '');
 

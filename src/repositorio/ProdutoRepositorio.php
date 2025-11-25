@@ -23,7 +23,7 @@ class ProdutoRepositorio {
             isset($id) ? (int) $id : null,
             $atributos['nome_produto'],
             $atributos['descricao_produto'],
-            $atributos['preco_produto'],
+            $atributos['quantidade_produto'],
             $atributos['preco_produto'],
             $this->obraRepo->findById($atributos['id_obra']),
             $atributos['imagem_produto'] ?? null
