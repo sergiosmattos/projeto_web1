@@ -21,6 +21,7 @@
     height: 600px;
     object-fit: cover;
     border-radius: 6px;
+    border: #ffffff solid 4px;
 }
 
 .relatorioProduto {
