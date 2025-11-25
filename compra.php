@@ -72,7 +72,7 @@
                     </div>
                     <div class="caracteproduto">
                         <label>Saldo Usuário</label>
-                        <input value="R$ <?= number_format($usuarioLogado->getSaldo(), 2, ",", ".")?>">
+                        <input readonly value="R$ <?= number_format($usuarioLogado->getSaldo(), 2, ",", ".")?>">
                     </div>
                     <div class="caracteproduto">
                         <label>Quantidade Estoque</label>

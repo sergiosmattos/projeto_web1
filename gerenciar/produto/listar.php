@@ -11,7 +11,7 @@
     $produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepo);
 
     // Paginação
-    $itens_por_pagina = $_GET['itens'] ?? 10;
+    $itens_por_pagina = $_GET['itens_por_pagina'] ?? 10;
     $pagina_atual = $_GET['pagina'] ?? 1;
     $offset = ($pagina_atual - 1) * $itens_por_pagina;
 
