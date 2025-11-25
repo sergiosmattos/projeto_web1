@@ -49,28 +49,50 @@
 
             <div class="container-superior">
 
-                <img 
-                    src="/projeto_web1/<?=htmlspecialchars($produto->getImagemDiretorio())?>" 
-                    alt="<?=htmlspecialchars($produto->getNome())?>"
-                >
+                <div class="imagem">
+                    <img 
+                        src="/projeto_web1/<?=htmlspecialchars($produto->getImagemDiretorio())?>" 
+                        alt="<?=htmlspecialchars($produto->getNome())?>"
+                    >
+                </div>
                 
-                <form class="form-produto" action="autenticarCompra.php">
+                <div class="relatorioProduto">
+                    <form class="form-produto" action="autenticarCompra.php">
 
-                    <h1><?= htmlspecialchars($produto->getNome())?></h1>
-                    
-                    <input readonly type="text" name="preco_unitario" value="R$ <?= number_format($produto->getPreco(), 2, ",", ".")?>">
+                        <div class="superior">
+                            <h1><?= htmlspecialchars($produto->getNome())?></h1>
+                            
+    
+                            <input readonly class="precoProduto"readonly type="text" name="preco_unitario" value="R$ <?= number_format($produto->getPreco(), 2, ",", ".")?>">
+        
+    
+                            <div class="caracteproduto">
+                                <label>QTD em Estoque</label>
+                                <input  readonly type="number" class="bloqueado" name="quantidade_estoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
+                            </div>
+                        </div>
+    
 
-                    <input readonly type="number" name="quantidade_estoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
+                        <div class="caracteproduto">
+                            <label>QTD Desejada</label>
+                            <input type="number" name="quantidade_desejada" value="">
+                        </div>
 
-                    <input type="number" name="quantidade_desejada" value="">
+                        <div class="caracteproduto">
+                            <label>Valor Total</label>
+                            <input readonly type="text" class="bloqueado" name="preco_total_aparente" value="">
+                        </div>
 
-                    <input readonly type="text" name="preco_total_aparente" value="">
 
-                    <input readonly type="text" name="saldo_usuario" value="<?= number_format($usuarioRepo->findByEmail($emailUsuario)->getSaldo(), 2, ",", ".")?>">
-
-                    <button type="submit">Comprar</button>
-
-                </form>
+                        <div class="caracteproduto">
+                            <label>Saldo Usuário</label>
+                            <input readonly type="text" class="bloqueado"name="saldo_usuario" value="<?= number_format($usuarioRepo->findByEmail($emailUsuario)->getSaldo(), 2, ",", ".")?>">
+                        </div>
+    
+                        <button type="submit">Comprar</button>
+    
+                    </form>
+                </div>
 
             </div>
 

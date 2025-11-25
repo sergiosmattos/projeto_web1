@@ -1,31 +1,121 @@
-
-.container-compra {
-
-    margin-top: 5%;
+.container-superior {
     display: flex;
-    flex-direction: column;
-    
-    width: 60%;
-    gap: 2vh;
-
+    gap: 20px;
 }
 
-.container-compra .container-superior {
-
-    display: flex;
-    justify-content: space-between;
-    
-    background-color: rgb(28, 190, 136);
-
-}
-
-.container-compra .container-inferior {
-
+.relatorioProduto {
     display: flex;
     flex-direction: column;
+}
 
-    width: 50%;
+.container-superior {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 80px;
+    width: 100%;
+}
 
-    background-color: rgb(55, 106, 47);
+.imagem img {
+    width: 360px;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.relatorioProduto {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.form-produto h1 {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.form-produto input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #35343a;
+    color: white;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+.form-produto button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #7747ff; 
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-produto button:hover {
+    background-color: #6231f5;
+} 
+
+.caracteproduto {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 18px;
+    padding: 10px 12px;
+    background-color: #1f1c20;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.caracteproduto label {
+    width: 150px;
+    color: white;
+}
+
+
+.form-produto input.precoProduto {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0 ;
+    margin: 0 0 20px 0;
+    border-radius: 0;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: none;
+    text-align: center;
+}
+
+.superior {
+    margin-bottom: 100px;
+}
+
+
+.container-inferior {
+    margin-top: 40px;
+}
+
+.container-inferior label{
+    margin-top: 40px;
+    font-weight: bold;
+}
+
+.container-inferior p {
+    border: 2px solid white;
+    padding: 15px;
+    background: transparent;
+    color: white;
+    margin-top: 10px;
+}
+
+.bloqueado {
+    pointer-events: none;
 
 }
