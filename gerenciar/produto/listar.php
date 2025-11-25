@@ -23,39 +23,19 @@ $obraRepo = new ObraRepositorio($pdo);
 
 $produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepo);
 
-// Configuração da paginação
-$itens_por_pagina = filter_input(INPUT_GET, 'itens_por_pagina', FILTER_VALIDATE_INT) ?: 10;
+    // Paginação
+    $itens_por_pagina = $_GET['itens'] ?? 10;
+    $pagina_atual = $_GET['pagina'] ?? 1;
+    $offset = ($pagina_atual - 1) * $itens_por_pagina;
 
-// Pega o número da página atual
-$pagina_atual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1;
+    // Ordenação
+    $ordem = $_GET['ordem'] ?? null;
+    $direcao = $_GET['direcao'] ?? 'ASC';
 
-// Calcula o offset
-$offset = ($pagina_atual - 1) * $itens_por_pagina;
-
-// Parâmetros de ordenação
-$ordem = filter_input(INPUT_GET, 'ordem') ?: null;
-$direcao = filter_input(INPUT_GET, 'direcao') ?: 'ASC';
-
-// Busca total de registros e calcula total de páginas
-$total_produtos = $produtoRepositorio->contarTotal();
-$total_paginas = ceil($total_produtos / $itens_por_pagina);
-
-// Busca produtos da página atual com ordenação
-$produtos = $produtoRepositorio->listarPaginado($itens_por_pagina, $offset, $ordem, $direcao);
-
-// Função para gerar URLs de ordenação
-function gerarUrlOrdenacao($campo, $paginaAtual, $ordemAtual, $direcaoAtual, $itensPorPagina) {
-    $novaDirecao = ($ordemAtual === $campo && $direcaoAtual === 'ASC') ? 'DESC' : 'ASC';
-    return "?pagina={$paginaAtual}&ordem={$campo}&direcao={$novaDirecao}&itens_por_pagina={$itensPorPagina}";
-}
-
-// Função para mostrar ícone de ordenação
-function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
-    if ($ordemAtual !== $campo) {
-        return '⇅';
-    }
-    return $direcaoAtual === 'ASC' ? '↑' : '↓';
-}
+    // Buscar dados
+    $total_categorias = $produtoRepositorio->contarTotal();
+    $total_paginas = ceil($total_categorias / $itens_por_pagina);
+    $produtos = $produtoRepositorio->listarPaginado($itens_por_pagina, $offset, $ordem, $direcao);
 ?>
 
 <!DOCTYPE html>
@@ -81,6 +61,7 @@ function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
 
         <div class="container-topo">
             <a href="form.php"><button class="botao-adicionar">Adicionar Produto</button></a>
+            <a href="geradorPdf.php" target="_blank"><button class="botao-adicionar">Gerar PDF</button></a>
 
             <div class="barra-pesquisar">
                 <input type="text" placeholder="Pesquisar obra...">
@@ -111,23 +92,36 @@ function mostrarIconeOrdenacao($campo, $ordemAtual, $direcaoAtual) {
                         <th>ID</th>
                         <th>Imagem</th>
                         <th>
-                            <a href="<?= gerarUrlOrdenacao('nome_produto', $pagina_atual, $ordem, $direcao, $itens_por_pagina) ?>" 
-                               style="color: inherit; text-decoration: none; cursor: pointer;">
-                                Nome <?= mostrarIconeOrdenacao('nome_produto', $ordem, $direcao) ?>
-                            </a>
-                        </th>
-                        <th>Descrição</th>
-                        <th>
-                            <a href="<?= gerarUrlOrdenacao('quantidade_produto', $pagina_atual, $ordem, $direcao, $itens_por_pagina) ?>" 
-                               style="color: inherit; text-decoration: none; cursor: pointer;">
-                                Quantidade <?= mostrarIconeOrdenacao('quantidade_produto', $ordem, $direcao) ?>
-                            </a>
+                            <div class="nomeColuna">
+                                <a href="?ordem=nome_produto&direcao=<?= $ordem == 'nome_produto' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
+                                Nome ⟳
+                                <?php if($ordem == 'nome_categoria'): ?>
+                                    <?= $direcao == 'ASC' ? '⭡A' : '⭣Z' ?>
+                                <?php endif; ?>
+                                </a>
+                            </div>
                         </th>
                         <th>
-                            <a href="<?= gerarUrlOrdenacao('preco_produto', $pagina_atual, $ordem, $direcao, $itens_por_pagina) ?>" 
-                               style="color: inherit; text-decoration: none; cursor: pointer;">
-                                Preço <?= mostrarIconeOrdenacao('preco_produto', $ordem, $direcao) ?>
-                            </a>
+                            <div class="nomeColuna">
+                                <a href="?ordem=descricao_produto&direcao=<?= $ordem == 'descricao_produto' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
+                                Descrição ⟳
+                                <?php if($ordem == 'descricao_produto'): ?>
+                                    <?= $direcao == 'ASC' ? '⭡A' : '⭣Z' ?>
+                                <?php endif; ?>
+                                </a>
+                            </div>
+                        </th>
+                        <th>Quantidade</th>
+                        <th>
+                            
+                            <div class="nomeColuna">
+                                <a href="?ordem=preco_produto&direcao=<?= $ordem == 'preco_produto' && $direcao == 'ASC' ? 'DESC' : 'ASC' ?>&itens=<?= $itens_por_pagina ?>">
+                                Preço ⟳
+                                <?php if($ordem == 'preco_produto'): ?>
+                                    <?= $direcao == 'ASC' ? '⭡A' : '⭣Z' ?>
+                                <?php endif; ?>
+                                </a>
+                            </div>
                         </th>
                         <th>Obra</th>
                         <th>Ações</th>

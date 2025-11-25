@@ -12,3 +12,6 @@ testF*.*
 
 uploads/*/*.png
 uploads/*/*.jpg
+
+#
+vendor/

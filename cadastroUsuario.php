@@ -18,6 +18,7 @@ $nome = trim($_POST['nome']) ?? '';
 $email = trim($_POST['email']) ?? '';
 $senha = trim($_POST['senha']) ?? '';
 $dataNascimento = $_POST['dataNascimento'] ?? '';
+$saldo = $_POST['saldo'] ?? 0;
 
 $dataNascimento = isset($dataNascimento) ? new DateTime($dataNascimento, $timezone) : '';
 
@@ -34,7 +35,7 @@ if ( $nome === '' || $email === '' || $senha === '' || $dataNascimento === '' ) 
 
 //>>
 
-$usuario = new Usuario(null, null, $nome, $dataNascimento, $email, $senha, null);
+$usuario = new Usuario(null, null, $nome, $dataNascimento, $email, $senha, $saldo, null);
 
 $usuarioRepositorio->cadastrar($usuario);
 
