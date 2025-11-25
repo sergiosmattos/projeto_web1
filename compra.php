@@ -18,6 +18,8 @@
 
     $idProduto = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
+    $usuarioRepo = new UsuarioRepositorio($pdo);
+
     $obraRepo = new ObraRepositorio($pdo);
     $produtoRepo = new ProdutoRepositorio($pdo, $obraRepo);
 
@@ -52,31 +54,21 @@
                     alt="<?=htmlspecialchars($produto->getNome())?>"
                 >
                 
-                <form class="form-produto">
+                <form class="form-produto" action="autenticarCompra.php">
 
-                    <div class="informacoes-compra">
+                    <h1><?= htmlspecialchars($produto->getNome())?></h1>
+                    
+                    <input readonly type="text" name="preco_unitario" value="R$ <?= number_format($produto->getPreco(), 2, ",", ".")?>">
 
-                        <h2><?=htmlspecialchars($produto->getNome())?></h2>
-                        
-                        <div>
-                            <div>R$ <?=number_format($produto->getPreco(), 2,",", ".")?></div>
-                        </div>
+                    <input readonly type="number" name="quantidade_estoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
 
-                    </div>
+                    <input type="number" name="quantidade_desejada" value="">
 
-                    <div class="informacoes-produto">
+                    <input readonly type="text" name="preco_total_aparente" value="">
 
-                        <div>
-                            <label>Obra:</label>
-                            <div><?=$produto->getObra()->getNome()?></div>
-                        </div>
+                    <input readonly type="text" name="saldo_usuario" value="<?= number_format($usuarioRepo->findByEmail($emailUsuario)->getSaldo(), 2, ",", ".")?>">
 
-                        <div>
-                            <label>Obra:</label>
-                            <div><?=$produto->getObra()->getNome()?></div>
-                        </div>
-
-                    </div>
+                    <button type="submit">Comprar</button>
 
                 </form>
 

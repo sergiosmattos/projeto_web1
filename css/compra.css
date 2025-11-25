@@ -29,20 +29,3 @@
     background-color: rgb(55, 106, 47);
 
 }
-
-.container-superior img {
-
-    border: solid 5px blueviolet;
-    border-radius: 10px;
-
-    padding: 10% 0;
-
-}
-
-
-.container-superior .form-produto {
-
-    width: 60%;
-    background-color: burlywood;
-
-}
