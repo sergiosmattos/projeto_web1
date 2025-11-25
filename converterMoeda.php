@@ -41,65 +41,19 @@
     <?php include_once DIR_PROJETOWEB . '/reutilizar/header.php' ?>
 
     <main>
-        <h2>Seu perfil</h2>
 
-        <div class="foto-perfil">
-            <img src="<?= $usuario->getImagemDiretorio() ?>" class="avatar">
-
-            <form action="alterarUsuarioPerfil.php" method="post" enctype="multipart/form-data">
-
-                <input type="hidden" name="imagem_atual" value="<?= $usuario->getImagem(); ?>">
-
-                <input type="file" name="imagem" id="foto" hidden>
-                <label for="foto" class="botao-editar">Selecionar Foto</label>
-
-                <button type="submit" class="botao-editar">Salvar Foto</button>
-            </form>
-        </div>
-
-        <div class="info-perfil">
-
-            <?php if($confirmacao === 'true'): ?>
-                <p class="mensagem-ok">Dado alterado!</p>
-            <?php endif ?>
+        <h2>Peça um saldo</h2>
             
-            <div class="campo">
-                <label>Nome</label>
-                <form action="alterarUsuarioPerfil.php" method="post">
-                    <input type="text" name="nome" value="<?= htmlspecialchars($usuario->getNome()) ?>">
-                    <button type="submit" class="botao-editar">ALTERAR</button>
-                </form>
-            </div>
+        <div class="campo">
 
-            <div class="campo">
-                <label>E-mail</label>
-                <form action="alterarUsuarioPerfil.php" method="post">
-                    <input type="email" name="email" value="<?= htmlspecialchars($usuario->getEmail()) ?>">
-                    <button type="submit" class="botao-editar">ALTERAR</button>
-                </form>
-            </div>
-
-            <div class="campo">
-                <label>Senha</label>
-                <form action="alterarUsuarioPerfil.php" method="post">
-                    <input type=" password" name="senha" value="<?= htmlspecialchars($usuario->getSenha())?>">
-                    <button type="submit" class="botao-editar">ALTERAR</button>
-                </form>
-            </div>
-
-            <div class="campo">
-                <label>Data de Nascimento</label>
-                <form action="alterarUsuarioPerfil.php" method="post">
-                    <input type="date" name="dataNascimento" value="<?= $dataFormatada ?>">
-                    <button type="submit" class="botao-editar">ALTERAR</button>
-                </form>
-            </div>
+            <label>Valor</label>
+            <form action="alterarUsuarioPerfil.php" method="post">
+                <input type="text" name="nome" value="<?= htmlspecialchars($usuario->getNome()) ?>">
+                <button type="submit" class="botao-editar">ALTERAR</button>
+            </form>
 
         </div>
 
-        <form action="logout.php" method="post">
-            <button type="submit" class="botao-sair-perfil">SAIR</button>
-        </form>
     </main>
 
     <script src="js/form.js"></script>

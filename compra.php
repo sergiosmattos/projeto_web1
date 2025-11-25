@@ -19,6 +19,7 @@
     $idProduto = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
     $usuarioRepo = new UsuarioRepositorio($pdo);
+    $usuarioLogado = $usuarioRepo->findByEmail($emailUsuario);
 
     $obraRepo = new ObraRepositorio($pdo);
     $produtoRepo = new ProdutoRepositorio($pdo, $obraRepo);
@@ -54,19 +55,24 @@
                     alt="<?=htmlspecialchars($produto->getNome())?>"
                 >
                 
-                <form class="form-produto" action="autenticarCompra.php">
+                <form class="form-produto" action="autenticarCompra.php" method="post">
 
                     <h1><?= htmlspecialchars($produto->getNome())?></h1>
                     
-                    <input readonly type="text" name="preco_unitario" value="R$ <?= number_format($produto->getPreco(), 2, ",", ".")?>">
+                    <p>R$ <?=number_format($produto->getPreco(), 2, ",", ".")?></p>
+                    <input type="hidden" name="preco_unitario" id="precoUnitario" value="<?=htmlspecialchars($produto->getPreco()) ?>">
 
-                    <input readonly type="number" name="quantidade_estoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
+                    <input readonly type="number" name="quantidade_estoque" id="qtdEstoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
 
-                    <input type="number" name="quantidade_desejada" value="">
+                    <input type="number" name="quantidade_desejada" max="<?= htmlspecialchars($produto->getQuantidade())?>" id="qtdDesejada" value="">
 
-                    <input readonly type="text" name="preco_total_aparente" value="">
+                    <input readonly type="text" id="precoTotalAparente" value="">
+                    <input type="hidden" name="preco_total" id="precoTotalHidden" value="">
 
-                    <input readonly type="text" name="saldo_usuario" value="<?= number_format($usuarioRepo->findByEmail($emailUsuario)->getSaldo(), 2, ",", ".")?>">
+                    <p>R$ <?= number_format($usuarioLogado->getSaldo(), 2, ",", ".")?></p>
+
+                    <input type="hidden" name="id_produto" value="<?= htmlspecialchars($produto->getId())?>">
+                    <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($usuarioLogado->getId())?>">
 
                     <button type="submit">Comprar</button>
 
@@ -86,11 +92,46 @@
     </main>
 
     <script scr="js/form.js"></script>
+    
     <script>
 
+        let qtdDesejada = document.getElementById("qtdDesejada");
+        let qtdEstoque = document.getElementById("qtdEstoque");
+        let precoUnitario = document.getElementById("precoUnitario");
+        let precoTotalHid = document.getElementById("precoTotalHidden");
+        let precoTotalApr = document.getElementById("precoTotalAparente");
 
+        function formatarPreco(valor) {
+            return new Intl.NumberFormat("pt-BR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(valor);
+        }
+
+        function calcular() {
+
+            let numero1 = Number(qtdDesejada.value);
+            let numero2 = Number(precoUnitario.value);
+
+            if (numero1 <= Number(qtdEstoque.value)) {
+
+                let resultado = numero1 * numero2;
+
+                precoTotalApr.value = "R$ " + formatarPreco(resultado); 
+                precoTotalHid.value = resultado;
+                
+            }
+            else {
+
+                precoTotalApr.value = "R$ " + formatarPreco(0); 
+                precoTotalHid.value = 0;
+            }
+        }
+
+        qtdDesejada.addEventListener("input", calcular);
 
     </script>
+
     
 </body>
 </html>

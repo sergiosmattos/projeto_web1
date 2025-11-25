@@ -50,6 +50,11 @@ class Produto {
         return $this->quantidade;
     }
 
+    function setQuantidade(int $quantidade): void
+    {
+        $this->quantidade = $quantidade;
+    }
+
     function getObra() : Obra {
         return $this->obra;
     }

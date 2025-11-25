@@ -62,6 +62,11 @@ class Usuario
         return $this->saldo;
     }
 
+    public function setSaldo(float $saldo): void
+    {
+        $this->saldo = $saldo;
+    }
+
     public function getImagem(): ?string
     {
         return $this->imagem;
