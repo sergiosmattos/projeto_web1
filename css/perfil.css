@@ -104,3 +104,25 @@ h2 {
 .botao-sair-perfil:hover {
     background-color: #4437a2;
 }
+
+.botao-trocar-perfil {
+    background-color: #5b4ebf;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    width: 70%;
+    margin-top: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botao-trocar-perfil a {
+    text-decoration: none;
+    color: white;
+}
+
+.botao-trocar-perfil:hover {
+    background-color: #4437a2;
+}

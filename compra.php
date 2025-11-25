@@ -50,26 +50,37 @@
 
             <div class="container-superior">
 
-                <img 
-                    src="/projeto_web1/<?=htmlspecialchars($produto->getImagemDiretorio())?>" 
-                    alt="<?=htmlspecialchars($produto->getNome())?>"
-                >
+                <div class="imagem">
+                    <img 
+                        src="/projeto_web1/<?=htmlspecialchars($produto->getImagemDiretorio())?>" 
+                        alt="<?=htmlspecialchars($produto->getNome())?>"
+                    >
+                </div>
                 
                 <form class="form-produto" action="autenticarCompra.php" method="post">
 
                     <h1><?= htmlspecialchars($produto->getNome())?></h1>
                     
-                    <p>R$ <?=number_format($produto->getPreco(), 2, ",", ".")?></p>
+                    <div class="caracteproduto">
+                        <label>Preço</label>
+                        <input readonly value="R$ <?=number_format($produto->getPreco(), 2, ",", ".")?>">
+                    </div>
+                    <div class="caracteproduto">
+                        <label>Saldo Usuário</label>
+                        <input value="R$ <?= number_format($usuarioLogado->getSaldo(), 2, ",", ".")?>">
+                    </div>
+                    <div class="caracteproduto">
+                        <label>Quantidade Estoque</label>
+                        <input readonly type="number" name="quantidade_estoque" id="qtdEstoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
+                    </div>
+                    <div class="caracteproduto">
+                        <label>Quantidade Desejada</label>
+                        <input type="number" name="quantidade_desejada" max="<?= htmlspecialchars($produto->getQuantidade())?>" id="qtdDesejada" value="">
+                    </div>
+                    
                     <input type="hidden" name="preco_unitario" id="precoUnitario" value="<?=htmlspecialchars($produto->getPreco()) ?>">
-
-                    <input readonly type="number" name="quantidade_estoque" id="qtdEstoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
-
-                    <input type="number" name="quantidade_desejada" max="<?= htmlspecialchars($produto->getQuantidade())?>" id="qtdDesejada" value="">
-
                     <input readonly type="text" id="precoTotalAparente" value="">
                     <input type="hidden" name="preco_total" id="precoTotalHidden" value="">
-
-                    <p>R$ <?= number_format($usuarioLogado->getSaldo(), 2, ",", ".")?></p>
 
                     <input type="hidden" name="id_produto" value="<?= htmlspecialchars($produto->getId())?>">
                     <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($usuarioLogado->getId())?>">

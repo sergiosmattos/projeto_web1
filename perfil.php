@@ -97,6 +97,8 @@
 
         </div>
 
+        <button class="botao-trocar-perfil"><a href="converterMoeda.php">Trocar Moeda</a></button>
+
         <form action="logout.php" method="post">
             <button type="submit" class="botao-sair-perfil">SAIR</button>
         </form>

@@ -7,11 +7,3 @@ brModelo.jar
 #ignore testFiles
 
 testF*.*
-
-#ignore uploads
-
-uploads/*/*.png
-uploads/*/*.jpg
-
-#
-vendor/
