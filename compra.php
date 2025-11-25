@@ -57,7 +57,7 @@
                     <?php elseif($erro == 'zerado'):?>
                         <p class="mensagem-erro">Produto fora de Estoque.</p>
                     <?php elseif($erro == 'saldo'):?>
-                        <p class="mensagem-erro">Produto fora de Estoque.</p>
+                        <p class="mensagem-erro">O Usuário não possui saldo suficiente.</p>
                     <?php elseif($erro == 'campos'):?>
                         <p class="mensagem-erro">Selecione uma quanitdade!</p>
                     <?php elseif($erro == 'desconhecido'):?>

@@ -19,8 +19,8 @@
     $direcao = $_GET['direcao'] ?? 'ASC';
 
     // Buscar dados
-    $total_usuario = $usuarioRepositorio->contarTotal();
-    $total_paginas = ceil($total_usuario / $itens_por_pagina);
+    $total_usuarios = $usuarioRepositorio->contarTotal();
+    $total_paginas = ceil($total_usuarios / $itens_por_pagina);
     $usuarios = $usuarioRepositorio->listarPaginado($itens_por_pagina, $offset, $ordem, $direcao);
 
 ?>
