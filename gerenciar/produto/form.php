@@ -72,9 +72,11 @@ $textoBotao = $modoEdicao ? 'Editar' : 'Cadastrar';
 
             <form action="salvar.php" method="POST" enctype="multipart/form-data" class="form-cadastro" autocomplete="off">
 
-                <?php if ($erro === 'campos'): ?>
-                    <p class="mensagem-erro">Preencha todos os campos!</p>
-                <?php endif; ?>
+                <div class="container-feedback">
+                    <?php if ($erro === 'campos'): ?>
+                        <p class="mensagem-erro">Preencha todos os campos!</p>
+                    <?php endif; ?>
+                </div>
 
                 <input name="id" type="hidden" value="<?= $id ?>">
 

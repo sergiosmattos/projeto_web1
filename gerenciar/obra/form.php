@@ -61,12 +61,14 @@
 
             <form action="salvar.php" method="POST" class="form-cadastro" autocomplete="off">
 
-                <?php if (in_array('campos',$erro)): ?>
-                    <p class="mensagem-erro">Preencha todos os campos.</p>
-                <?php endif; ?>
-                <?php if (in_array('selecao',$erro)): ?>
-                    <p class="mensagem-erro">Selecione uma categoria.</p>
-                <?php endif; ?>
+                <div class="container-feedback">
+                    <?php if (in_array('campos',$erro)): ?>
+                        <p class="mensagem-erro">Preencha todos os campos.</p>
+                    <?php endif; ?>
+                    <?php if (in_array('selecao',$erro)): ?>
+                        <p class="mensagem-erro">Selecione uma categoria.</p>
+                    <?php endif; ?>
+                </div>
 
                 <input name="id" type="hidden" value=<?= $id ?>>
 

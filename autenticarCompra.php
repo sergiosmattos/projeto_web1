@@ -23,7 +23,6 @@
     }
     $idUsuario = $_POST['id_usuario'] ?? null;
     $precoTotal = $_POST['preco_total'] ?? null;
-    $qtdEstoque = $_POST['quantidade_estoque'] ?? null;
     $qtdDesejada = $_POST['quantidade_desejada'] ?? '';
 
     if ($qtdDesejada == '') {
@@ -41,6 +40,7 @@
         $produto = $produtoRepo->findById($idProduto);
 
         $saldoUsuario = $usuario->getSaldo();
+        $qtdEstoque = $produto->getQuantidade();
 
         if($precoTotal > $saldoUsuario) {
 
@@ -50,7 +50,7 @@
 
         }
 
-        if( $produto->getQuantidade() == 0 ) {
+        if( $qtdEstoque <= 0 ) {
 
             $pdo->rollBack();
             header("Location: compra.php?id=". $idProduto . "&erro=zerado");
@@ -58,10 +58,29 @@
 
         }
 
+        if( $produto->getQuantidade() < $qtdDesejada ) {
+
+            $pdo->rollBack();
+            header("Location: compra.php?id=". $idProduto . "&erro=quantidade");
+            exit;
+
+        }
+
+        $novaQuantidade = $qtdEstoque - $qtdDesejada;
+
+        // echo("<br/>Quantidade em Estoque: ");
+        // var_dump($qtdEstoque);
+
+        // echo("<br/>Quantidade Desejada: ");
+        // var_dump($qtdDesejada);
+
+        // echo("<br/>Nova Quantidade: ");
+        // var_dump($novaQuantidade);
+
         $usuario->setSaldo($saldoUsuario - $precoTotal);
         $usuarioRepo->atualizar($usuario);
         
-        $produto->setQuantidade($qtdEstoque - $qtdDesejada);
+        $produto->setQuantidade($novaQuantidade);
         $produtoRepo->atualizar($produto);
 
         $compra = new Compra(null, null, $qtdDesejada, $precoTotal, $usuario, $produto);

@@ -118,6 +118,21 @@ class ObraCategoriaRepositorio {
 
     }
 
+    public function listByCategoria(Categoria $categoria) : ?array {
+
+        $sql = 'select tbObraCategoria.* from tbObraCategoria where id_categoria = ?';
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $categoria->getId());
+        $stmt->execute();
+
+        $resultadoConsulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $objetos = array_map(fn($linhaConsulta) => $this->makeObject($linhaConsulta), $resultadoConsulta);
+
+        return $objetos;
+
+    }
+
     public function relateObjects(array $idsParaAdd, ?int $idObra): void {
 
         $ultimoId = $this->pdo->lastInsertId();

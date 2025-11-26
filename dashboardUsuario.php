@@ -6,17 +6,6 @@
 
     include_once(DIR_PROJETOWEB."/reutilizar/verify-logged.php");
 
-    session_start();
-
-    $emailUsuario = $_SESSION['usuario'] ?? null;
-
-    if (!isset($emailUsuario)) {
-        header('Location: login.php');
-        exit;
-    }
-
-    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
-
     $categoriaRepositorio = new CategoriaRepositorio($pdo);
     $categorias = $categoriaRepositorio->listar();
 
@@ -45,21 +34,11 @@
     <main>
 
         <div class="categorias-container">
-
-            <h2>- Top Categorias</h2>
             
             <div class="categorias-itens">
                 
                 <?php foreach ($categorias as $categoria): ?>
-                    <form action="GET">
-                        <a name="categoria" href="listaObra.php" class="categoria-item">
-                            <img 
-                                src="/projeto_web1/<?= htmlspecialchars($categoria->getImagemDiretorio()) ?>" 
-                                alt="<?= htmlspecialchars($categoria->getNome()) ?>"
-                                class="imagemList">
-                            <p><?= htmlspecialchars($categoria->getNome()) ?></p>
-                        </a>
-                    </form>
+                    <?php include(DIR_PROJETOWEB."/reutilizar/card-categoria.php");?>
                 <?php endforeach; ?>
 
             </div>
@@ -77,7 +56,9 @@
                 <?php else: ?>
                     <?php foreach ($produtosDestaque as $produto): ?>
 
-                        <?php include(DIR_PROJETOWEB."/reutilizar/card-produto.php");?>
+                        <?php if($produto->getQuantidade() > 0):?>
+                        <?php include(DIR_PROJETOWEB."/reutilizar/card-produto.php"); ?>
+                        <?php endif;?>
 
                     <?php endforeach; ?>
                 <?php endif; ?>

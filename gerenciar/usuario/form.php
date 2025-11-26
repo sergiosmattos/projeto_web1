@@ -60,9 +60,11 @@
 
             <form action="salvar.php" method="POST" class="form-cadastro" autocomplete="off">
 
-                <?php if ($erro === 'campos'): ?>
-                    <p class="mensagem-erro">Preencha todos os campos!</p>
-                <?php endif; ?>
+                <div class="container-feedback">
+                    <?php if ($erro === 'campos'): ?>
+                        <p class="mensagem-erro">Preencha todos os campos!</p>
+                    <?php endif; ?>
+                </div>
 
                 <input name="id" type="hidden" value=<?= $userIdPost ?>>
 

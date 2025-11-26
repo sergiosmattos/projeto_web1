@@ -327,3 +327,62 @@ main h1 {
     background-color: #9567f8;
 }
 
+.titulo-cat-pag {
+
+    font-size: 4.5vh;
+    margin: 50px 0;
+
+}
+
+.container-categoria-pag {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.container-categoria-pag img {
+
+    align-self: center;
+    width: 85%;;
+
+}
+
+.container-categoria-pag h1 {
+
+    text-align: center;
+    padding: 10px;
+    font-size: 5vh;
+    margin: 0;
+
+}
+
+.container-obra {
+
+    justify-items: center;
+    width: 100%;
+
+}
+
+.container-obra ul {
+    
+    padding-top: 50px;
+
+    display: grid;
+    grid-row: auto;
+    align-content: center;
+    gap: 50px;
+
+}
+
+.container-obra ul li {
+
+    text-align: center;
+    font-size: 25px;
+
+    background-color: #221f27;
+    border: solid 0.5vh #7b42f6;
+    border-radius: 10px;
+    padding: 20px 5vw;
+
+}

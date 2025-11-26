@@ -19,6 +19,8 @@
     $erro = $_GET['erro'] ?? '';
     $novacompra = $_GET['novacompra'] ?? '';
 
+    $outOfStorage = $produto->getQuantidade() == 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +49,25 @@
                     <img 
                         src="/projeto_web1/<?=htmlspecialchars($produto->getImagemDiretorio())?>" 
                         alt="<?=htmlspecialchars($produto->getNome())?>"
+
+                        <?php if($outOfStorage): ?>
+                        class="out"
+                        <?php endif;?>
                     >
                 </div>
+
+                <?php if($outOfStorage): ?>
+
+                <div class="out-container">
+                    <a href="/projeto_web1/catalogoCompra.php">
+                        <div class="out-message">
+                            <h1>Fora de Estoque</h1>
+                            <p>Por Favor compre outra coisa até reabastercermos</p>
+                        </div>
+                    </a>
+                </div>
+
+                <?php endif;?>
                 
                 <form class="form-produto" action="autenticarCompra.php" method="post">
 
@@ -60,6 +79,8 @@
                         <p class="mensagem-erro">O Usuário não possui saldo suficiente.</p>
                     <?php elseif($erro == 'campos'):?>
                         <p class="mensagem-erro">Selecione uma quanitdade!</p>
+                    <?php elseif($erro == 'quantidade'):?>
+                        <p class="mensagem-erro">Escolha uma quanitdade válida!.</p>
                     <?php elseif($erro == 'desconhecido'):?>
                         <p class="mensagem-erro">Erro Desconhecido.</p>
                     <?php endif;?>
@@ -68,29 +89,38 @@
                     
                     <div class="caracteproduto">
                         <label>Preço</label>
-                        <input readonly value="R$ <?=number_format($produto->getPreco(), 2, ",", ".")?>">
+                        <input disabled value="R$ <?=number_format($produto->getPreco(), 2, ",", ".")?>">
                     </div>
                     <div class="caracteproduto">
                         <label>Saldo Usuário</label>
-                        <input readonly value="R$ <?= number_format($usuarioLogado->getSaldo(), 2, ",", ".")?>">
+                        <input disabled value="R$ <?= number_format($usuarioLogado->getSaldo(), 2, ",", ".")?>">
                     </div>
                     <div class="caracteproduto">
                         <label>Quantidade Estoque</label>
-                        <input readonly type="number" name="quantidade_estoque" id="qtdEstoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
+                        <input disabled type="number" name="quantidade_estoque" id="qtdEstoque" value="<?= htmlspecialchars($produto->getQuantidade())?>">
                     </div>
                     <div class="caracteproduto">
-                        <label>Quantidade Desejada</label>
-                        <input type="number" name="quantidade_desejada" max="<?= htmlspecialchars($produto->getQuantidade())?>" id="qtdDesejada" value="">
+                        <label for="qtdDesejada">Quantidade Desejada</label>
+                        <input 
+                            type="number" 
+                            name="quantidade_desejada"
+                            id="qtdDesejada" 
+                            value="" 
+                            max="<?= htmlspecialchars($produto->getQuantidade())?>" 
+                            min="1"
+
+                            <?php if($outOfStorage) echo("disabled");?>
+                        >
                     </div>
                     
                     <input type="hidden" name="preco_unitario" id="precoUnitario" value="<?=htmlspecialchars($produto->getPreco()) ?>">
-                    <input readonly type="text" id="precoTotalAparente" value="">
+                    <input disabled type="text" id="precoTotalAparente" value="">
                     <input type="hidden" name="preco_total" id="precoTotalHidden" value="">
 
                     <input type="hidden" name="id_produto" value="<?= htmlspecialchars($produto->getId())?>">
                     <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($usuarioLogado->getId())?>">
 
-                    <button type="submit">Comprar</button>
+                    <button type="submit" <?php if($outOfStorage) echo("disabled");?>>Comprar</button>
 
                 </form>
 

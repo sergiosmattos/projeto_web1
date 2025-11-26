@@ -48,7 +48,11 @@
             <?php else: ?>
 
                 <?php foreach ($produtosDestaque as $produto): ?>
+
+                    <?php if($produto->getQuantidade() > 0):?>
                     <?php include(DIR_PROJETOWEB."/reutilizar/card-produto.php"); ?>
+                    <?php endif;?>
+
                 <?php endforeach; ?>
                 
             <?php endif; ?>

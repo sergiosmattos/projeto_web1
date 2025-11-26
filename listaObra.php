@@ -3,26 +3,22 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/projeto_web1/config.php';
     require DIR_PROJETOWEB . 'src/repositorio/CategoriaRepositorio.php';
     require DIR_PROJETOWEB . 'src/repositorio/ProdutoRepositorio.php';
+    require DIR_PROJETOWEB . 'src/repositorio/ObraCategoriaRepositorio.php';
 
     include_once(DIR_PROJETOWEB."/reutilizar/verify-logged.php");
 
-    session_start();
+    $idCategoria = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
-    $emailUsuario = $_SESSION['usuario'] ?? null;
+    $categoriaRepo = new CategoriaRepositorio($pdo);
+    $obraRepo = new ObraRepositorio($pdo);
 
-    if (!isset($emailUsuario)) {
-        header('Location: login.php');
-        exit;
-    }
+    $produtoRepo = new ProdutoRepositorio($pdo, $obraRepo);
+    $obraCategoriaRepo = new ObraCategoriaRepositorio($pdo, $obraRepo, $categoriaRepo);
+    
+    $categoriaSelecionada = $categoriaRepo->findById($idCategoria);
+    $categorias = $categoriaRepo->listar();
 
-    $tipoUsuario = $_SESSION['tipo'] ?? 'User';
-
-    $categoriaRepositorio = new CategoriaRepositorio($pdo);
-    $categorias = $categoriaRepositorio->listar();
-
-    $obraRepositorio = new ObraRepositorio($pdo);
-    $produtoRepositorio = new ProdutoRepositorio($pdo, $obraRepositorio);
-    $produtosDestaque = $produtoRepositorio->listarDestaque(4);
+    $obrasCategorias = $obraCategoriaRepo->listByCategoria($categoriaSelecionada);
 
 ?>
 
@@ -35,6 +31,7 @@
     <link rel="icon" href="/projeto_web1/img/logo_geek.png">
     <link rel="stylesheet" href="/projeto_web1/css/reset.css">
     <link rel="stylesheet" href="/projeto_web1/css/dashboard.css">
+    <link rel="stylesheet" href="/projeto_web1/css/catalogo.css">
     <title>Geek Artifacts</title>
     
 </head>
@@ -45,12 +42,42 @@
     <main>
 
         <div class="categorias-container">
-
-            <h2>- Top Categorias</h2>
             
+            <div class="categorias-itens">
+                
+                <?php foreach ($categorias as $categoria): ?>
+                    <?php include(DIR_PROJETOWEB."/reutilizar/card-categoria.php");?>
+                <?php endforeach; ?>
 
+            </div>
 
-</div>
+        </div>
+
+        <h2 class="titulo-cat-pag">Mostrando obras relacionadas a:</h2>
+
+        <div class="container-categoria-pag">
+
+            <img 
+                src="/projeto_web1/<?= htmlspecialchars($categoriaSelecionada->getImagemDiretorio()) ?>" 
+                alt="<?= htmlspecialchars($categoriaSelecionada->getNome()) ?>"
+                class="imagemList"
+            >
+
+            <h1><?= htmlspecialchars($categoriaSelecionada->getNome()) ?></h1>
+
+        </div>
+        
+        <div class="container-obra">
+
+            <ul>
+
+                <?php foreach($obrasCategorias as $objeto):?>
+                    <li><?=$objeto->getObra()->getNome()?></li>
+                <?php endforeach;?>
+
+            </ul>
+
+        </div>
 
     </main>
 
